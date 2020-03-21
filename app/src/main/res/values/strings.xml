@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AppTemplate</string>
+
+    <!-- Error -->
+    <string name="result_connect_failed_error">服务器连接失败，请稍后再试。</string>
+    <string name="result_connect_timeout_error">服务器连接超时，请稍后再试。</string>
+    <string name="result_error">系统繁忙，请稍后再试。</string>
+    <string name="result_network_unavailable_error">网络不给力，请检查网络。</string>
+
+    <string name="result_failure">获取失败</string>
+
+    <string name="success_operator">操作成功</string>
+    <string name="failed_operator">操作失败，请稍后再试</string>
+
+
+</resources>

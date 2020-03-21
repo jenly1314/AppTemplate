@@ -1,0 +1,154 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.buildTools
+
+    defaultConfig {
+        applicationId "com.king.template"
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode app_version.versionCode
+        versionName app_version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi-v7a", "x86"//, "arm64-v8a", "x86","x86_64"
+        }
+
+    }
+
+    if(rootProject.ext.signingEnabled){
+        signingConfigs {
+            config  {
+                //加载配置资源
+                Properties properties = new Properties()
+                InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+                properties.load( inputStream )
+
+                //读取配置文件
+                def storeFileDir = properties.getProperty('storeFile.file')
+                storeFile file( storeFileDir )
+
+                //读取配置字段
+                def key_keyAlias = properties.getProperty('keyAlias')
+                def key_keyPassword = properties.getProperty('keyPassword')
+                def key_storePassword = properties.getProperty('storePassword')
+
+                keyAlias key_keyAlias
+                keyPassword key_keyPassword
+                storePassword key_storePassword
+            }
+
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (rootProject.ext.signingEnabled) {
+                signingConfig signingConfigs.config
+            }
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    flavorDimensions "flavor"
+    productFlavors {
+        //正式
+        flavors_release {
+            dimension "flavor"
+        }
+        //开发
+        flavors_dev {
+            dimension "flavor"
+        }
+    }
+
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "androidx.core:core-ktx:$versions.coreKtx"
+    implementation "com.google.android.material:material:$versions.material"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCore"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinxCoroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinxCoroutines"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewmodelKtx"
+
+    kapt "androidx.room:room-compiler:$versions.room"
+    implementation "androidx.room:room-rxjava2:$versions.room"
+
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+
+    implementation "com.king.frame:mvvmframe:$versions.mvvmframe"
+
+    implementation "com.king.thread:nevercrash:$versions.nevercrash"
+    //app-updater
+    implementation "com.king.app:app-updater:$versions.appUpdater"
+    //app-dialog
+    implementation "com.king.app:app-dialog:$versions.appUpdater"
+
+    implementation "com.king.base:util:$versions.base"
+
+    implementation "com.king.base:base-url-manager:$versions.baseUrlManager"
+
+    implementation "com.orhanobut:logger:$versions.logger"
+
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.brvah"
+
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$versions.smartRefreshLayout"
+
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$versions.glide"
+
+    implementation "com.tencent:mmkv:$versions.mmkv"
+
+    implementation "com.github.tbruyelle:rxpermissions:$versions.rxpermissions"
+
+    implementation "com.tencent.bugly:crashreport_upgrade:$versions.bugly"
+
+    implementation "com.tencent.tinker:tinker-android-lib:$versions.tinker"
+
+    implementation "androidx.multidex:multidex:$versions.multidex"
+
+
+//    implementation "org.greenrobot:eventbus:$versions.eventbus"
+//
+//    implementation "com.king.guide:guidepage:$versions.guidepage"
+//    implementation "com.king.image:imageviewer:$versions.imageviewer"
+
+//    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
+//
+//    implementation "com.github.chrisbanes:PhotoView:$versions.PhotoView"
+//
+//    implementation "com.github.lzyzsd:jsbridge:$versions.jsbridge"
+//
+//    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
+
+}
+
+
+if(rootProject.ext.tinkerEnabled){
+    apply from: 'tinker-support.gradle'
+}
