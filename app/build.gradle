@@ -87,6 +87,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
     testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test.ext:junit:$versions.androidExtJunit"
     androidTestImplementation "androidx.test:runner:$versions.runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCore"
 
