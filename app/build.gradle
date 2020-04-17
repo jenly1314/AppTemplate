@@ -64,6 +64,11 @@ android {
         enabled true
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     flavorDimensions "flavor"
     productFlavors {
         //正式
@@ -133,6 +138,11 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$versions.multidex"
 
+    //leakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanaryNoOp"
+
+    implementation "com.github.GrenderG:Toasty:$versions.toasty"
 
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //

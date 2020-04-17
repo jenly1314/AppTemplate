@@ -11,14 +11,16 @@ object Constants {
     const val isDomain = false
 
     //TODO 接口地址
-    const val BASE_URL = "http://192.168.1.1"
+    const val BASE_URL = "https://github.com"
 
     //TODO Bugly申请的AppId
-    const val BUGLY_APP_ID = "xxxxxx"
+    const val BUGLY_APP_ID = "5e7c47b81a"
 
     const val TAG = "Jenly"
 
     const val PAGE_SIZE = 20
+
+    const val DOUBLE_CLICK_EXIT_TIME = 2500
 
     //---------------------------------------------
 

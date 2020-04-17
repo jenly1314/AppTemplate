@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.king.frame.mvvmframe.di.scope.ViewModelKey
 import com.king.template.app.base.BaseViewModel
 import com.king.template.app.home.HomeViewModel
+import com.king.template.app.home.MenuViewModel
 import com.king.template.app.splash.SplashViewModel
 import com.king.template.temp.TempListViewModel
 import com.king.template.temp.TempViewModel
@@ -42,5 +43,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(viewModel: HomeViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MenuViewModel::class)
+    abstract fun bindMenuViewModel(viewModel: MenuViewModel) : ViewModel
 
 }

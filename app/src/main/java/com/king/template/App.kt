@@ -18,6 +18,7 @@ import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
+import es.dmoral.toasty.Toasty
 import timber.log.Timber
 
 /**

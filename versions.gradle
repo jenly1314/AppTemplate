@@ -15,7 +15,7 @@ ext.build_versions = build_versions
 // App dependencies
 def versions = [:]
 
-versions.gralde = "3.6.1"
+versions.gralde = '3.6.2'
 versions.kotlin = "1.3.70"
 versions.tinkerSupport = "1.1.5"
 
@@ -58,5 +58,10 @@ versions.mmkv = "1.0.24"
 versions.bugly = "1.3.6"
 versions.tinker = "1.9.9"
 versions.debugDb = "1.0.6"
+
+versions.leakcanary = "2.2"
+versions.leakcanaryNoOp = "1.6.3"
+
+versions.toasty = "1.4.2"
 
 ext.versions = versions

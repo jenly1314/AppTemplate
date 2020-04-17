@@ -45,7 +45,7 @@ class SplashActivity : BaseActivity<SplashViewModel, SplashActivityBinding>(){
     }
 
     private fun startActivity(){
-        startActivity(HomeActivity::class.java)
+        startHomeActivity()
         finish()
     }
 

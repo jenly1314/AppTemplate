@@ -5,18 +5,17 @@
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <include layout="@layout/toolbar"/>
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
-            android:textSize="@dimen/size_30sp"
+            android:textSize="@dimen/size_20sp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
