@@ -8,6 +8,7 @@ import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.app.me.MeFragment
+import com.king.template.app.base.TabFragment
 import com.king.template.databinding.HomeActivityBinding
 
 /**
@@ -64,7 +65,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
     private fun getFragment1(fragmentTransaction: FragmentTransaction): Fragment{
         if(fragment1 == null){
             //TODO 替换成菜单对应的Fragment
-            fragment1 = MenuFragment.newInstance(getString(R.string.home_menu1))
+            fragment1 = HomeFragment.newInstance()
             fragment1?.let{
                 fragmentTransaction.add(R.id.fragmentContent,it)
             }
@@ -86,7 +87,13 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
     private fun getFragment3(fragmentTransaction: FragmentTransaction): Fragment{
         if(fragment3 == null){
             //TODO 替换成菜单对应的Fragment
-            fragment3 = MenuFragment.newInstance(getString(R.string.home_menu3))
+
+            fragment3 = TabFragment.newInstance( {
+                when(it){
+                    0 -> MenuFragment.newInstance("Tab1",false)
+                    else -> MenuFragment.newInstance("Tab2",false)
+                }
+            },arrayOf("Tab1","Tab2"),true)
             fragment3?.let{
                 fragmentTransaction.add(R.id.fragmentContent,it)
             }

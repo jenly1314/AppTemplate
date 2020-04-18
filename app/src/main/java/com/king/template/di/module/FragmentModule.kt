@@ -3,6 +3,8 @@ package com.king.template.di.module
 import com.king.frame.mvvmframe.di.component.BaseFragmentSubcomponent
 import com.king.template.app.home.MenuFragment
 import com.king.template.app.me.MeFragment
+import com.king.template.app.base.TabFragment
+import com.king.template.app.home.HomeFragment
 import com.king.template.temp.TempFragment
 import com.king.template.temp.TempListFragment
 import dagger.Module
@@ -21,9 +23,16 @@ abstract class FragmentModule {
     abstract fun contributeTempListFragment(): TempListFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeMenuFragment(): MenuFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMeFragment(): MeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTabFragment(): TabFragment
+
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppTemplate</string>
+    <string name="app_name">App Template</string>
 
     <!-- Error -->
     <string name="result_connect_failed_error">服务器连接失败，请稍后再试。</string>

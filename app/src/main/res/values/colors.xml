@@ -6,6 +6,8 @@
 
     <color name="title_bg">#0d7fea</color>
 
+    <color name="splash_bg">#0d7fea</color>
+
     <color name="default_bg">#f2f3f6</color>
 
     <color name="line">#f2f3f6</color>
@@ -24,6 +26,11 @@
     <color name="text_3">#333333</color>
     <color name="text_6">#666666</color>
     <color name="text_9">#999999</color>
+
+    <color name="tab_normal">#666666</color>
+    <color name="tab_selected">#0d7fea</color>
+
+
 
     <color name="text_theme">#0d7fea</color>
 

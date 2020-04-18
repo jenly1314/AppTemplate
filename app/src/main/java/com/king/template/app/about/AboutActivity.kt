@@ -33,7 +33,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         var config = AppDialogConfig()
         with(config){
             isHideTitle = true
-            content = "检测新版本"
+            content = "发现新版本"
             ok = "更新"
             onClickOk = View.OnClickListener {
                 AppDialog.INSTANCE.dismissDialog()

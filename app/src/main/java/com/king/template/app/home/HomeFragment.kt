@@ -1,0 +1,117 @@
+package com.king.template.app.home
+
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.king.base.adapter.divider.DividerItemDecoration
+import com.king.template.R
+import com.king.template.app.adapter.BannerImageAdapter
+import com.king.template.app.adapter.BindingAdapter
+import com.king.template.app.base.BaseFragment
+import com.king.template.bean.Bean
+import com.king.template.databinding.HomeFragmentBinding
+import com.youth.banner.config.IndicatorConfig
+import com.youth.banner.indicator.CircleIndicator
+import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.rv
+import kotlinx.android.synthetic.main.home_fragment.srl
+
+/**
+ * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
+ */
+class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
+
+    val mAdapter by lazy { BindingAdapter<Bean>(R.layout.rv_bean_item) }
+
+    var curPage = 1
+
+    companion object{
+        fun newInstance(): HomeFragment{
+            return HomeFragment()
+        }
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        super.initData(savedInstanceState)
+
+        //TODO Banner初始化示例
+        with(banner){
+            adapter = BannerImageAdapter()
+            indicator = CircleIndicator(context)
+            setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
+        }
+
+        viewModel.liveDataBanner.observe(this, Observer {
+            banner.adapter.setDatas(it)
+            banner.adapter.notifyDataSetChanged()
+        })
+
+        //---------------------------------
+        //TODO 列表初始化示例
+        rv.layoutManager = LinearLayoutManager(context)
+        rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL,R.drawable.line_space_divider))
+
+        rv.adapter = mAdapter
+        rv.isNestedScrollingEnabled = false
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
+        srl.setEnableLoadMore(false)
+        srl.setOnRefreshListener{requestData(1)}
+        srl.setOnLoadMoreListener {requestData(curPage)}
+        viewModel.liveData.observe(this, Observer {
+            mAdapter.replaceData(it)
+            srl.closeHeaderOrFooter()
+        })
+        srl.autoRefresh()
+
+        //---------------------------------
+
+    }
+
+    private fun requestData(curPage: Int){
+        this.curPage = curPage
+        viewModel.getRequestBanner()
+        viewModel.getRequestData()
+    }
+
+    fun clickItem(data: Bean){
+        //TODO 点击Item处理逻辑
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        banner.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        banner.stop()
+        srl.closeHeaderOrFooter()
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
+        srl.closeHeaderOrFooter()
+        initEmptyView()
+    }
+
+    private fun initEmptyView(){
+        if(mAdapter.emptyLayout == null){
+            createEmptyView(rv)?.let {
+                mAdapter.setEmptyView(it)
+            }
+        }
+    }
+
+    open fun createEmptyView(root: ViewGroup): View? {
+        return inflate(R.layout.layout_empty,root,false)
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.home_fragment
+    }
+
+    override fun createViewModel(): HomeViewModel = obtainViewModel(activity!!.viewModelStore,HomeViewModel::class.java)
+}

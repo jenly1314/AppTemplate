@@ -30,7 +30,7 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         setToolbarTitle(intent.getStringExtra(Constants.KEY_TITLE))
-        mViewModel?.let {
+        viewModel?.let {
             pageSize = it.pageSize()
         }
         initRecyclerView(rv)
@@ -48,18 +48,18 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
 
     open fun initRefreshLayout(srl: SmartRefreshLayout){
         srl.setEnableLoadMore(false)
-        srl.setOnRefreshListener{refreshLayout -> requestData(1)}
-        srl.setOnLoadMoreListener { refreshLayout -> requestData(curPage)}
+        srl.setOnRefreshListener{ requestData(1)}
+        srl.setOnLoadMoreListener { requestData(curPage)}
         srl.autoRefresh()
     }
 
     open fun observeData(){
-        mViewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage == 1) })
+        viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage == 1) })
     }
 
     fun requestData(page: Int){
         curPage = page
-        mViewModel?.requestData(curPage)
+        viewModel?.requestData(curPage)
     }
 
     override fun hideLoading() {

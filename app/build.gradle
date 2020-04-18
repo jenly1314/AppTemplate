@@ -115,6 +115,7 @@ dependencies {
     implementation "com.king.app:app-dialog:$versions.appUpdater"
 
     implementation "com.king.base:util:$versions.base"
+    implementation "com.king.base:adapter:$versions.base"
 
     implementation "com.king.base:base-url-manager:$versions.baseUrlManager"
 
@@ -147,6 +148,8 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 
     implementation "com.github.lzyzsd:jsbridge:$versions.jsbridge"
+
+    implementation "com.youth.banner:banner:$versions.banner"
 
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //

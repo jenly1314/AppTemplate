@@ -48,6 +48,7 @@
 
         <activity android:name=".app.base.WebActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleInstance"
             tools:ignore="LockedOrientationActivity" />
 
         <meta-data android:name="com.king.template.config.AppConfigModule"
