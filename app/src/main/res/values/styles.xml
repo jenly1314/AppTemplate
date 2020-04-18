@@ -10,13 +10,16 @@
         <item name="windowActionBar">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:listDivider">@drawable/line_divider</item>
+        <item name="android:textSize">@dimen/size_16sp</item>
         <item name="android:textColor">@color/text_default</item>
+        <item name="android:windowBackground">@color/default_bg</item>
         <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
 
     </style>
 
     <style name="SplashAppTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>

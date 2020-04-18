@@ -1,6 +1,8 @@
 package com.king.template.di.module
 
 import com.king.frame.mvvmframe.di.component.BaseActivitySubcomponent
+import com.king.template.app.about.AboutActivity
+import com.king.template.app.base.WebActivity
 import com.king.template.app.home.HomeActivity
 import com.king.template.app.splash.SplashActivity
 import com.king.template.temp.TempActivity
@@ -25,5 +27,11 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeActivity(): HomeActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeAboutActivity(): AboutActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeWebActivity(): WebActivity
 
 }

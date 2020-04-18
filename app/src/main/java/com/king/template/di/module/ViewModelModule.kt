@@ -2,9 +2,11 @@ package com.king.template.di.module
 
 import androidx.lifecycle.ViewModel
 import com.king.frame.mvvmframe.di.scope.ViewModelKey
+import com.king.template.app.about.AboutViewModel
 import com.king.template.app.base.BaseViewModel
 import com.king.template.app.home.HomeViewModel
 import com.king.template.app.home.MenuViewModel
+import com.king.template.app.me.MeViewModel
 import com.king.template.app.splash.SplashViewModel
 import com.king.template.temp.TempListViewModel
 import com.king.template.temp.TempViewModel
@@ -48,5 +50,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MenuViewModel::class)
     abstract fun bindMenuViewModel(viewModel: MenuViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AboutViewModel::class)
+    abstract fun bindAboutViewModel(viewModel: AboutViewModel) : ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MeViewModel::class)
+    abstract fun bindMeViewModel(viewModel: MeViewModel) : ViewModel
 
 }

@@ -20,5 +20,17 @@
 
     <string name="tips_double_click_exit">再按一次退出</string>
 
+    <!-- Me -->
+    <string name="me_menu1">菜单1</string>
+    <string name="me_menu2">菜单2</string>
+    <string name="me_menu3">菜单3</string>
+    <string name="me_menu4">菜单4</string>
+    <string name="me_about">关于</string>
+
+    <!-- About -->
+    <string name="about_title">关于</string>
+    <string name="about_version_update">版本更新</string>
+    <string name="about_about">关于</string>
+
 
 </resources>

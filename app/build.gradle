@@ -144,6 +144,10 @@ dependencies {
 
     implementation "com.github.GrenderG:Toasty:$versions.toasty"
 
+    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
+
+    implementation "com.github.lzyzsd:jsbridge:$versions.jsbridge"
+
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //
 //    implementation "com.king.guide:guidepage:$versions.guidepage"
@@ -152,8 +156,6 @@ dependencies {
 //    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 //
 //    implementation "com.github.chrisbanes:PhotoView:$versions.PhotoView"
-//
-//    implementation "com.github.lzyzsd:jsbridge:$versions.jsbridge"
 //
 //    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
 

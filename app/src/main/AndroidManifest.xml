@@ -41,6 +41,14 @@
             android:windowSoftInputMode="stateVisible|adjustPan"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity android:name=".app.about.AboutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity android:name=".app.base.WebActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
         <meta-data android:name="com.king.template.config.AppConfigModule"
             android:value="FrameConfigModule"/>

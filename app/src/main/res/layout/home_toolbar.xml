@@ -18,7 +18,7 @@
             android:id="@+id/ivLeft"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/btn_back_selector"
+            android:src="@drawable/btn_none"
             android:paddingLeft="@dimen/size_14dp"
             android:paddingRight="@dimen/size_14dp"
             style="@style/OnClick"/>

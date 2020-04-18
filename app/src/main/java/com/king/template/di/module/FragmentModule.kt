@@ -2,6 +2,7 @@ package com.king.template.di.module
 
 import com.king.frame.mvvmframe.di.component.BaseFragmentSubcomponent
 import com.king.template.app.home.MenuFragment
+import com.king.template.app.me.MeFragment
 import com.king.template.temp.TempFragment
 import com.king.template.temp.TempListFragment
 import dagger.Module
@@ -21,5 +22,8 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMenuFragment(): MenuFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMeFragment(): MeFragment
 
 }

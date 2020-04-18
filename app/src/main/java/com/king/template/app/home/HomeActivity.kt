@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
+import com.king.template.app.me.MeFragment
 import com.king.template.databinding.HomeActivityBinding
 
 /**
@@ -96,7 +97,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
     private fun getFragment4(fragmentTransaction: FragmentTransaction): Fragment{
         if(fragment4 == null){
             //TODO 替换成菜单对应的Fragment
-            fragment4 = MenuFragment.newInstance(getString(R.string.home_menu4))
+            fragment4 = MeFragment.newInstance()
             fragment4?.let{
                 fragmentTransaction.add(R.id.fragmentContent,it)
             }

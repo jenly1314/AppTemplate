@@ -3,8 +3,10 @@ package com.king.template.app.home
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.king.template.R
+import com.king.template.app.about.AboutActivity
 import com.king.template.app.base.BaseFragment
 import com.king.template.databinding.MenuFragmentBinding
+import kotlinx.android.synthetic.main.home_toolbar.*
 import kotlinx.android.synthetic.main.menu_fragment.*
 
 /**

@@ -6,16 +6,24 @@
 
     <color name="title_bg">#0d7fea</color>
 
+    <color name="default_bg">#f2f3f6</color>
+
     <color name="line">#f2f3f6</color>
 
     <color name="line_divider">#f2f3f6</color>
 
-    <color name="white_pressed">#ddffffff</color>
+    <color name="white_pressed">#10000000</color>
 
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="white_7f">#7fffffff</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
 
     <color name="text_default">#666666</color>
+
+    <color name="text_3">#333333</color>
+    <color name="text_6">#666666</color>
+    <color name="text_9">#999999</color>
 
     <color name="text_theme">#0d7fea</color>
 

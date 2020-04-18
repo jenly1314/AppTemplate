@@ -63,5 +63,6 @@ versions.leakcanary = "2.2"
 versions.leakcanaryNoOp = "1.6.3"
 
 versions.toasty = "1.4.2"
+versions.circleimageview = "3.1.0"
 
 ext.versions = versions
