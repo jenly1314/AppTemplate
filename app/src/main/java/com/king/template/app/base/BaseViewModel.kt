@@ -62,12 +62,16 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
 
     fun launch(showLoading: Boolean,block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
         try {
-            if(showLoading) showLoading()
+            if(showLoading) {
+                showLoading()
+            }
             block()
         } catch (e: Throwable) {
             error(e)
         }
-        hideLoading()
+        if(showLoading){
+            hideLoading()
+        }
     }
 
 }

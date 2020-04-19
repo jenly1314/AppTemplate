@@ -7,6 +7,7 @@ import com.king.template.BuildConfig
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.about.AboutActivity
+import com.king.template.app.account.ChangePwdActivity
 import com.king.template.app.base.BaseFragment
 import kotlinx.android.synthetic.main.me_fragment.*
 import kotlinx.android.synthetic.main.me_fragment.tvAppVersion
@@ -29,6 +30,7 @@ class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListe
         tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
 
         //TODO 对应的菜单按钮
+        rlUser.setOnClickListener(this)
         tvMenu1.setOnClickListener(this)
         tvMenu2.setOnClickListener(this)
         tvMenu3.setOnClickListener(this)
@@ -46,13 +48,27 @@ class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListe
         return R.layout.me_fragment
     }
 
+    //-------------------------------
+
+    private fun clickChangePassword(){
+        startActivity(ChangePwdActivity::class.java)
+    }
+
+    private fun clickUser(){
+        //TODO 点击用户信息逻辑
+        startLoginActivity()
+    }
+
+
     private fun clickAbout(){
         startActivity(AboutActivity::class.java)
     }
 
     override fun onClick(v: View){
         when(v.id){
+            R.id.rlUser -> clickUser()
             R.id.btnAbout -> clickAbout()
+            R.id.tvMenu1 -> clickChangePassword()
         }
     }
 }

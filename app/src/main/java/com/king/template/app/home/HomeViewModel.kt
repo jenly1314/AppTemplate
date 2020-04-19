@@ -33,11 +33,16 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
         }
     }
 
-    fun getRequestData(){
+    fun getRequestData(curPage: Int,pageSize : Int){
         //TODO 模拟请求
-        launch(false) {
+        launch {
+            var start = (curPage - 1) * pageSize + 1
+            var end = (curPage) * pageSize
+            if(curPage > 1){
+                end -= pageSize / 2
+            }
             var data = ArrayList<Bean>()
-            for(index in 1..20){
+            for(index in start..end){
                 var bean = Bean()
                 with(bean){
                     title = "列表模板标题示例$index"
@@ -46,7 +51,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
                 }
                 data.add(bean)
             }
-            delay(1500)
+            delay(1000)
             liveData.value = data
         }
     }

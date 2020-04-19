@@ -32,5 +32,40 @@
     <string name="about_version_update">版本更新</string>
     <string name="about_about">关于</string>
 
+    <!-- Login & Register & Password -->
+
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+
+    <string name="hint_username">请输入手机号码</string>
+    <string name="hint_password">请输入登录密码</string>
+    <string name="hint_verify_code">请输入短信验证码</string>
+
+    <string name="hint_old_password">请输入旧密码</string>
+    <string name="hint_new_password">请输入新密码</string>
+    <string name="hint_confirm_new_password">请确认新密码</string>
+    <string name="hint_new_password_not_match">两次输入的新密码不一致</string>
+
+    <string name="tips_username_matcher">请输入有效的手机号码</string>
+    <string name="tips_password_matcher">密码长度6~20个字符，由英文字母、数字和符号中的至少两种组成。</string>
+
+
+    <string name="send_verify_code">发送验证码</string>
+    <string name="verify_code_down_time_">%1$dS后重发</string>
+
+    <string name="register_now">立即注册</string>
+    <string name="verify_code_login">验证码登录</string>
+    <string name="password_login">密码登录</string>
+
+    <string name="tips_user_agreement">阅读并同意</string>
+    <string name="tips_user_terms_of_service">《用户服务协议》</string>
+    <string name="terms_of_service_title">用户服务协议</string>
+
+    <string name="label_exist_account">已有账户，</string>
+    <string name="login_now">立即登录</string>
+
+    <string name="forgot_password">忘记密码</string>
+    <string name="reset_password">重置密码</string>
+    <string name="change_password">修改密码</string>
 
 </resources>

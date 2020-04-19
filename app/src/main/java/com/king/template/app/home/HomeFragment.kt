@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.king.base.adapter.divider.DividerItemDecoration
 import com.king.template.R
+import com.king.template.app.Constants
 import com.king.template.app.adapter.BannerImageAdapter
 import com.king.template.app.adapter.BindingAdapter
 import com.king.template.app.base.BaseFragment
@@ -17,6 +18,7 @@ import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.rv
 import kotlinx.android.synthetic.main.home_fragment.srl
+import kotlinx.android.synthetic.main.list_fragment.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -60,8 +62,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         srl.setOnRefreshListener{requestData(1)}
         srl.setOnLoadMoreListener {requestData(curPage)}
         viewModel.liveData.observe(this, Observer {
-            mAdapter.replaceData(it)
-            srl.closeHeaderOrFooter()
+            updateUI(it,curPage > 1)
         })
         srl.autoRefresh()
 
@@ -72,7 +73,21 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
     private fun requestData(curPage: Int){
         this.curPage = curPage
         viewModel.getRequestBanner()
-        viewModel.getRequestData()
+        viewModel.getRequestData(curPage,Constants.PAGE_SIZE)
+    }
+
+    private fun updateUI(data: Collection<Bean>?,loadMore: Boolean){
+        data?.let {
+            if(loadMore) mAdapter.addData(data) else mAdapter.replaceData(data)
+
+            if(mAdapter.itemCount >= curPage * Constants.PAGE_SIZE){
+                srl.setEnableLoadMore(true)
+                curPage++
+            }else{
+                srl.setEnableLoadMore(false)
+                srl.finishLoadMoreWithNoMoreData()
+            }
+        }
     }
 
     fun clickItem(data: Bean){
@@ -91,6 +106,9 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         srl.closeHeaderOrFooter()
     }
 
+    override fun showLoading() {
+//        super.showLoading()
+    }
     override fun hideLoading() {
         super.hideLoading()
         srl.closeHeaderOrFooter()
@@ -113,5 +131,4 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         return R.layout.home_fragment
     }
 
-    override fun createViewModel(): HomeViewModel = obtainViewModel(activity!!.viewModelStore,HomeViewModel::class.java)
 }

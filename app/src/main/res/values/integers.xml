@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="username_max_length">11</integer>
+    <integer name="password_max_length">20</integer>
+    <integer name="name_max_length">16</integer>
+    <integer name="verify_code_max_length">6</integer>
+</resources>

@@ -30,13 +30,14 @@
     <color name="tab_normal">#666666</color>
     <color name="tab_selected">#0d7fea</color>
 
-
-
     <color name="text_theme">#0d7fea</color>
 
     <color name="home_menu_normal">#808080</color>
     <color name="home_menu_selected">#0d7fea</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="btn_bg_normal">#0d7fea</color>
+    <color name="btn_bg_pressed">#0c6aad</color>
 
 </resources>

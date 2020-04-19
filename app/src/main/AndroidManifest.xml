@@ -51,6 +51,31 @@
             android:launchMode="singleInstance"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity android:name=".app.account.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity android:name=".app.account.CodeLoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity android:name=".app.account.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity android:name=".app.account.ResetPwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity android:name=".app.account.ChangePwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            tools:ignore="LockedOrientationActivity"/>
+
         <meta-data android:name="com.king.template.config.AppConfigModule"
             android:value="FrameConfigModule"/>
 

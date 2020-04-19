@@ -14,6 +14,7 @@
         <item name="android:textColor">@color/text_default</item>
         <item name="android:windowBackground">@color/default_bg</item>
         <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
+        <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
 
     </style>
 

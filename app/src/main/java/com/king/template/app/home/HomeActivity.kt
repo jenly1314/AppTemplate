@@ -112,6 +112,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
         return fragment4!!
     }
 
+
     override fun onClick(v: View) {
         when(v.id){
             R.id.rbMenu1 -> showFragment {getFragment1(it)}

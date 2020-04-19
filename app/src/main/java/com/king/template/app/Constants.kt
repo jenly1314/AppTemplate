@@ -47,5 +47,7 @@ object Constants {
 
     const val KEY_CONTENT = "key_content"
 
+    const val KEY_CLEAR_TASK = "key_clear_task"
+
     //---------------------------------------------
 }

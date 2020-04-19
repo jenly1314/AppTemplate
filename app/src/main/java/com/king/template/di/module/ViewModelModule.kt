@@ -3,6 +3,9 @@ package com.king.template.di.module
 import androidx.lifecycle.ViewModel
 import com.king.frame.mvvmframe.di.scope.ViewModelKey
 import com.king.template.app.about.AboutViewModel
+import com.king.template.app.account.LoginViewModel
+import com.king.template.app.account.PasswordViewModel
+import com.king.template.app.account.RegisterViewModel
 import com.king.template.app.base.BaseViewModel
 import com.king.template.app.home.HomeViewModel
 import com.king.template.app.home.MenuViewModel
@@ -56,10 +59,24 @@ abstract class ViewModelModule {
     @ViewModelKey(AboutViewModel::class)
     abstract fun bindAboutViewModel(viewModel: AboutViewModel) : ViewModel
 
-
     @Binds
     @IntoMap
     @ViewModelKey(MeViewModel::class)
     abstract fun bindMeViewModel(viewModel: MeViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindLoginViewModel(viewModel: LoginViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    abstract fun bindRegisterViewModel(viewModel: RegisterViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PasswordViewModel::class)
+    abstract fun bindPasswordViewModel(viewModel: PasswordViewModel) : ViewModel
 
 }
