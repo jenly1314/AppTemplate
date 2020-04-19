@@ -16,9 +16,6 @@ import com.king.template.databinding.HomeFragmentBinding
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.rv
-import kotlinx.android.synthetic.main.home_fragment.srl
-import kotlinx.android.synthetic.main.list_fragment.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
