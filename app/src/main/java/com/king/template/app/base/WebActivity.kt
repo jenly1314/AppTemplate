@@ -142,7 +142,7 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
     override fun getLayoutId(): Int {
-            return R.layout.web_activity
+        return R.layout.web_activity
     }
 
 

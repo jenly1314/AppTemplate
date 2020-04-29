@@ -23,10 +23,10 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
         launch(false) {
             //TODO 模拟请求
             val data = arrayOf(
-                "http://jenly.coding.me/medias/banner/1.jpg",
-                "http://jenly.coding.me/medias/banner/2.jpg",
-                "http://jenly.coding.me/medias/banner/3.jpg",
-                "http://jenly.coding.me/medias/banner/4.jpg"
+                "https://jenly1314.gitee.io/medias/banner/1.jpg",
+                "https://jenly1314.gitee.io/medias/banner/2.jpg",
+                "https://jenly1314.gitee.io/medias/banner/3.jpg",
+                "https://jenly1314.gitee.io/medias/banner/4.jpg"
             )
             delay(1000)
             liveDataBanner.value = data.toMutableList()

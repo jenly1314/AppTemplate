@@ -32,8 +32,8 @@
 
     <color name="text_theme">#0d7fea</color>
 
-    <color name="home_menu_normal">#808080</color>
-    <color name="home_menu_selected">#0d7fea</color>
+    <color name="home_menu_normal">#999999</color>
+    <color name="home_menu_selected">#A38D59</color>
 
     <color name="transparent">#00000000</color>
 

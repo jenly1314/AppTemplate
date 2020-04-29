@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import com.king.base.util.SystemUtils
 import com.king.frame.mvvmframe.base.DataViewModel
+import com.king.frame.mvvmframe.base.livedata.SingleLiveEvent
 import com.king.template.App
 import com.king.template.R
 import com.king.template.api.ApiService
@@ -26,6 +27,8 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
 
     val apiService: ApiService by lazy { getRetrofitService(ApiService::class.java) }
 
+    val liveDataTag by lazy { SingleLiveEvent<Int>() }
+
 
     fun isSuccess(result : Result<*>?): Boolean{
         if(result == null){
@@ -41,12 +44,8 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
     }
 
 
-    fun launch(block: suspend () -> Unit){
-        launch(true,block)
-    }
-
-    fun launch(showLoading: Boolean,block: suspend () -> Unit){
-        launch(showLoading,block,{
+    fun launch(showLoading: Boolean = true,tag: Int? = null,block: suspend () -> Unit){
+        launch(showLoading,tag,block,{
             Timber.w(it)
             if(SystemUtils.isNetWorkActive(getApp())){
                 when(it){
@@ -60,7 +59,7 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
         })
     }
 
-    fun launch(showLoading: Boolean,block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
+    fun launch(showLoading: Boolean,tag: Int? = null,block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
         try {
             if(showLoading) {
                 showLoading()
@@ -72,6 +71,10 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
         if(showLoading){
             hideLoading()
         }
+        tag?.let {
+            liveDataTag.value = it
+        }
+
     }
 
 }
