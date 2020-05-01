@@ -6,7 +6,7 @@ import dagger.Module
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-@Module(includes = [ViewModelFactoryModule::class,ViewModelModule::class,ActivityModule::class,FragmentModule::class])
+@Module(includes = [ViewModelFactoryModule::class,ViewModelModule::class,ActivityModule::class,FragmentModule::class,DialogFragmentModule::class])
 class ApplicationModule {
 
 }
