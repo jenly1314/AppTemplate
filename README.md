@@ -1,5 +1,7 @@
 # AppTemplate
 
+![Image](app/src/main/ic_launcher-playstore.png)
+
 [![Download](https://img.shields.io/badge/download-App-blue.svg)](https://raw.githubusercontent.com/jenly1314/AppTemplate/master/app/flavors_release/release/app-flavors_release-release.apk)
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php)
