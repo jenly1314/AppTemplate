@@ -65,5 +65,6 @@ versions.leakcanaryNoOp = "1.6.3"
 versions.toasty = "1.4.2"
 versions.circleimageview = "3.1.0"
 versions.banner = "2.0.7"
+versions.autosize = "1.2.1"
 
 ext.versions = versions

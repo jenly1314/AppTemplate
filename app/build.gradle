@@ -151,6 +151,8 @@ dependencies {
 
     implementation "com.youth.banner:banner:$versions.banner"
 
+    implementation "me.jessyan:autosize:$versions.autosize"
+
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //
 //    implementation "com.king.guide:guidepage:$versions.guidepage"

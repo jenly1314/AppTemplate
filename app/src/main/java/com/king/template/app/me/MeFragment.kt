@@ -69,6 +69,7 @@ class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListe
             R.id.rlUser -> clickUser()
             R.id.btnAbout -> clickAbout()
             R.id.tvMenu1 -> clickChangePassword()
+            R.id.tvMenu2 -> {}
         }
     }
 }

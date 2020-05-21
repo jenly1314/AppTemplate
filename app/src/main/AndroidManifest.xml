@@ -79,8 +79,13 @@
         <meta-data android:name="com.king.template.config.AppConfigModule"
             android:value="FrameConfigModule"/>
 
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360"/>
+
         <meta-data android:name="android.max_aspect"
-            android:value="2.4" />
+            android:value="2.2" />
     </application>
 
 </manifest>

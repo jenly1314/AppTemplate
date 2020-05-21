@@ -129,6 +129,7 @@
             android:drawablePadding="@dimen/size_6dp"
             android:text="@string/tips_user_agreement"
             android:textColor="@color/text_6"
+            android:textSize="@dimen/size_13sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTips" />
         <TextView
@@ -138,6 +139,7 @@
             android:layout_marginRight="@dimen/size_20dp"
             android:layout_marginTop="@dimen/size_20dp"
             android:textColor="@color/text_theme"
+            android:textSize="@dimen/size_13sp"
             android:text="@string/tips_user_terms_of_service"
             app:layout_constraintTop_toBottomOf="@+id/tvTips"
             app:layout_constraintLeft_toRightOf="@+id/cbUserAgreement"
