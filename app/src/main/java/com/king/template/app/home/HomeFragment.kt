@@ -89,6 +89,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     fun clickItem(data: Bean){
         //TODO 点击Item处理逻辑
+        showToast(data.title!!)
     }
 
 

@@ -69,7 +69,9 @@ class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListe
             R.id.rlUser -> clickUser()
             R.id.btnAbout -> clickAbout()
             R.id.tvMenu1 -> clickChangePassword()
-            R.id.tvMenu2 -> {}
+            R.id.tvMenu2 -> startWebActivity("https://github.com/jenly1314","GitHub")
+            R.id.tvMenu3 -> startWebActivity("https://jenly1314.github.io","Jenly")
+            R.id.tvMenu4 -> startWebActivity("https://developer.android.google.cn","Android")
         }
     }
 }

@@ -7,6 +7,7 @@ import com.king.base.baseurlmanager.bean.UrlInfo
 import com.king.frame.mvvmframe.base.BaseApplication
 import com.king.template.app.Constants
 import com.king.template.di.compoent.DaggerApplicationComponent
+import com.king.template.util.Cache
 import com.king.thread.nevercrash.NeverCrash
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -17,7 +18,6 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.crashreport.CrashReport
-import com.tencent.mmkv.MMKV
 import es.dmoral.toasty.Toasty
 import timber.log.Timber
 
@@ -60,6 +60,7 @@ class App : BaseApplication() {
         MultiDex.install(base)
         Beta.installTinker()
 
+        Toasty.Config.getInstance().allowQueue(false).apply()
     }
 
     override fun onCreate() {
@@ -80,7 +81,7 @@ class App : BaseApplication() {
             .appComponent(appComponent)
             .build()
             .inject(this)
-        MMKV.initialize(this)
+        Cache.initialize(this)
 
     }
 }

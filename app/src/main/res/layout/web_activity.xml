@@ -22,15 +22,26 @@
             android:progressDrawable="@drawable/web_progress_bar"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             style="?android:attr/progressBarStyleHorizontal"/>
-        <LinearLayout
-            android:id="@+id/llError"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+        <ProgressBar
+            android:id="@+id/pbFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/size_30dp"
+            android:visibility="gone"/>
+        <LinearLayout
+            android:id="@+id/llError"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/default_bg"
             android:visibility="gone"
             style="@style/OnClick">
             <ImageView

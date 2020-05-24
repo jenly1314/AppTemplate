@@ -2,9 +2,11 @@ package com.king.template.app.base
 
 import android.graphics.Bitmap
 import android.net.http.SslError
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
+import androidx.core.view.isVisible
 import com.github.lzyzsd.jsbridge.DefaultHandler
 import com.king.template.R
 import com.king.template.app.Constants
@@ -37,6 +39,7 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             url = it
         }
 
+        pbFirst.isVisible = true
         web.setDefaultHandler(DefaultHandler())
 
         web.webChromeClient = object : WebChromeClient(){
@@ -55,6 +58,7 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
                 super.onProgressChanged(view, newProgress)
                 updateProgress(newProgress,isError)
             }
+
         }
         web.webViewClient = object : WebViewClient(){
 
@@ -72,25 +76,44 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
             override fun onPageFinished(view: WebView?, url: String?) {
+                pbFirst.isVisible = false
                 super.onPageFinished(view, url)
                 Timber.d("onPageFinished:$url")
                 updateProgress(100,isError)
+
             }
 
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError) {
                 super.onReceivedError(view, request, error)
                 Timber.d("onReceivedError:$url")
-                isError = true
-//                view?.loadUrl(BLANK_URL)
-                updateProgress(0,isError)
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    val code = error.errorCode
+                    Timber.d("errorCode:${code}")
+                    if(code <= ERROR_TIMEOUT){
+                        isError = true
+                        view?.loadUrl(BLANK_URL)
+                        updateProgress(0,isError)
+                    }
+                }else{
+                    isError = true
+                    view?.loadUrl(BLANK_URL)
+                    updateProgress(0,isError)
+                }
+
             }
 
-            override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse?) {
+            override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse) {
                 super.onReceivedHttpError(view, request, errorResponse)
                 Timber.d("onReceivedHttpError:$url")
-                isError = true
-//                view?.loadUrl(BLANK_URL)
-                updateProgress(0,isError)
+                val code = errorResponse.statusCode
+                Timber.d("errorCode:${code}")
+                if(code == 400 || code == 500){
+                    isError = true
+                    view?.loadUrl(BLANK_URL)
+                    updateProgress(0,isError)
+                }
+
             }
 
             override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler, error: SslError?) {
@@ -122,6 +145,7 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             pb.progress = 0
             pb.visibility = View.GONE
             llError.visibility = View.VISIBLE
+
         }else{
             pb.progress = progress
             if(llError.visibility != View.GONE){
@@ -156,8 +180,15 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
     override fun onBackPressed() {
-        if(isGoBack() && !isError && !curl.equals(BLANK_URL,true)){
+        if(isGoBack()){
             web.goBack()
+            if(curl.equals(BLANK_URL,true)){//返回上一页时如果是空白页，表示之前加载页面出错过
+                if(isGoBack()){
+                    web.goBack()
+                }else{
+                    super.onBackPressed()
+                }
+            }
             return
         }
         super.onBackPressed()
