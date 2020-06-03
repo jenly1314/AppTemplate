@@ -11,7 +11,7 @@ abstract class ListViewModel<T> constructor(application: Application, model: Bas
 
     val liveData by lazy { MutableLiveData<Collection<T>>() }
 
-    fun pageSize() = Constants.PAGE_SIZE
+    open fun pageSize() = Constants.PAGE_SIZE
 
     open fun requestData(curPage: Int){
         launch {

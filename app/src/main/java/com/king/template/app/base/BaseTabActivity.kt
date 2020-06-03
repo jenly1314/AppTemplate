@@ -1,17 +1,17 @@
 package com.king.template.app.base
 
 import android.os.Bundle
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.king.template.R
-import com.king.template.databinding.BaseTabActivityBinding
 import kotlinx.android.synthetic.main.base_tab_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBinding>(){
+abstract class BaseTabActivity : BaseActivity<BaseViewModel, ViewDataBinding>(){
 
     private var titles = getTabTitles()
 
@@ -44,8 +44,6 @@ abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBind
     override fun getLayoutId(): Int {
         return R.layout.base_tab_activity
     }
-
-    override fun createViewModel(): BaseViewModel = obtainViewModel(BaseViewModel::class.java)
 
     abstract fun getTabTitles(): Array<String>
 

@@ -16,7 +16,7 @@ ext.build_versions = build_versions
 def versions = [:]
 
 versions.gralde = '3.6.2'
-versions.kotlin = "1.3.70"
+versions.kotlin = "1.3.71"
 versions.tinkerSupport = "1.1.5"
 
 versions.appcompat = "1.1.0"
@@ -36,7 +36,7 @@ versions.room = "2.2.5"
 versions.dagger = "2.27"
 versions.multidex = "2.0.1"
 
-versions.mvvmframe = "1.1.2"
+versions.mvvmframe = "1.1.3"
 versions.nevercrash = "1.0.0"
 versions.base = "3.2.1-androidx"
 versions.appUpdater = "1.0.5-androidx"
@@ -46,7 +46,7 @@ versions.imageviewer = "1.0.0"
 versions.baseUrlManager = "1.0.1-androidx"
 versions.logger = "2.2.0"
 versions.eventbus = "3.1.1"
-versions.brvah = "3.0.1"
+versions.brvah = "3.0.4"
 versions.smartRefreshLayout= "1.1.2"
 versions.circleimageview = "3.0.1"
 versions.glide = "4.10.0"

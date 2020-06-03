@@ -9,7 +9,7 @@ import com.king.base.adapter.divider.DividerItemDecoration
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.adapter.BannerImageAdapter
-import com.king.template.app.adapter.BindingAdapter
+import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.app.base.BaseFragment
 import com.king.template.bean.Bean
 import com.king.template.databinding.HomeFragmentBinding
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
  */
 class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
-    val mAdapter by lazy { BindingAdapter<Bean>(R.layout.rv_bean_item) }
+    val mAdapter by lazy { BaseBindingAdapter<Bean>(R.layout.rv_bean_item) }
 
     var curPage = 1
 

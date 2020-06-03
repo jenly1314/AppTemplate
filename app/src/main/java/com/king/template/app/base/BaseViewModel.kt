@@ -21,13 +21,13 @@ import javax.inject.Inject
  */
 open class BaseViewModel @Inject constructor(application: Application, model: BaseModel?) : DataViewModel(application,model) {
 
-    fun getApp() = getApplication<App>()
+    open fun getApp() = getApplication<App>()
 
-    fun getString(@StringRes resId: Int) = getApp().getString(resId)
+    open fun getString(@StringRes resId: Int) = getApp().getString(resId)
 
     val apiService: ApiService by lazy { getRetrofitService(ApiService::class.java) }
 
-    val liveDataTag by lazy { SingleLiveEvent<Int>() }
+    open val liveDataTag by lazy { SingleLiveEvent<Int>() }
 
 
     fun isSuccess(result : Result<*>?): Boolean{

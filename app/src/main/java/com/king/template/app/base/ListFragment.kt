@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.king.template.R
 import com.king.template.app.Constants
-import com.king.template.app.adapter.BindingAdapter
+import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.databinding.ListFragmentBinding
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.list_fragment.*
@@ -22,7 +22,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
     var curPage : Int = 1
     var pageSize = Constants.PAGE_SIZE
 
-    lateinit var mAdapter : BindingAdapter<T>
+    lateinit var mAdapter : BaseBindingAdapter<T>
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -84,9 +84,9 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
 
     }
 
-    fun updateUI(data: Collection<T>?,loadMore: Boolean){
+    open fun updateUI(data: Collection<T>?,loadMore: Boolean){
         data?.let {
-            if(loadMore) mAdapter.addData(data) else mAdapter.replaceData(data)
+            if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
             if(mAdapter.itemCount >= curPage * pageSize){
                 srl.setEnableLoadMore(true)
@@ -98,5 +98,5 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
         }
     }
 
-    abstract fun createAdapter(): BindingAdapter<T>
+    abstract fun createAdapter(): BaseBindingAdapter<T>
 }

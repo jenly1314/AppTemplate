@@ -80,7 +80,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
         if(!checkInput(etNewPassword,R.string.hint_new_password)){
             return
         }
-        if(!CheckUtils.checkUsername(etNewPassword.text.toString())){
+        if(!CheckUtils.checkPassword(etNewPassword.text.toString())){
             showToast(R.string.tips_password_matcher)
             return
         }

@@ -1,17 +1,18 @@
 package com.king.template.app.base
 
 import android.os.Bundle
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.king.template.R
-import com.king.template.databinding.BaseTabFragmentBinding
 import kotlinx.android.synthetic.main.base_tab_fragment.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabFragment(var titles: Array<String>) : BaseFragment<BaseViewModel,BaseTabFragmentBinding>() {
+abstract class BaseTabFragment(var titles: Array<String>) : BaseFragment<BaseViewModel,ViewDataBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -42,8 +43,6 @@ abstract class BaseTabFragment(var titles: Array<String>) : BaseFragment<BaseVie
     override fun getLayoutId(): Int {
         return R.layout.base_tab_fragment
     }
-
-    override fun createViewModel(): BaseViewModel = obtainViewModel(BaseViewModel::class.java)
 
     abstract fun createTabItemFragment(position: Int): Fragment
 }

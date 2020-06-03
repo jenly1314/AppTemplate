@@ -8,8 +8,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class BindingHolder(view: View) : BaseViewHolder(view) {
+class BindingViewHolder<VDB: ViewDataBinding>(view: View) : BaseViewHolder(view) {
 
-    var mBinding: ViewDataBinding? = DataBindingUtil.bind(view)
+    var mBinding = DataBindingUtil.bind<VDB>(view)
 
 }
