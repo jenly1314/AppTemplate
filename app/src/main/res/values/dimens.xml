@@ -5,7 +5,7 @@
     <dimen name="title_height">56dp</dimen>
 
     <dimen name="app_bar_height">260dp</dimen>
-
+    
     <dimen name="size_line">0.7dp</dimen>
     <dimen name="size_space">6dp</dimen>
 

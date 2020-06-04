@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
+import com.king.template.bean.BannerBean
 import com.king.template.bean.Bean
 import kotlinx.coroutines.delay
 import retrofit2.await
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
 
 
-    val liveDataBanner by lazy { MutableLiveData<MutableList<String>>()}
+    val liveDataBanner by lazy { MutableLiveData<List<BannerBean>>()}
 
     val liveData by lazy { MutableLiveData<MutableList<Bean>>()}
 
@@ -29,7 +30,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
                 "https://jenly1314.gitee.io/medias/banner/4.jpg"
             )
             delay(1000)
-            liveDataBanner.value = data.toMutableList()
+            liveDataBanner.value = data.map { BannerBean(it) }
         }
     }
 
@@ -47,7 +48,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
                 with(bean){
                     title = "列表模板标题示例$index"
                     content = "列表模板内容示例$index"
-                    imageUrl = "http://jenly.coding.me/medias/banner/${index % 7}.jpg"
+                    imageUrl = "http://jenly1314.gitee.io/medias/banner/${index % 7}.jpg"
                 }
                 data.add(bean)
             }

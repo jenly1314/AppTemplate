@@ -11,6 +11,7 @@ import com.king.template.app.Constants
 import com.king.template.app.adapter.BannerImageAdapter
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.app.base.BaseFragment
+import com.king.template.bean.BannerBean
 import com.king.template.bean.Bean
 import com.king.template.databinding.HomeFragmentBinding
 import com.youth.banner.config.IndicatorConfig
@@ -37,7 +38,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
         //TODO Banner初始化示例
         with(banner){
-            adapter = BannerImageAdapter()
+            adapter = BannerImageAdapter<BannerBean>()
             indicator = CircleIndicator(context)
             setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
         }
