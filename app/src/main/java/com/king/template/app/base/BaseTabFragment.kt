@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.base_tab_fragment.*
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabFragment(var titles: Array<String>) : BaseFragment<BaseViewModel,ViewDataBinding>() {
+abstract class BaseTabFragment : BaseFragment<BaseViewModel,ViewDataBinding>() {
+
+    private val titles by lazy { getTabTitles() }
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -42,6 +44,8 @@ abstract class BaseTabFragment(var titles: Array<String>) : BaseFragment<BaseVie
     override fun getLayoutId(): Int {
         return R.layout.base_tab_fragment
     }
+
+    abstract fun getTabTitles(): Array<String>
 
     abstract fun createTabItemFragment(position: Int): Fragment
 }

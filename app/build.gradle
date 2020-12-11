@@ -64,29 +64,34 @@ android {
         enabled true
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions "flavor"
-    productFlavors {
-        //正式
-        flavors_release {
-            dimension "flavor"
-        }
-        //开发
-        flavors_dev {
-            dimension "flavor"
-        }
-    }
+//    flavorDimensions "flavor"
+//    productFlavors {
+//        //正式
+//        flavors_release {
+//            dimension "flavor"
+//        }
+//        //开发
+//        flavors_dev {
+//            dimension "flavor"
+//        }
+//    }
 
 }
 
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
     implementation "androidx.core:core-ktx:$versions.coreKtx"
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
@@ -98,7 +103,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinxCoroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinxCoroutines"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewmodelKtx"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleKtx"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleKtx"
 
     kapt "androidx.room:room-compiler:$versions.room"
     implementation "androidx.room:room-rxjava2:$versions.room"
@@ -141,7 +147,6 @@ dependencies {
 
     //leakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanaryNoOp"
 
     implementation "com.github.GrenderG:Toasty:$versions.toasty"
 
@@ -153,11 +158,11 @@ dependencies {
 
     implementation "me.jessyan:autosize:$versions.autosize"
 
+//    implementation "com.king.image:imageviewer:$versions.imageviewer"
+//    implementation "com.king.guide:guidepage:$versions.guidepage"
+
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //
-//    implementation "com.king.guide:guidepage:$versions.guidepage"
-//    implementation "com.king.image:imageviewer:$versions.imageviewer"
-
 //    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 //
 //    implementation "com.github.chrisbanes:PhotoView:$versions.PhotoView"
@@ -165,7 +170,6 @@ dependencies {
 //    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
 
 }
-
 
 if(rootProject.ext.tinkerEnabled){
     apply from: 'tinker-support.gradle'

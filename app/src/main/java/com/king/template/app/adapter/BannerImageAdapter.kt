@@ -23,6 +23,10 @@ class BannerImageAdapter<T : BannerImage>(datas: List<T>? = null) : BannerAdapte
         return BannerViewHolder(imageView)
     }
 
+    fun getDatas(): List<T>{
+        return mDatas
+    }
+
     override fun onBindView(holder: BannerViewHolder, data: T, position: Int, size: Int) {
         ImageLoader.displayImage(holder.imageView,data.getImageUrl(), R.drawable.btn_none)
     }

@@ -12,8 +12,7 @@ import com.king.template.app.Constants
 class AppConfigModule : FrameConfigModule() {
     override fun applyOptions(context: Context, builder: ConfigModule.Builder) {
         if(Constants.isDomain){
-            val manager = BaseUrlManager(context)
-            builder.baseUrl(manager.baseUrl)
+            builder.baseUrl(BaseUrlManager.getInstance().baseUrl)
         }else{
             builder.baseUrl(Constants.BASE_URL)
         }

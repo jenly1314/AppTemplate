@@ -39,6 +39,10 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         //TODO Banner初始化示例
         with(banner){
             adapter = BannerImageAdapter<BannerBean>()
+            adapter.setOnBannerListener { data, position ->
+                //TODO 点击 Banner Item 示例
+                showToast("banner:$position")
+            }
             indicator = CircleIndicator(context)
             setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
         }
@@ -76,7 +80,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     private fun updateUI(data: Collection<Bean>?,loadMore: Boolean){
         data?.let {
-            if(loadMore) mAdapter.addData(data) else mAdapter.replaceData(data)
+            if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
             if(mAdapter.itemCount >= curPage * Constants.PAGE_SIZE){
                 srl.setEnableLoadMore(true)

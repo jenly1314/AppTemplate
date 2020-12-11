@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.base_tab_activity.*
  */
 abstract class BaseTabActivity : BaseActivity<BaseViewModel, ViewDataBinding>(){
 
-    private var titles = getTabTitles()
+    private val titles by lazy { getTabTitles() }
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)

@@ -36,8 +36,6 @@ class App : BaseApplication() {
         }
     }
 
-    val manager  by lazy { BaseUrlManager(this) }
-
     override fun attachBaseContext(base: Context?) {
         //初始化打印日志
         var formatStrategy = PrettyFormatStrategy.newBuilder()
@@ -65,10 +63,9 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         if(Constants.isDomain){//提供动态切换环境
-            if(manager.count==0){
-                manager.urlInfo = UrlInfo(Constants.BASE_URL)
+            if(BaseUrlManager.getInstance().count == 0){
+                BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }
-
         }
         super.onCreate()
         Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)

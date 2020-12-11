@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/btn_bg_normal" />
-    <corners android:radius="@dimen/size_20dp"/>
+    <corners android:radius="@dimen/btn_bg_radius"/>
     <padding android:left="@dimen/size_20dp"
         android:right="@dimen/size_16dp"
         android:top="@dimen/size_6dp"

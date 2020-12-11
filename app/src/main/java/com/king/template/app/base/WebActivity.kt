@@ -87,19 +87,19 @@ class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
                 super.onReceivedError(view, request, error)
                 Timber.d("onReceivedError:$url")
 
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    val code = error.errorCode
-                    Timber.d("errorCode:${code}")
-                    if(code <= ERROR_TIMEOUT){
-                        isError = true
-                        view?.loadUrl(BLANK_URL)
-                        updateProgress(0,isError)
-                    }
-                }else{
-                    isError = true
-                    view?.loadUrl(BLANK_URL)
-                    updateProgress(0,isError)
-                }
+//                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                    val code = error.errorCode
+//                    Timber.d("errorCode:${code}")
+//                    if(code <= ERROR_TIMEOUT){
+//                        isError = true
+//                        view?.loadUrl(BLANK_URL)
+//                        updateProgress(0,isError)
+//                    }
+//                }else{
+//                    isError = true
+//                    view?.loadUrl(BLANK_URL)
+//                    updateProgress(0,isError)
+//                }
 
             }
 

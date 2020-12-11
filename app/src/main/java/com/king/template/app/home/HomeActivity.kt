@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
-import com.king.template.app.me.MeFragment
 import com.king.template.app.base.TabFragment
+import com.king.template.app.me.MeFragment
 import com.king.template.databinding.HomeActivityBinding
 
 /**
@@ -76,12 +76,12 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
     private fun getFragment2(fragmentTransaction: FragmentTransaction): Fragment{
         if(fragment2 == null){
             //TODO 替换成菜单对应的Fragment
-            fragment2 = TabFragment.newInstance( {
+            fragment2 = TabFragment.newInstance(arrayOf("Tab1","Tab2")){
                 when(it){
                     0 -> MenuFragment.newInstance("Tab1",false)
                     else -> MenuFragment.newInstance("Tab2",false)
                 }
-            },arrayOf("Tab1","Tab2"),true)
+            }
             fragment2?.let{
                 fragmentTransaction.add(R.id.fragmentContent,it)
             }

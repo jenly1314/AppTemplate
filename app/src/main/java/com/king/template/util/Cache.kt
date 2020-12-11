@@ -87,19 +87,19 @@ object Cache {
         }
     }
 
-    fun getBool(key: String, defValue: Boolean = false) = mmkv().decodeBool(key,defValue)
+    fun getBoolean(key: String, defValue: Boolean = false) = mmkv().getBoolean(key,defValue)
 
-    fun getInt(key: String, defValue: Int = 0) = mmkv().decodeInt(key,defValue)
+    fun getInt(key: String, defValue: Int = 0) = mmkv().getInt(key,defValue)
 
-    fun getLong(key: String, defValue: Long = 0) = mmkv().decodeLong(key,defValue)
+    fun getLong(key: String, defValue: Long = 0) = mmkv().getLong(key,defValue)
 
-    fun getFloat(key: String, defValue: Float = 0F) = mmkv().decodeFloat(key,defValue)
+    fun getFloat(key: String, defValue: Float = 0F) = mmkv().getFloat(key,defValue)
 
     fun getDouble(key: String, defValue: Double = 0.0) = mmkv().decodeDouble(key,defValue)
 
-    fun getString(key: String, defValue: String? = null): String? = mmkv().decodeString(key,defValue)
+    fun getString(key: String, defValue: String? = null): String? = mmkv().getString(key,defValue)
 
-    fun getByteArray(key: String, defValue: ByteArray? = null): ByteArray? = mmkv().decodeBytes(key,defValue)
+    fun getByteArray(key: String, defValue: ByteArray? = null): ByteArray? = mmkv().getBytes(key,defValue)
 
     fun <T: Parcelable> getParcelable(key: String, clazz: Class<T>, defValue: T? = null): T? = mmkv().decodeParcelable(key,clazz,defValue)
 

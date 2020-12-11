@@ -49,5 +49,9 @@ object Constants {
 
     const val KEY_CLEAR_TASK = "key_clear_task"
 
+    const val KEY_ARRAY = "key_array"
+
+    const val KEY_SHOW_TOOLBAR = "key_show_toolbar"
+
     //---------------------------------------------
 }
