@@ -12,11 +12,12 @@ import javax.inject.Inject
  */
 class TempListViewModel @Inject constructor(application: Application, model: BaseModel?) : ListViewModel<Bean>(application, model){
 
-    override suspend fun request(curPage: Int, pageSize: Int) {
-        val result = apiService.getListBean("").await()
-        if(isSuccess(result)){
-            liveData.value = result.data
+    fun requestData(curPage: Int){
+        launch {
+            val result = apiService.getListBean("").await()
+            if(isSuccess(result)){
+                liveData.value = result.data
+            }
         }
     }
-
 }

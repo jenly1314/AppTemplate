@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.king.base.adapter.divider.DividerItemDecoration
+import com.king.image.imageviewer.ImageViewer
+import com.king.image.imageviewer.loader.GlideImageLoader
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.adapter.BannerImageAdapter
@@ -38,10 +40,16 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
         //TODO Banner初始化示例
         with(banner){
-            adapter = BannerImageAdapter<BannerBean>()
+            var imageAdapter = BannerImageAdapter<BannerBean>()
+            adapter = imageAdapter
             adapter.setOnBannerListener { data, position ->
                 //TODO 点击 Banner Item 示例
-                showToast("banner:$position")
+//                showToast("banner:$position")
+                ImageViewer.load(imageAdapter.getDatas())
+                        .imageLoader(GlideImageLoader())
+                        .selection(position)
+                        .indicator(true)
+                        .start(this@HomeFragment,this)
             }
             indicator = CircleIndicator(context)
             setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
@@ -109,9 +117,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         srl.closeHeaderOrFooter()
     }
 
-    override fun showLoading() {
-//        super.showLoading()
-    }
+
     override fun hideLoading() {
         super.hideLoading()
         srl.closeHeaderOrFooter()
@@ -126,7 +132,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         }
     }
 
-    open fun createEmptyView(root: ViewGroup): View? {
+    private fun createEmptyView(root: ViewGroup): View? {
         return inflate(R.layout.layout_empty,root,false)
     }
 

@@ -13,11 +13,4 @@ abstract class ListViewModel<T> constructor(application: Application, model: Bas
 
     open fun pageSize() = Constants.PAGE_SIZE
 
-    open fun requestData(curPage: Int){
-        launch {
-            request(curPage,pageSize())
-        }
-    }
-
-    abstract suspend fun request(curPage: Int,pageSize: Int)
 }

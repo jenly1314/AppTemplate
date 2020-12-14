@@ -43,19 +43,23 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
     }
 
     open fun initRefreshLayout(srl: SmartRefreshLayout){
+        srl.setEnableRefresh(isSupportRefresh())
         srl.setEnableLoadMore(false)
-        srl.setOnRefreshListener{requestData(1)}
-        srl.setOnLoadMoreListener {requestData(curPage)}
-        srl.autoRefresh()
+        srl.setOnRefreshListener{ requestData(1)}
+        srl.setOnLoadMoreListener { requestData(curPage)}
+        if(isSupportRefresh()){
+            srl.autoRefresh()
+        }
     }
 
     open fun observeData(){
         viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage == 1) })
     }
 
-    fun requestData(page: Int){
+    open fun isSupportRefresh() = true
+
+    open fun requestData(page: Int){
         curPage = page
-        viewModel?.requestData(curPage)
     }
 
     override fun hideLoading() {
@@ -88,12 +92,14 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
         data?.let {
             if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
-            if(mAdapter.itemCount >= curPage * pageSize){
-                srl.setEnableLoadMore(true)
-                curPage++
-            }else{
-                srl.setEnableLoadMore(false)
-                srl.finishLoadMoreWithNoMoreData()
+            if(isSupportRefresh()){
+                if(mAdapter.itemCount >= curPage * pageSize){
+                    srl.setEnableLoadMore(true)
+                    curPage++
+                }else{
+                    srl.setEnableLoadMore(false)
+                    srl.finishLoadMoreWithNoMoreData()
+                }
             }
         }
     }

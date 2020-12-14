@@ -30,16 +30,13 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
     open val liveDataTag by lazy { SingleLiveEvent<Int>() }
 
 
-    fun isSuccess(result : Result<*>?): Boolean{
-        if(result == null){
-            sendMessage(getString(R.string.result_failure))
-            return false
-        }
-        if(result.isSuccess()){
+    open fun isSuccess(result : Result<*>?,showError: Boolean = true): Boolean{
+        if(result?.isSuccess() == true){
             return true
         }
-        var msg = result.getErrorMessage()?: getString(R.string.result_failure)
-        sendMessage(msg)
+        if(showError){
+            sendMessage(result?.getErrorMessage() ?: getString(R.string.result_failure))
+        }
         return false
     }
 

@@ -2,7 +2,6 @@ package com.king.template.app.base
 
 import android.graphics.Bitmap
 import android.net.http.SslError
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
@@ -16,10 +15,10 @@ import kotlinx.android.synthetic.main.web_activity.*
 import timber.log.Timber
 
 /**
- * 细节处理待完善
+ * 通用 WebActivity，细节处理待完善
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
+open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
     private var url = BLANK_URL
     private lateinit var curl: String

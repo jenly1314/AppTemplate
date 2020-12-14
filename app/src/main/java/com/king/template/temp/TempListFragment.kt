@@ -10,6 +10,11 @@ import com.king.template.bean.Bean
  */
 class TempListFragment : ListFragment<Bean,TempListViewModel>() {
 
+    override fun requestData(curPage: Int) {
+        super.requestData(curPage)
+        viewModel.requestData(curPage)
+    }
+
     override fun createAdapter(): BaseBindingAdapter<Bean> {
         return BaseBindingAdapter(R.layout.rv_item)
     }

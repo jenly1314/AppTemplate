@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
 
     fun getRequestData(curPage: Int,pageSize : Int){
         //TODO 模拟请求
-        launch {
+        launch(false) {
             var start = (curPage - 1) * pageSize + 1
             var end = (curPage) * pageSize
             if(curPage > 1){

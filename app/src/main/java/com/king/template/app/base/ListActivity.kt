@@ -12,8 +12,7 @@ import com.king.template.app.Constants
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.databinding.ListActivityBinding
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import kotlinx.android.synthetic.main.list_activity.rv
-import kotlinx.android.synthetic.main.list_activity.srl
+import kotlinx.android.synthetic.main.list_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -45,19 +44,23 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
     }
 
     open fun initRefreshLayout(srl: SmartRefreshLayout){
+        srl.setEnableRefresh(isSupportRefresh())
         srl.setEnableLoadMore(false)
         srl.setOnRefreshListener{ requestData(1)}
         srl.setOnLoadMoreListener { requestData(curPage)}
-        srl.autoRefresh()
+        if(isSupportRefresh()){
+            srl.autoRefresh()
+        }
     }
 
     open fun observeData(){
         viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage == 1) })
     }
 
-    fun requestData(page: Int){
-        curPage = page
-        viewModel?.requestData(curPage)
+    open fun isSupportRefresh() = true
+
+    open fun requestData(curPage: Int){
+        this.curPage = curPage
     }
 
     override fun hideLoading() {
@@ -90,12 +93,14 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
         data?.let {
             if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
-            if(mAdapter.itemCount >= curPage * pageSize){
-                srl.setEnableLoadMore(true)
-                curPage++
-            }else{
-                srl.setEnableLoadMore(false)
-                srl.finishLoadMoreWithNoMoreData()
+            if(isSupportRefresh()){
+                if(mAdapter.itemCount >= curPage * pageSize){
+                    srl.setEnableLoadMore(true)
+                    curPage++
+                }else{
+                    srl.setEnableLoadMore(false)
+                    srl.finishLoadMoreWithNoMoreData()
+                }
             }
         }
     }
