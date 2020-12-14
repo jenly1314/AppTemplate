@@ -7,6 +7,6 @@ import javax.inject.Inject
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class BaseModel @Inject constructor(dataRepository : IDataRepository) : BaseModel(dataRepository) {
+open class BaseModel @Inject constructor(dataRepository : IDataRepository) : BaseModel(dataRepository) {
 
 }

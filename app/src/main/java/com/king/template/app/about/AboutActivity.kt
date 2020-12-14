@@ -32,7 +32,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         //当检测到新版本时，这里只是演示检测到新版本的大概流程
         var config = AppDialogConfig()
         with(config){
-            isHideTitle = true
+            title = "版本更新"
             content = "发现新版本(这里只是演示模板步骤)"
             ok = "更新"
             onClickOk = View.OnClickListener {
