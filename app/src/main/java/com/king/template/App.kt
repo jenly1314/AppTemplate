@@ -1,30 +1,31 @@
 package com.king.template
 
+import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.king.base.baseurlmanager.BaseUrlManager
 import com.king.base.baseurlmanager.bean.UrlInfo
-import com.king.frame.mvvmframe.base.BaseApplication
 import com.king.template.app.Constants
-import com.king.template.di.compoent.DaggerApplicationComponent
 import com.king.template.util.Cache
 import com.king.thread.nevercrash.NeverCrash
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
-import com.scwang.smartrefresh.header.MaterialHeader
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.MaterialHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.crashreport.CrashReport
+import dagger.hilt.android.HiltAndroidApp
 import es.dmoral.toasty.Toasty
 import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class App : BaseApplication() {
+@HiltAndroidApp
+class App : Application() {
 
     init {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
@@ -37,6 +38,32 @@ class App : BaseApplication() {
     }
 
     override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(base)
+        Beta.installTinker()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        initLogger()
+        Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
+        Cache.initialize(this)
+
+        Toasty.Config.getInstance().allowQueue(false).apply()
+
+        NeverCrash.init { t, e ->
+            CrashReport.postCatchedException(e)
+        }
+        if(Constants.isDomain){//提供动态切换环境
+            if(BaseUrlManager.getInstance().count == 0){
+                BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
+            }
+        }
+
+
+    }
+
+    private fun initLogger(){
         //初始化打印日志
         var formatStrategy = PrettyFormatStrategy.newBuilder()
             .methodOffset(5)
@@ -52,33 +79,6 @@ class App : BaseApplication() {
                 }
             }
         })
-
-        super.attachBaseContext(base)
-
-        MultiDex.install(base)
-        Beta.installTinker()
-
-        Toasty.Config.getInstance().allowQueue(false).apply()
-    }
-
-    override fun onCreate() {
-        if(Constants.isDomain){//提供动态切换环境
-            if(BaseUrlManager.getInstance().count == 0){
-                BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
-            }
-        }
-        super.onCreate()
-        Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
-
-        NeverCrash.init { t, e ->
-            CrashReport.postCatchedException(e)
-        }
-
-        DaggerApplicationComponent.builder()
-            .appComponent(appComponent)
-            .build()
-            .inject(this)
-        Cache.initialize(this)
 
     }
 }

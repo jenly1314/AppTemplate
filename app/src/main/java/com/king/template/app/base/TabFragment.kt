@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.king.template.app.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.toolbar.*
 
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 open class TabFragment(var block: (Int) -> Fragment) : BaseTabFragment() {
 
     private lateinit var titles : Array<String>

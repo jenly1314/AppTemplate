@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -106,11 +107,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleKtx"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleKtx"
 
+    //lifecycle
+    kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+    //room
     kapt "androidx.room:room-compiler:$versions.room"
-    implementation "androidx.room:room-rxjava2:$versions.room"
+    //hilt
+    implementation "com.google.dagger:hilt-android:$versions.hiltAndroid"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hiltAndroid"
 
-    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt"
+    kapt "androidx.hilt:hilt-compiler:$versions.hilt"
 
     implementation "com.king.frame:mvvmframe:$versions.mvvmframe"
 
@@ -129,8 +135,11 @@ dependencies {
 
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.brvah"
 
-    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout"
-    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$versions.smartRefreshLayout"
+    implementation "com.scwang.smart:refresh-layout-kernel:$versions.smartRefreshLayout"
+    implementation "com.scwang.smart:refresh-header-material:$versions.smartRefreshLayout"
+    implementation "com.scwang.smart:refresh-footer-classics:$versions.smartRefreshLayout"
+//    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout"
+//    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$versions.smartRefreshLayout"
 
     implementation "com.github.bumptech.glide:glide:$versions.glide"
     kapt "com.github.bumptech.glide:compiler:$versions.glide"
@@ -165,7 +174,7 @@ dependencies {
 //
 //    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 //
-//    implementation "com.github.chrisbanes:PhotoView:$versions.PhotoView"
+//    implementation "com.github.chrisbanes:PhotoView:$versions.photoView"
 //
 //    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
 

@@ -10,6 +10,7 @@ import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.RegisterActivityBinding
 import com.king.template.util.CheckUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_activity.*
 import kotlinx.android.synthetic.main.register_activity.*
 import kotlinx.android.synthetic.main.register_activity.etPassword
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.register_activity.etUsername
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding>(){
 
     var username : String? = null

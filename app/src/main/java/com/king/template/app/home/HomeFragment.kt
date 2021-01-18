@@ -18,11 +18,13 @@ import com.king.template.bean.Bean
 import com.king.template.databinding.HomeFragmentBinding
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     val mAdapter by lazy { BaseBindingAdapter<Bean>(R.layout.rv_bean_item) }

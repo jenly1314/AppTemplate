@@ -8,11 +8,13 @@ import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.app.home.HomeActivity
 import com.king.template.databinding.SplashActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.splash_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<SplashViewModel, SplashActivityBinding>(){
 
 

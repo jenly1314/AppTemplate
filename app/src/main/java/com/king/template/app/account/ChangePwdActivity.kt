@@ -9,11 +9,13 @@ import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ChangePwdActivityBinding
 import com.king.template.util.CheckUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.change_pwd_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBinding>(){
 
     override fun initData(savedInstanceState: Bundle?) {

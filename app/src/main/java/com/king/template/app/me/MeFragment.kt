@@ -9,12 +9,14 @@ import com.king.template.app.Constants
 import com.king.template.app.about.AboutActivity
 import com.king.template.app.account.ChangePwdActivity
 import com.king.template.app.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.me_fragment.*
 import kotlinx.android.synthetic.main.me_fragment.tvAppVersion
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListener {
 
     companion object{

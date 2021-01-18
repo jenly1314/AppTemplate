@@ -10,6 +10,7 @@ import com.github.lzyzsd.jsbridge.DefaultHandler
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.databinding.WebActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.web_activity.*
 import timber.log.Timber
@@ -18,6 +19,7 @@ import timber.log.Timber
  * 通用 WebActivity，细节处理待完善
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
     private var url = BLANK_URL

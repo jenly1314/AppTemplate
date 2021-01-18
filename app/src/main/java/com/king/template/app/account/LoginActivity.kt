@@ -9,11 +9,13 @@ import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.LoginActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
 
     var username : String? = null

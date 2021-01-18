@@ -10,10 +10,12 @@ import com.king.template.app.base.BaseActivity
 import com.king.template.app.base.TabFragment
 import com.king.template.app.me.MeFragment
 import com.king.template.databinding.HomeActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
 
     var fragment1 : Fragment? = null

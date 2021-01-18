@@ -11,7 +11,7 @@ import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.databinding.ListFragmentBinding
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.list_fragment.*
 
 /**

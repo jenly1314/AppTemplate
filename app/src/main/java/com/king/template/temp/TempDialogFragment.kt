@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.king.template.R
 import com.king.template.app.base.BaseDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class TempDialogFragment : BaseDialogFragment<TempViewModel,ViewDataBinding>() {
 
     companion object{

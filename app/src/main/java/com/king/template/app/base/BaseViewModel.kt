@@ -2,6 +2,7 @@ package com.king.template.app.base
 
 import android.app.Application
 import androidx.annotation.StringRes
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.king.base.util.SystemUtils
 import com.king.frame.mvvmframe.base.DataViewModel
@@ -10,6 +11,7 @@ import com.king.template.App
 import com.king.template.R
 import com.king.template.api.ApiService
 import com.king.template.bean.Result
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.net.ConnectException
@@ -19,7 +21,7 @@ import javax.inject.Inject
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-open class BaseViewModel @Inject constructor(application: Application, model: BaseModel?) : DataViewModel(application,model) {
+open class BaseViewModel @ViewModelInject constructor(application: Application, model: BaseModel?) : DataViewModel(application,model) {
 
     open fun getApp() = getApplication<App>()
 
@@ -65,9 +67,7 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
         } catch (e: Throwable) {
             error(e)
         }
-        if(showLoading){
-            hideLoading()
-        }
+        hideLoading()
         tag?.let {
             liveDataTag.value = it
         }

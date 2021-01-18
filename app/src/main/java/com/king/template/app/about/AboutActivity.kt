@@ -9,11 +9,13 @@ import com.king.template.BuildConfig
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.AboutActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.about_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
 
     override fun initData(savedInstanceState: Bundle?) {

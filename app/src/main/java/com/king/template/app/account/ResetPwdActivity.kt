@@ -10,6 +10,7 @@ import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ResetPwdActivityBinding
 import com.king.template.util.CheckUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.change_pwd_activity.*
 import kotlinx.android.synthetic.main.reset_pwd_activity.*
 import kotlinx.android.synthetic.main.reset_pwd_activity.etConfirmPassword
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.reset_pwd_activity.etNewPassword
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding>(){
 
     var username : String? = null

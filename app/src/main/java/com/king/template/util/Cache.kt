@@ -13,7 +13,7 @@ object Cache {
         MMKV.initialize(context)
     }
 
-    private fun mmkv() = MMKV.defaultMMKV()
+    private fun mmkv() = MMKV.defaultMMKV()!!
 
     fun put(key: String,value: Boolean?){
         if(value != null){

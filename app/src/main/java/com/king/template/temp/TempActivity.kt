@@ -5,10 +5,12 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
+@AndroidEntryPoint
 class TempActivity : BaseActivity<TempViewModel, ViewDataBinding>(){
 
     override fun initData(savedInstanceState: Bundle?) {

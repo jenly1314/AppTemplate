@@ -37,19 +37,15 @@ abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
 
     }
 
-    @NonNull
-    override fun getContext(): Context {
-        return requireContext()
-    }
 
     //-----------------------------------
 
     fun showToast(@StringRes resId: Int){
-        Toasty.normal(context,resId).show()
+        Toasty.normal(requireContext(),resId).show()
     }
 
     fun showToast(text: CharSequence){
-        Toasty.normal(context,text).show()
+        Toasty.normal(requireContext(),text).show()
     }
 
     //-----------------------------------
@@ -93,7 +89,7 @@ abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         if(isAlphaAnim){
-            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.app_dialog_out)
+            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(requireContext(), R.anim.alpha_in_anim, R.anim.app_dialog_out)
             startActivity(intent, optionsCompat.toBundle())
         }else{
             startActivity(intent)
@@ -103,7 +99,7 @@ abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
     fun startHomeActivity(){
         val intent = Intent(context, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.alpha_out_anim)
+        val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(requireContext(), R.anim.alpha_in_anim, R.anim.alpha_out_anim)
         startActivity(intent, optionsCompat.toBundle())
     }
 
