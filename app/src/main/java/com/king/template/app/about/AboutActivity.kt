@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import com.king.app.dialog.AppDialog
 import com.king.app.dialog.AppDialogConfig
-import com.king.app.updater.AppUpdater
 import com.king.template.BuildConfig
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.AboutActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.about_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -21,7 +19,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         setToolbarTitle(getString(R.string.about_title))
-        tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
+        viewDataBinding.tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
     }
 
     override fun getLayoutId(): Int {

@@ -9,15 +9,14 @@ import com.king.template.app.Constants
 import com.king.template.app.about.AboutActivity
 import com.king.template.app.account.ChangePwdActivity
 import com.king.template.app.base.BaseFragment
+import com.king.template.databinding.MeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.me_fragment.*
-import kotlinx.android.synthetic.main.me_fragment.tvAppVersion
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListener {
+class MeFragment : BaseFragment<MeViewModel,MeFragmentBinding>(),View.OnClickListener {
 
     companion object{
         fun newInstance(): MeFragment{
@@ -29,21 +28,21 @@ class MeFragment : BaseFragment<MeViewModel,ViewDataBinding>(),View.OnClickListe
         super.initData(savedInstanceState)
 
         updateUI()
-        tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
+        viewDataBinding.tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
 
         //TODO 对应的菜单按钮
-        rlUser.setOnClickListener(this)
-        tvMenu1.setOnClickListener(this)
-        tvMenu2.setOnClickListener(this)
-        tvMenu3.setOnClickListener(this)
-        tvMenu4.setOnClickListener(this)
-        btnAbout.setOnClickListener(this)
+        viewDataBinding.rlUser.setOnClickListener(this)
+        viewDataBinding.tvMenu1.setOnClickListener(this)
+        viewDataBinding.tvMenu2.setOnClickListener(this)
+        viewDataBinding.tvMenu3.setOnClickListener(this)
+        viewDataBinding.tvMenu4.setOnClickListener(this)
+        viewDataBinding.btnAbout.setOnClickListener(this)
     }
 
     private fun updateUI(){
         //TODO 更新UI显示
-        tvName.text = Constants.TAG
-        tvUsername.text = "138****8888"
+        viewDataBinding.tvName.text = Constants.TAG
+        viewDataBinding.tvUsername.text = "138****8888"
     }
 
     override fun getLayoutId(): Int {

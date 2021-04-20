@@ -10,7 +10,6 @@ import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ChangePwdActivityBinding
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.change_pwd_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -23,7 +22,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
         setToolbarTitle(getString(R.string.change_password))
 
-        etOldPassword.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etOldPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -32,11 +31,11 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etOldPassword.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etOldPassword.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        etNewPassword.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etNewPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -45,11 +44,11 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etNewPassword.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etNewPassword.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        etConfirmPassword.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etConfirmPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -58,13 +57,13 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etConfirmPassword.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etConfirmPassword.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(etOldPassword)
-        setClickRightClearListener(etNewPassword)
-        setClickRightClearListener(etConfirmPassword)
+        setClickRightClearListener(viewDataBinding.etOldPassword)
+        setClickRightClearListener(viewDataBinding.etNewPassword)
+        setClickRightClearListener(viewDataBinding.etConfirmPassword)
 
     }
 
@@ -76,21 +75,21 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
 
     private fun clickChangePassword(){
-        if(!checkInput(etOldPassword,R.string.hint_old_password)){
+        if(!checkInput(viewDataBinding.etOldPassword,R.string.hint_old_password)){
             return
         }
-        if(!checkInput(etNewPassword,R.string.hint_new_password)){
+        if(!checkInput(viewDataBinding.etNewPassword,R.string.hint_new_password)){
             return
         }
-        if(!CheckUtils.checkPassword(etNewPassword.text.toString())){
+        if(!CheckUtils.checkPassword(viewDataBinding.etNewPassword.text.toString())){
             showToast(R.string.tips_password_matcher)
             return
         }
-        if(!checkInput(etConfirmPassword,R.string.hint_confirm_new_password)){
+        if(!checkInput(viewDataBinding.etConfirmPassword,R.string.hint_confirm_new_password)){
             return
         }
-        var newPwd = etNewPassword.text.toString()
-        if(newPwd != etConfirmPassword.text.toString()){
+        var newPwd = viewDataBinding.etNewPassword.text.toString()
+        if(newPwd != viewDataBinding.etConfirmPassword.text.toString()){
             showToast(R.string.hint_new_password_not_match)
             return
         }
@@ -98,7 +97,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
         //TODO 点击“修改密码”逻辑
         showToast(R.string.change_password)
 
-        var oldPwd = etOldPassword.text.toString()
+        var oldPwd = viewDataBinding.etOldPassword.text.toString()
 
         viewModel.changePwd(oldPwd,newPwd)
     }

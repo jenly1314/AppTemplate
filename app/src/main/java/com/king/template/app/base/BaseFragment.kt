@@ -1,11 +1,9 @@
 package com.king.template.app.base
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.ViewDataBinding

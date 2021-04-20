@@ -5,14 +5,13 @@ import android.net.http.SslError
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
+import android.widget.TextView
 import androidx.core.view.isVisible
 import com.github.lzyzsd.jsbridge.DefaultHandler
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.databinding.WebActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.android.synthetic.main.web_activity.*
 import timber.log.Timber
 
 /**
@@ -40,16 +39,16 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             url = it
         }
 
-        pbFirst.isVisible = true
-        web.setDefaultHandler(DefaultHandler())
+        viewDataBinding.pbFirst.isVisible = true
+        viewDataBinding.web.setDefaultHandler(DefaultHandler())
 
-        web.webChromeClient = object : WebChromeClient(){
+        viewDataBinding.web.webChromeClient = object : WebChromeClient(){
 
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
                 title?.let {
                     if(!it.equals(BLANK_URL,true)){
-                        tvTitle.text = it
+                        viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
                     }
                 }
 
@@ -61,7 +60,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             }
 
         }
-        web.webViewClient = object : WebViewClient(){
+        viewDataBinding.web.webViewClient = object : WebViewClient(){
 
             override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
@@ -77,7 +76,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
             override fun onPageFinished(view: WebView?, url: String?) {
-                pbFirst.isVisible = false
+                viewDataBinding.pbFirst.isVisible = false
                 super.onPageFinished(view, url)
                 Timber.d("onPageFinished:$url")
                 updateProgress(100,isError)
@@ -127,13 +126,13 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
         }
 
-        web.loadUrl(url)
+        viewDataBinding.web.loadUrl(url)
 
     }
 
     private fun initToolbarTitle(){
         intent.getStringExtra(Constants.KEY_TITLE)?.let {
-            tvTitle.text = it
+            viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
         }
     }
 
@@ -143,23 +142,23 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
     private fun updateProgress(progress: Int,isError: Boolean){
 
         if(isError){
-            pb.progress = 0
-            pb.visibility = View.GONE
-            llError.visibility = View.VISIBLE
+            viewDataBinding.pb.progress = 0
+            viewDataBinding.pb.visibility = View.GONE
+            viewDataBinding.llError.visibility = View.VISIBLE
 
         }else{
-            pb.progress = progress
-            if(llError.visibility != View.GONE){
-                llError.visibility = View.GONE
+            viewDataBinding.pb.progress = progress
+            if(viewDataBinding.llError.visibility != View.GONE){
+                viewDataBinding.llError.visibility = View.GONE
             }
 
             if(progress<100){
-                if(pb.visibility != View.VISIBLE){
-                    pb.visibility = View.VISIBLE
+                if(viewDataBinding.pb.visibility != View.VISIBLE){
+                    viewDataBinding.pb.visibility = View.VISIBLE
                 }
 
             }else{
-                pb.visibility = View.GONE
+                viewDataBinding.pb.visibility = View.GONE
             }
 
         }
@@ -172,20 +171,20 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
     private fun retry(){
-        web.loadUrl(url)
+        viewDataBinding.web.loadUrl(url)
     }
 
     private fun isGoBack(): Boolean {
-        return web != null && web.canGoBack()
+        return viewDataBinding.web != null && viewDataBinding.web.canGoBack()
     }
 
 
     override fun onBackPressed() {
         if(isGoBack()){
-            web.goBack()
+            viewDataBinding.web.goBack()
             if(curl.equals(BLANK_URL,true)){//返回上一页时如果是空白页，表示之前加载页面出错过
                 if(isGoBack()){
-                    web.goBack()
+                    viewDataBinding.web.goBack()
                 }else{
                     super.onBackPressed()
                 }

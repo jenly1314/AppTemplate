@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
-import retrofit2.await
-import javax.inject.Inject
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>

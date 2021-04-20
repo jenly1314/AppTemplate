@@ -19,7 +19,6 @@ import com.king.template.databinding.HomeFragmentBinding
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -28,6 +27,8 @@ import kotlinx.android.synthetic.main.home_fragment.*
 class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     val mAdapter by lazy { BaseBindingAdapter<Bean>(R.layout.rv_bean_item) }
+
+    val mImageAdapter by lazy{ BannerImageAdapter<BannerBean>()}
 
     var curPage = 1
 
@@ -41,13 +42,12 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         super.initData(savedInstanceState)
 
         //TODO Banner初始化示例
-        with(banner){
-            var imageAdapter = BannerImageAdapter<BannerBean>()
-            adapter = imageAdapter
+        with(viewDataBinding.banner){
+            adapter = mImageAdapter
             adapter.setOnBannerListener { data, position ->
                 //TODO 点击 Banner Item 示例
 //                showToast("banner:$position")
-                ImageViewer.load(imageAdapter.getDatas())
+                ImageViewer.load(mImageAdapter.getDatas())
                         .imageLoader(GlideImageLoader())
                         .selection(position)
                         .indicator(true)
@@ -58,25 +58,25 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         }
 
         viewModel.liveDataBanner.observe(this, Observer {
-            banner.adapter.setDatas(it)
-            banner.adapter.notifyDataSetChanged()
+            mImageAdapter.setDatas(it)
+            mImageAdapter.notifyDataSetChanged()
         })
 
         //---------------------------------
         //TODO 列表初始化示例
-        rv.layoutManager = LinearLayoutManager(context)
-        rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL,R.drawable.line_space_divider))
+        viewDataBinding.rv.layoutManager = LinearLayoutManager(context)
+        viewDataBinding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL,R.drawable.line_space_divider))
 
-        rv.adapter = mAdapter
-        rv.isNestedScrollingEnabled = false
+        viewDataBinding.rv.adapter = mAdapter
+        viewDataBinding.rv.isNestedScrollingEnabled = false
         mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
-        srl.setEnableLoadMore(false)
-        srl.setOnRefreshListener{requestData(1)}
-        srl.setOnLoadMoreListener {requestData(curPage)}
+        viewDataBinding.srl.setEnableLoadMore(false)
+        viewDataBinding.srl.setOnRefreshListener{requestData(1)}
+        viewDataBinding.srl.setOnLoadMoreListener {requestData(curPage)}
         viewModel.liveData.observe(this, Observer {
             updateUI(it,curPage > 1)
         })
-        srl.autoRefresh()
+        viewDataBinding.srl.autoRefresh()
 
         //---------------------------------
 
@@ -93,11 +93,11 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
             if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
             if(mAdapter.itemCount >= curPage * Constants.PAGE_SIZE){
-                srl.setEnableLoadMore(true)
+                viewDataBinding.srl.setEnableLoadMore(true)
                 curPage++
             }else{
-                srl.setEnableLoadMore(false)
-                srl.finishLoadMoreWithNoMoreData()
+                viewDataBinding.srl.setEnableLoadMore(false)
+                viewDataBinding.srl.finishLoadMoreWithNoMoreData()
             }
         }
     }
@@ -110,25 +110,25 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     override fun onStart() {
         super.onStart()
-        banner.start()
+        viewDataBinding.banner.start()
     }
 
     override fun onStop() {
         super.onStop()
-        banner.stop()
-        srl.closeHeaderOrFooter()
+        viewDataBinding.banner.stop()
+        viewDataBinding.srl.closeHeaderOrFooter()
     }
 
 
     override fun hideLoading() {
         super.hideLoading()
-        srl.closeHeaderOrFooter()
+        viewDataBinding.srl.closeHeaderOrFooter()
         initEmptyView()
     }
 
     private fun initEmptyView(){
         if(mAdapter.emptyLayout == null){
-            createEmptyView(rv)?.let {
+            createEmptyView(viewDataBinding.rv)?.let {
                 mAdapter.setEmptyView(it)
             }
         }

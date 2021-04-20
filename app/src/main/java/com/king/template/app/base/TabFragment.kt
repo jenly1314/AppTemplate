@@ -1,11 +1,12 @@
 package com.king.template.app.base
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.king.template.R
 import com.king.template.app.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.toolbar.*
 
 
 /**
@@ -30,7 +31,7 @@ open class TabFragment(var block: (Int) -> Fragment) : BaseTabFragment() {
     private fun receiveArguments(){
         arguments?.let {
             titles = it.getStringArray(Constants.KEY_ARRAY)?: arrayOf("","")
-            toolbar.isVisible = it.getBoolean(Constants.KEY_SHOW_TOOLBAR,true)
+            viewDataBinding.root.findViewById<Toolbar>(R.id.toolbar).isVisible = it.getBoolean(Constants.KEY_SHOW_TOOLBAR,true)
         }
     }
 

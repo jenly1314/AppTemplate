@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
@@ -24,7 +25,6 @@ import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -35,7 +35,7 @@ abstract class BaseActivity<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
 
     fun setToolbarTitle(title: String?){
         title?.let {
-            tvTitle.text = it
+            viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
         }
     }
 

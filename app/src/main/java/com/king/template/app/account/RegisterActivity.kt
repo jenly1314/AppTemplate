@@ -11,10 +11,6 @@ import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.RegisterActivityBinding
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.login_activity.*
-import kotlinx.android.synthetic.main.register_activity.*
-import kotlinx.android.synthetic.main.register_activity.etPassword
-import kotlinx.android.synthetic.main.register_activity.etUsername
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -29,7 +25,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
 
         setToolbarTitle(getString(R.string.register))
 
-        etUsername.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -38,17 +34,17 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etUsername.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(etUsername)
-        setClickRightEyeListener(etPassword)
+        setClickRightClearListener(viewDataBinding.etUsername)
+        setClickRightEyeListener(viewDataBinding.etPassword)
 
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            etUsername.setText(it)
+            viewDataBinding.etUsername.setText(it)
         }
 
     }
@@ -76,17 +72,17 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
     }
 
     private fun clickRegister(){
-        if(!checkInput(etUsername,R.string.hint_username)){
+        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
             return
         }
-        if(!CheckUtils.checkUsername(etUsername.text.toString())){
+        if(!CheckUtils.checkUsername(viewDataBinding.etUsername.text.toString())){
             showToast(R.string.tips_username_matcher)
             return
         }
-        if(!checkInput(etCode,R.string.hint_verify_code)){
+        if(!checkInput(viewDataBinding.etCode,R.string.hint_verify_code)){
             return
         }
-        if(!checkInput(etPassword,R.string.hint_password)){
+        if(!checkInput(viewDataBinding.etPassword,R.string.hint_password)){
             return
         }
 
@@ -94,9 +90,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
         //TODO 点击“注册”逻辑
         showToast(R.string.register)
 
-        val username = etUsername.text.toString()
-        val verifyCode = etCode.text.toString()
-        val password = etPassword.text.toString()
+        val username = viewDataBinding.etUsername.text.toString()
+        val verifyCode = viewDataBinding.etCode.text.toString()
+        val password = viewDataBinding.etPassword.text.toString()
         viewModel.register(username,verifyCode,password)
     }
 

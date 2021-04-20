@@ -10,7 +10,6 @@ import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.LoginActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.login_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -25,7 +24,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
 
         setToolbarTitle(getString(R.string.login))
 
-        etUsername.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -34,17 +33,17 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etUsername.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(etUsername)
-        setClickRightEyeListener(etPassword)
+        setClickRightClearListener(viewDataBinding.etUsername)
+        setClickRightEyeListener(viewDataBinding.etPassword)
 
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            etUsername.setText(it)
+            viewDataBinding.etUsername.setText(it)
         }
 
     }
@@ -56,33 +55,33 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
     //-------------------------------
 
     private fun clickRegister(){
-        username = etUsername.text.toString()
+        username = viewDataBinding.etUsername.text.toString()
         startActivity(RegisterActivity::class.java,username)
     }
 
     private fun clickCodeLogin(){
-        username = etUsername.text.toString()
+        username = viewDataBinding.etUsername.text.toString()
         startLoginActivity(username, isCode = true)
     }
 
     private fun clickForgotPwd(){
-        username = etUsername.text.toString()
+        username = viewDataBinding.etUsername.text.toString()
         startActivity(ResetPwdActivity::class.java,username)
     }
 
     private fun clickLogin(){
-        if(!checkInput(etUsername,R.string.hint_username)){
+        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
             return
         }
-        if(!checkInput(etPassword,R.string.hint_password)){
+        if(!checkInput(viewDataBinding.etPassword,R.string.hint_password)){
             return
         }
 
         //TODO 点击“登录”逻辑
         showToast(R.string.login)
 
-        val username = etUsername.text.toString()
-        val password = etPassword.text.toString()
+        val username = viewDataBinding.etUsername.text.toString()
+        val password = viewDataBinding.etPassword.text.toString()
         viewModel.login(username,password)
     }
 

@@ -15,24 +15,24 @@ ext.build_versions = build_versions
 // App dependencies
 def versions = [:]
 
-versions.gralde = '4.1.1'
-versions.kotlin = "1.4.21"
-versions.tinkerSupport = "1.1.5"
+versions.gralde = '4.1.3'
+versions.kotlin = "1.4.32"
+versions.tinkerSupport = "1.2.2"
 
 versions.appcompat = "1.2.0"
-versions.coreKtx = "1.3.2"
-versions.material = "1.2.1"
+versions.coreKtx = "1.5.0-rc01"
+versions.material = "1.3.0"
 versions.constraintlayout = "2.0.4"
-versions.junit = "4.13.1"
+versions.junit = "4.13.2"
 versions.androidExtJunit = "1.1.2"
 versions.runner = "1.3.0"
 versions.espressoCore = "3.3.0"
-versions.recyclerview = "1.1.0"
+versions.recyclerview = "1.2.0"
 versions.viewpager2 = "1.0.0"
 versions.debugDb = "1.0.6"
-versions.kotlinxCoroutines = "1.4.2"
-versions.lifecycleKtx="2.2.0"
-versions.lifecycle = "2.2.0"
+versions.kotlinxCoroutines = "1.4.3"
+versions.lifecycleKtx="2.3.1"
+versions.lifecycle = "2.3.1"
 versions.room = "2.2.5"
 versions.hiltAndroid = "2.30.1-alpha"
 versions.hilt = "1.0.0-alpha02"
@@ -51,21 +51,21 @@ versions.eventbus = "3.2.0"
 versions.brvah = "3.0.6"
 versions.smartRefreshLayout= "2.0.3"
 versions.circleimageview = "3.1.0"
-versions.glide = "4.11.0"
+versions.glide = "4.12.0"
 
 versions.photoView = "2.0.0"
 versions.rxpermissions = "0.10.2"
 versions.jsbridge = "1.0.4"
 versions.mmkv = "1.2.7"
-versions.bugly = "1.4.5"
-versions.tinker = "1.9.14.7"
+versions.bugly = "1.5.1"
+versions.tinker = "1.9.14.16"
 versions.debugDb = "1.0.6"
 
-versions.leakcanary = "2.6"
+versions.leakcanary = "2.7"
 
 versions.toasty = "1.5.0"
 versions.circleimageview = "3.1.0"
-    versions.banner = "2.1.0"
+versions.banner = "2.1.0"
 versions.autosize = "1.2.1"
 
 ext.versions = versions

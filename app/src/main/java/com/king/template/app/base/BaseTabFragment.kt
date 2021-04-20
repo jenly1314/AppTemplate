@@ -1,17 +1,16 @@
 package com.king.template.app.base
 
 import android.os.Bundle
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.king.template.R
-import kotlinx.android.synthetic.main.base_tab_fragment.*
+import com.king.template.databinding.BaseTabFragmentBinding
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabFragment : BaseFragment<BaseViewModel,ViewDataBinding>() {
+abstract class BaseTabFragment : BaseFragment<BaseViewModel,BaseTabFragmentBinding>() {
 
     private val titles by lazy { getTabTitles() }
 
@@ -22,12 +21,12 @@ abstract class BaseTabFragment : BaseFragment<BaseViewModel,ViewDataBinding>() {
 
     open fun initTab(){
         for(title in titles){
-            var tab = tabLayout.newTab()
+            var tab = viewDataBinding.tabLayout.newTab()
             tab.text  = title
-            tabLayout.addTab(tab)
+            viewDataBinding.tabLayout.addTab(tab)
         }
 
-        viewPager.adapter = object : FragmentStateAdapter(this){
+        viewDataBinding.viewPager.adapter = object : FragmentStateAdapter(this){
             override fun getItemCount(): Int {
                 return titles.size
             }
@@ -36,7 +35,7 @@ abstract class BaseTabFragment : BaseFragment<BaseViewModel,ViewDataBinding>() {
             }
         }
 
-        TabLayoutMediator(tabLayout,viewPager) { tab, position ->
+        TabLayoutMediator(viewDataBinding.tabLayout,viewDataBinding.viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }

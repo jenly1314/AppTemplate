@@ -12,7 +12,6 @@ import com.king.template.app.Constants
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.databinding.ListActivityBinding
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import kotlinx.android.synthetic.main.list_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -30,12 +29,12 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
         viewModel?.let {
             pageSize = it.pageSize()
         }
-        initRecyclerView(rv)
+        initRecyclerView(viewDataBinding.rv)
         mAdapter = createAdapter()
-        rv.adapter = mAdapter
+        viewDataBinding.rv.adapter = mAdapter
         mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
         observeData()
-        initRefreshLayout(srl)
+        initRefreshLayout(viewDataBinding.srl)
     }
 
     open fun initRecyclerView(rv: RecyclerView){
@@ -65,13 +64,13 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
 
     override fun hideLoading() {
         super.hideLoading()
-        srl.closeHeaderOrFooter()
+        viewDataBinding.srl.closeHeaderOrFooter()
         initEmptyView()
     }
 
     private fun initEmptyView(){
         if(mAdapter.emptyLayout == null){
-            createEmptyView(rv)?.let {
+            createEmptyView(viewDataBinding.rv)?.let {
                 mAdapter.setEmptyView(it)
             }
         }
@@ -95,11 +94,11 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
 
             if(isSupportRefresh()){
                 if(mAdapter.itemCount >= curPage * pageSize){
-                    srl.setEnableLoadMore(true)
+                    viewDataBinding.srl.setEnableLoadMore(true)
                     curPage++
                 }else{
-                    srl.setEnableLoadMore(false)
-                    srl.finishLoadMoreWithNoMoreData()
+                    viewDataBinding.srl.setEnableLoadMore(false)
+                    viewDataBinding.srl.finishLoadMoreWithNoMoreData()
                 }
             }
         }

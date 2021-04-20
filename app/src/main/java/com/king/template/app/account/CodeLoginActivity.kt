@@ -10,7 +10,6 @@ import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.CodeLoginActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.code_login_activity.*
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -25,7 +24,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
 
         setToolbarTitle(getString(R.string.login))
 
-        etUsername.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -34,16 +33,16 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etUsername.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(etUsername)
+        setClickRightClearListener(viewDataBinding.etUsername)
 
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            etUsername.setText(it)
+            viewDataBinding.etUsername.setText(it)
         }
 
     }
@@ -55,7 +54,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     //-------------------------------
 
     private fun clickRegister(){
-        username = etUsername.text.toString()
+        username = viewDataBinding.etUsername.text.toString()
         startActivity(RegisterActivity::class.java,username)
     }
 
@@ -67,18 +66,18 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     private fun clickLogin(){
         //TODO 点击“登录”逻辑
 
-        if(!checkInput(etUsername,R.string.hint_username)){
+        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
             return
         }
-        if(!checkInput(etCode,R.string.hint_verify_code)){
+        if(!checkInput(viewDataBinding.etCode,R.string.hint_verify_code)){
             return
         }
 
         //TODO 点击“登录”逻辑
         showToast(R.string.login)
 
-        val username = etUsername.text.toString()
-        val verifyCode = etCode.text.toString()
+        val username = viewDataBinding.etUsername.text.toString()
+        val verifyCode = viewDataBinding.etCode.text.toString()
         viewModel.verifyCodeLogin(username,verifyCode)
     }
 

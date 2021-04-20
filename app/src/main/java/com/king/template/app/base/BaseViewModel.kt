@@ -11,12 +11,10 @@ import com.king.template.App
 import com.king.template.R
 import com.king.template.api.ApiService
 import com.king.template.bean.Result
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.net.ConnectException
 import java.net.SocketTimeoutException
-import javax.inject.Inject
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>

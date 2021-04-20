@@ -11,10 +11,6 @@ import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ResetPwdActivityBinding
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.change_pwd_activity.*
-import kotlinx.android.synthetic.main.reset_pwd_activity.*
-import kotlinx.android.synthetic.main.reset_pwd_activity.etConfirmPassword
-import kotlinx.android.synthetic.main.reset_pwd_activity.etNewPassword
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -29,7 +25,7 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
 
         setToolbarTitle(getString(R.string.reset_password))
 
-        etUsername.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -38,11 +34,11 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etUsername.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        etNewPassword.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etNewPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -51,11 +47,11 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etNewPassword.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etNewPassword.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        etConfirmPassword.addTextChangedListener(object : TextWatcher {
+        viewDataBinding.etConfirmPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -64,18 +60,18 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                etConfirmPassword.isSelected = !TextUtils.isEmpty(s)
+                viewDataBinding.etConfirmPassword.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(etUsername)
-        setClickRightClearListener(etNewPassword)
-        setClickRightClearListener(etConfirmPassword)
+        setClickRightClearListener(viewDataBinding.etUsername)
+        setClickRightClearListener(viewDataBinding.etNewPassword)
+        setClickRightClearListener(viewDataBinding.etConfirmPassword)
 
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            etUsername.setText(it)
+            viewDataBinding.etUsername.setText(it)
         }
 
     }
@@ -87,20 +83,20 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
     //-------------------------------
 
     private fun clickReset(){
-        if(!checkInput(etUsername,R.string.hint_username)){
+        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
             return
         }
-        if(!CheckUtils.checkUsername(etUsername.text.toString())){
+        if(!CheckUtils.checkUsername(viewDataBinding.etUsername.text.toString())){
             showToast(R.string.tips_username_matcher)
             return
         }
-        if(!checkInput(etCode,R.string.hint_verify_code)){
+        if(!checkInput(viewDataBinding.etCode,R.string.hint_verify_code)){
             return
         }
-        if(!checkInput(etNewPassword,R.string.hint_password)){
+        if(!checkInput(viewDataBinding.etNewPassword,R.string.hint_password)){
             return
         }
-        if(!CheckUtils.checkPassword(etNewPassword.text.toString())){
+        if(!CheckUtils.checkPassword(viewDataBinding.etNewPassword.text.toString())){
             showToast(R.string.tips_password_matcher)
             return
         }
@@ -108,9 +104,9 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
         //TODO 点击“重置密码”逻辑
         showToast(R.string.reset_password)
 
-        val username = etUsername.text.toString()
-        val verifyCode = etCode.text.toString()
-        val password = etNewPassword.text.toString()
+        val username = viewDataBinding.etUsername.text.toString()
+        val verifyCode = viewDataBinding.etCode.text.toString()
+        val password = viewDataBinding.etNewPassword.text.toString()
         viewModel.resetPwd(username,verifyCode,password)
 
     }
