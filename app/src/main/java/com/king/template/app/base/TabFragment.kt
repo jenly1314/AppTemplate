@@ -31,7 +31,7 @@ open class TabFragment(var block: (Int) -> Fragment) : BaseTabFragment() {
     private fun receiveArguments(){
         arguments?.let {
             titles = it.getStringArray(Constants.KEY_ARRAY)?: arrayOf("","")
-            viewDataBinding.root.findViewById<Toolbar>(R.id.toolbar)?.isVisible = it.getBoolean(Constants.KEY_SHOW_TOOLBAR,true)
+            viewDataBinding.includeToolbar.toolbar.isVisible = it.getBoolean(Constants.KEY_SHOW_TOOLBAR,true)
         }
     }
 

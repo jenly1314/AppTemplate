@@ -48,7 +48,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
                 super.onReceivedTitle(view, title)
                 title?.let {
                     if(!it.equals(BLANK_URL,true)){
-                        viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
+                        setToolbarTitle(it)
                     }
                 }
 
@@ -132,7 +132,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
     private fun initToolbarTitle(){
         intent.getStringExtra(Constants.KEY_TITLE)?.let {
-            viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
+            setToolbarTitle(it)
         }
     }
 

@@ -17,15 +17,12 @@ import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
 import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
 import es.dmoral.toasty.Toasty
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBinding> : BaseFragment<VM,VDB>(){
-
-    val rxPermission by lazy { RxPermissions(this) }
 
 
     override fun initData(savedInstanceState: Bundle?) {

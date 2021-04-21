@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
@@ -23,7 +22,6 @@ import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
 import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
 import es.dmoral.toasty.Toasty
 
 /**
@@ -31,16 +29,15 @@ import es.dmoral.toasty.Toasty
  */
 abstract class BaseActivity<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBinding> : BaseActivity<VM,VDB>(){
 
-    val rxPermission by lazy { RxPermissions(this) }
 
     fun setToolbarTitle(title: String?){
         title?.let {
-            viewDataBinding.root.findViewById<TextView>(R.id.tvTitle)?.text = it
+            viewDataBinding?.root?.findViewById<TextView>(R.id.tvTitle)?.text = it
         }
     }
 
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun initData(savedInstanceState: Bundle?)   {
         registerMessageEvent {
             ToastUtils.showToast(context,it)
         }
