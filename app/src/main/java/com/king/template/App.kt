@@ -6,6 +6,7 @@ import androidx.multidex.MultiDex
 import com.king.base.baseurlmanager.BaseUrlManager
 import com.king.base.baseurlmanager.bean.UrlInfo
 import com.king.template.app.Constants
+import com.king.template.component.ComponentAppManager
 import com.king.template.util.Cache
 import com.king.thread.nevercrash.NeverCrash
 import com.orhanobut.logger.AndroidLogAdapter
@@ -27,6 +28,8 @@ import timber.log.Timber
 @HiltAndroidApp
 class App : Application() {
 
+    val componentAppManager by lazy { ComponentAppManager() }
+
     init {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
             layout.setPrimaryColorsId(R.color.colorPrimary,R.color.white)
@@ -46,8 +49,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         initLogger()
-        Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
         Cache.initialize(this)
+        Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
+        componentAppManager.initComponentApp(this)
 
         Toasty.Config.getInstance().allowQueue(false).apply()
 
@@ -81,4 +85,5 @@ class App : Application() {
         })
 
     }
+
 }

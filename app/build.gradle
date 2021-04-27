@@ -62,8 +62,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding = true
     }
 
     kotlinOptions {
@@ -178,6 +178,9 @@ dependencies {
 //    implementation "com.github.chrisbanes:PhotoView:$versions.photoView"
 //
 //    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
+
+    implementation project(":lib-component")
+    implementation project(":lib-umeng")
 
 }
 

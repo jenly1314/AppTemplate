@@ -2,10 +2,15 @@
 
 buildscript {
     apply from: 'versions.gradle'
+    ext {
+        versions.kotlin = '1.4.32'
+        versions.kotlin = '1.4.32'
+    }
     repositories {
         google()
         mavenCentral()
         jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
 
     }
     dependencies {
@@ -27,6 +32,7 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/jenly/maven' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
 
     }
 }
