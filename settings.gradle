@@ -1,2 +1,4 @@
+include ':lib-component'
+include ':lib-umeng'
 rootProject.name='AppTemplate'
 include ':app'

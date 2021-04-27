@@ -44,6 +44,7 @@ versions.base = "3.2.1-androidx"
 versions.appUpdater = "1.0.9-androidx"
 versions.guidepage = "1.0.0"
 versions.imageviewer = "1.0.2"
+versions.timber = "4.7.1"
 
 versions.baseUrlManager = "1.1.0"
 versions.logger = "2.2.0"
