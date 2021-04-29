@@ -1,15 +1,17 @@
 package com.king.template.app.splash
 
 import android.app.Application
-import androidx.hilt.lifecycle.ViewModelInject
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.await
+import javax.inject.Inject
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class SplashViewModel @ViewModelInject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
+@HiltViewModel
+class SplashViewModel @Inject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
 
 
     /**

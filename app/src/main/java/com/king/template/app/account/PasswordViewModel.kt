@@ -1,15 +1,16 @@
 package com.king.template.app.account
 
 import android.app.Application
-import androidx.hilt.lifecycle.ViewModelInject
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class PasswordViewModel @ViewModelInject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
+@HiltViewModel
+class PasswordViewModel @Inject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
 
     /**
      * 重置密码

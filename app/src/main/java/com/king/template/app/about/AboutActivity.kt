@@ -30,7 +30,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         //TODO 处理点击“版本更新”逻辑
 
         //当检测到新版本时，这里只是演示检测到新版本的大概流程
-        var config = AppDialogConfig()
+        var config = AppDialogConfig(context)
         with(config){
             title = "版本更新"
             content = "发现新版本(这里只是演示模板步骤)"
@@ -42,7 +42,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
 //                AppUpdater.Builder().serUrl("https://xxx/xxx/xxx.apk").build(context).start()
             }
         }
-        AppDialog.INSTANCE.showDialog(context,config)
+        AppDialog.INSTANCE.showDialog(config)
     }
 
     private fun clickAbout(){

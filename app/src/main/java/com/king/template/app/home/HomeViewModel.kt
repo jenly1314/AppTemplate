@@ -1,18 +1,20 @@
 package com.king.template.app.home
 
 import android.app.Application
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
 import com.king.template.bean.BannerBean
 import com.king.template.bean.Bean
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-class HomeViewModel @ViewModelInject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
+@HiltViewModel
+class HomeViewModel @Inject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
 
 
     val liveDataBanner by lazy { MutableLiveData<List<BannerBean>>()}

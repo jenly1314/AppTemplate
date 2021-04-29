@@ -113,13 +113,13 @@ dependencies {
     //room
     kapt "androidx.room:room-compiler:$versions.room"
     //hilt
-    implementation "com.google.dagger:hilt-android:$versions.hiltAndroid"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.hiltAndroid"
+    implementation "com.google.dagger:hilt-android:$versions.daggerHilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.daggerHilt"
 
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt"
-    kapt "androidx.hilt:hilt-compiler:$versions.hilt"
+//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt"
+//    kapt "androidx.hilt:hilt-compiler:$versions.hilt"
 
-    implementation "com.king.frame:mvvmframe:$versions.mvvmframe"
+    implementation "com.github.jenly1314:mvvmframe:$versions.mvvmframe"
 
     implementation "com.king.thread:nevercrash:$versions.nevercrash"
     //app-updater

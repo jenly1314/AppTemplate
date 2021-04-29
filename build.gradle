@@ -2,21 +2,19 @@
 
 buildscript {
     apply from: 'versions.gradle'
-    ext {
-        versions.kotlin = '1.4.32'
-        versions.kotlin = '1.4.32'
-    }
+
     repositories {
         google()
         mavenCentral()
         jcenter()
+        maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
 
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gralde"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hiltAndroid"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.daggerHilt"
 
         classpath "com.tencent.bugly:tinker-support:$versions.tinkerSupport"
 
