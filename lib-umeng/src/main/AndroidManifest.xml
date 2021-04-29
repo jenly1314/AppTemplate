@@ -5,7 +5,7 @@
     <application>
 
         <meta-data android:name="com.king.template.umeng.UMengComponentApp"
-            android:value="ComponentApp"/>
+            android:value="ComponentApp" />
 
     </application>
 </manifest>
