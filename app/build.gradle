@@ -114,7 +114,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$versions.room"
     //hilt
     implementation "com.google.dagger:hilt-android:$versions.daggerHilt"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.daggerHilt"
+    kapt "com.google.dagger:hilt-compiler:$versions.daggerHilt"
+//    kapt "com.google.dagger:hilt-android-compiler:$versions.daggerHilt"
 
 //    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt"
 //    kapt "androidx.hilt:hilt-compiler:$versions.hilt"
