@@ -43,20 +43,18 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
     }
 
 
-    fun launch(showLoading: Boolean = true,tag: Int? = null,block: suspend () -> Unit){
-        launch(showLoading,tag,block,{
-            Timber.w(it)
-            if(SystemUtils.isNetWorkActive(getApp())){
-                when(it){
-                    is SocketTimeoutException -> sendMessage(getString(R.string.result_connect_timeout_error))
-                    is ConnectException -> sendMessage(getString(R.string.result_connect_failed_error))
-                    else -> sendMessage(getString(R.string.result_error))
-                }
-            }else{
-                sendMessage(getString(R.string.result_network_unavailable_error))
+    fun launch(showLoading: Boolean = true,tag: Int? = null,block: suspend () -> Unit) = launch(showLoading,tag,block,{
+        Timber.w(it)
+        if(SystemUtils.isNetWorkActive(getApp())){
+            when(it){
+                is SocketTimeoutException -> sendMessage(getString(R.string.result_connect_timeout_error))
+                is ConnectException -> sendMessage(getString(R.string.result_connect_failed_error))
+                else -> sendMessage(getString(R.string.result_error))
             }
-        })
-    }
+        }else{
+            sendMessage(getString(R.string.result_network_unavailable_error))
+        }
+    })
 
     fun launch(showLoading: Boolean,tag: Int? = null,block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
         try {
