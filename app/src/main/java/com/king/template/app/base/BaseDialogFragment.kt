@@ -1,11 +1,9 @@
 package com.king.template.app.base
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.ViewDataBinding
@@ -30,24 +28,19 @@ abstract class BaseDialogFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDa
 
     override fun initData(savedInstanceState: Bundle?) {
         registerMessageEvent {
-            ToastUtils.showToast(context,it)
+            showToast(it)
         }
 
-    }
-
-    @NonNull
-    override fun getContext(): Context {
-        return requireContext()
     }
 
     //-----------------------------------
 
     fun showToast(@StringRes resId: Int){
-        Toasty.normal(context,resId).show()
+        Toasty.normal(requireContext(),resId).show()
     }
 
     fun showToast(text: CharSequence){
-        Toasty.normal(context,text).show()
+        Toasty.normal(requireContext(),text).show()
     }
 
     //-----------------------------------
@@ -91,7 +84,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDa
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         if(isAlphaAnim){
-            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.app_dialog_out)
+            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(requireContext(), R.anim.alpha_in_anim, R.anim.app_dialog_out)
             startActivity(intent, optionsCompat.toBundle())
         }else{
             startActivity(intent)
@@ -101,7 +94,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDa
     fun startHomeActivity(){
         val intent = Intent(context, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.alpha_out_anim)
+        val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(requireContext(), R.anim.alpha_in_anim, R.anim.alpha_out_anim)
         startActivity(intent, optionsCompat.toBundle())
     }
 

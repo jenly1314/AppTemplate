@@ -52,7 +52,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
     }
 
     open fun observeData(){
-        viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage == 1) })
+        viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage > 1) })
     }
 
     open fun isSupportRefresh() = true

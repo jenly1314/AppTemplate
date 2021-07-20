@@ -27,7 +27,7 @@ abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
 
     override fun initData(savedInstanceState: Bundle?) {
         registerMessageEvent {
-            ToastUtils.showToast(context,it)
+            showToast(it)
         }
 
     }
