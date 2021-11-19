@@ -5,14 +5,13 @@ import android.net.http.SslError
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
-import android.widget.TextView
 import androidx.core.view.isVisible
-import com.github.lzyzsd.jsbridge.DefaultHandler
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.databinding.WebActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+
 
 /**
  * 通用 WebActivity，细节处理待完善
@@ -40,7 +39,8 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
         }
 
         viewDataBinding.pbFirst.isVisible = true
-        viewDataBinding.web.setDefaultHandler(DefaultHandler())
+
+        intWebSettings(viewDataBinding.web)
 
         viewDataBinding.web.webChromeClient = object : WebChromeClient(){
 
@@ -76,7 +76,6 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
             override fun onPageFinished(view: WebView?, url: String?) {
-                viewDataBinding.pbFirst.isVisible = false
                 super.onPageFinished(view, url)
                 Timber.d("onPageFinished:$url")
                 updateProgress(100,isError)
@@ -108,11 +107,11 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
                 Timber.d("onReceivedHttpError:$url")
                 val code = errorResponse.statusCode
                 Timber.d("errorCode:${code}")
-                if(code == 400 || code == 500){
-                    isError = true
-                    view?.loadUrl(BLANK_URL)
-                    updateProgress(0,isError)
-                }
+//                if(code == 400 || code == 500){
+//                    isError = true
+//                    view?.loadUrl(BLANK_URL)
+//                    updateProgress(0,isError)
+//                }
 
             }
 
@@ -136,6 +135,35 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
         }
     }
 
+    open fun intWebSettings(webView: WebView){
+        webView.settings.apply {
+            //如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript
+            this.javaScriptEnabled = true
+
+            //设置自适应屏幕，两者合用
+            this.useWideViewPort = true //将图片调整到适合webView的大小
+            this.loadWithOverviewMode = true // 缩放至屏幕的大小
+
+            //缩放操作
+            this.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
+
+            this.builtInZoomControls = true //设置内置的缩放控件。若为false，则该WebView不可缩放
+
+            this.displayZoomControls = false //隐藏原生的缩放控件
+
+            //其他细节操作
+            this.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK //关闭webView中缓存
+
+            this.allowFileAccess = true //设置可以访问文件
+
+            this.javaScriptCanOpenWindowsAutomatically = true //支持通过JS打开新窗口
+
+            this.loadsImagesAutomatically = true //支持自动加载图片
+
+            this.defaultTextEncodingName = "utf-8" //设置编码格式
+        }
+    }
+
     /**
      * 更新进度
      */
@@ -145,20 +173,21 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             viewDataBinding.pb.progress = 0
             viewDataBinding.pb.visibility = View.GONE
             viewDataBinding.llError.visibility = View.VISIBLE
-
+            viewDataBinding.pbFirst.isVisible = false
         }else{
             viewDataBinding.pb.progress = progress
             if(viewDataBinding.llError.visibility != View.GONE){
                 viewDataBinding.llError.visibility = View.GONE
             }
 
-            if(progress<100){
+            if(progress < 100){
                 if(viewDataBinding.pb.visibility != View.VISIBLE){
                     viewDataBinding.pb.visibility = View.VISIBLE
                 }
 
             }else{
                 viewDataBinding.pb.visibility = View.GONE
+                viewDataBinding.pbFirst.isVisible = false
             }
 
         }

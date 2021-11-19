@@ -148,7 +148,7 @@ abstract class BaseActivity<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         if(isAlphaAnim){
-            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.app_dialog_out)
+            val optionsCompat = ActivityOptionsCompat.makeCustomAnimation(context, R.anim.alpha_in_anim, R.anim.app_dialog_scale_out)
             startActivity(intent, optionsCompat.toBundle())
         }else{
             startActivity(intent)

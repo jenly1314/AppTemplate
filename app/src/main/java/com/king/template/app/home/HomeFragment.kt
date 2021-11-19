@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
         //TODO Banner初始化示例
         with(viewDataBinding.banner){
-            adapter = mImageAdapter
+            setAdapter(mImageAdapter)
             adapter.setOnBannerListener { data, position ->
                 //TODO 点击 Banner Item 示例
 //                showToast("banner:$position")
@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
         viewDataBinding.rv.adapter = mAdapter
         viewDataBinding.rv.isNestedScrollingEnabled = false
-        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position)}
         viewDataBinding.srl.setEnableLoadMore(false)
         viewDataBinding.srl.setOnRefreshListener{requestData(1)}
         viewDataBinding.srl.setOnLoadMoreListener {requestData(curPage)}
@@ -102,9 +102,11 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         }
     }
 
-    fun clickItem(data: Bean){
+    private fun clickItem(position: Int){
         //TODO 点击Item处理逻辑
-        showToast(data.title!!)
+        mAdapter.getItem(position).title?.let {
+            showToast(it)
+        }
     }
 
 

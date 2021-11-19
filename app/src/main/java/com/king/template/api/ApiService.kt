@@ -25,6 +25,9 @@ interface ApiService {
     @PUT("api/putRequest")
     fun putRequest(@Header("token") token: String, @Body bean: Bean): Call<Result<Any>>
 
+    @PATCH("api/patchRequest")
+    fun patchRequest(@Header("token") token: String, @Body bean: Bean): Call<Result<Any>>
+
     @DELETE("api/deleteRequest/{id}")
     fun deleteRequest(@Header("token") token: String, @Path("id") id: Long): Call<Result<Any>>
 

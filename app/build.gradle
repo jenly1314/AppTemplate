@@ -97,6 +97,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$versions.coreKtx"
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+    implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.androidExtJunit"
@@ -115,18 +116,14 @@ dependencies {
     //hilt
     implementation "com.google.dagger:hilt-android:$versions.daggerHilt"
     kapt "com.google.dagger:hilt-compiler:$versions.daggerHilt"
-//    kapt "com.google.dagger:hilt-android-compiler:$versions.daggerHilt"
-
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt"
-//    kapt "androidx.hilt:hilt-compiler:$versions.hilt"
 
     implementation "com.github.jenly1314:mvvmframe:$versions.mvvmframe"
+    //app-updater
+    implementation "com.github.jenly1314.AppUpdater:app-updater:$versions.appUpdater"
+    //app-dialog
+    implementation "com.github.jenly1314.AppUpdater:app-dialog:$versions.appUpdater"
 
     implementation "com.king.thread:nevercrash:$versions.nevercrash"
-    //app-updater
-    implementation "com.king.app:app-updater:$versions.appUpdater"
-    //app-dialog
-    implementation "com.king.app:app-dialog:$versions.appUpdater"
 
     implementation "com.king.base:util:$versions.base"
     implementation "com.king.base:adapter:$versions.base"
@@ -163,9 +160,7 @@ dependencies {
 
     implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 
-    implementation "com.github.lzyzsd:jsbridge:$versions.jsbridge"
-
-    implementation "com.youth.banner:banner:$versions.banner"
+    implementation "io.github.youth5201314:banner:$versions.banner"
 
     implementation "me.jessyan:autosize:$versions.autosize"
 

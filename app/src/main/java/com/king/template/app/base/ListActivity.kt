@@ -32,7 +32,7 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
         initRecyclerView(viewDataBinding.rv)
         mAdapter = createAdapter()
         viewDataBinding.rv.adapter = mAdapter
-        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position)}
         observeData()
         initRefreshLayout(viewDataBinding.srl)
     }
@@ -84,7 +84,7 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
         return R.layout.list_activity
     }
 
-    open fun clickItem(data: T){
+    open fun clickItem(position: Int){
 
     }
 

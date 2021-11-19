@@ -7,66 +7,64 @@ ext.app_version = app_version
 //build version
 def build_versions = [:]
 build_versions.minSdk = 21
-build_versions.targetSdk = 29
-build_versions.compileSdk = 29
-build_versions.buildTools = "29.0.3"
+build_versions.targetSdk = 30
+build_versions.compileSdk = 30
+build_versions.buildTools = "30.0.3"
 ext.build_versions = build_versions
 
 // App dependencies
 def versions = [:]
 
-versions.gralde = '4.1.3'
-versions.kotlin = "1.4.32"
+versions.gralde = '4.2.2'
+versions.kotlin = "1.6.0"
 versions.tinkerSupport = "1.2.2"
 
-versions.appcompat = "1.2.0"
-versions.coreKtx = "1.5.0-rc01"
-versions.material = "1.3.0"
-versions.constraintlayout = "2.0.4"
+versions.appcompat = "1.3.1"
+versions.coreKtx = "1.6.0"
+versions.material = "1.4.0"
+versions.constraintlayout = "2.1.1"
 versions.junit = "4.13.2"
 versions.androidExtJunit = "1.1.2"
 versions.runner = "1.3.0"
 versions.espressoCore = "3.3.0"
-versions.recyclerview = "1.2.0"
+versions.recyclerview = "1.2.1"
 versions.viewpager2 = "1.0.0"
 versions.debugDb = "1.0.6"
-versions.kotlinxCoroutines = "1.4.3"
+versions.kotlinxCoroutines = "1.5.2"
 versions.lifecycleKtx="2.3.1"
 versions.lifecycle = "2.3.1"
 versions.room = "2.3.0"
-versions.daggerHilt = "2.37"
-versions.hilt = "1.0.0-alpha02"
+versions.daggerHilt = "2.40.1"
 versions.multidex = "2.0.1"
 
-versions.mvvmframe = "2.1.1"
+versions.mvvmframe = "2.2.0"
 versions.nevercrash = "1.0.0"
 versions.base = "3.2.1-androidx"
-versions.appUpdater = "1.0.10-androidx"
+versions.appUpdater = "1.1.2"
 versions.guidepage = "1.0.0"
 versions.imageviewer = "1.0.2"
-versions.timber = "4.7.1"
+versions.timber = "5.0.1"
 
-versions.baseUrlManager = "1.1.0"
+versions.baseUrlManager = "1.1.1"
 versions.logger = "2.2.0"
 versions.eventbus = "3.2.0"
-versions.brvah = "3.0.6"
+versions.brvah = "3.0.7"
 versions.smartRefreshLayout= "2.0.3"
 versions.circleimageview = "3.1.0"
 versions.glide = "4.12.0"
 
 versions.photoView = "2.0.0"
 versions.rxpermissions = "0.10.2"
-versions.jsbridge = "1.0.4"
-versions.mmkv = "1.2.7"
-versions.bugly = "1.5.1"
-versions.tinker = "1.9.14.16"
+versions.mmkv = "1.2.11"
+versions.bugly = "1.5.23"
+versions.tinker = "1.9.14.18"
 versions.debugDb = "1.0.6"
 
 versions.leakcanary = "2.7"
 
 versions.toasty = "1.5.0"
 versions.circleimageview = "3.1.0"
-versions.banner = "2.1.0"
+versions.banner = "2.2.2"
 versions.autosize = "1.2.1"
 
 ext.versions = versions

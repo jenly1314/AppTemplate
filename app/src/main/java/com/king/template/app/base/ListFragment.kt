@@ -31,7 +31,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
         initRecyclerView(viewDataBinding.rv)
         mAdapter = createAdapter()
         viewDataBinding.rv.adapter = mAdapter
-        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(mAdapter.getItem(position))}
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position)}
         observeData()
         initRefreshLayout(viewDataBinding.srl)
     }
@@ -83,7 +83,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>> : BaseFragment<VM, ListFra
         return R.layout.list_fragment
     }
 
-    open fun clickItem(data: T){
+    open fun clickItem(position: Int){
 
     }
 
