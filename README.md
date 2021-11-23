@@ -8,7 +8,7 @@
 [![Blog](https://img.shields.io/badge/blog-Jenly-9933CC.svg)](https://jenly1314.github.io/)
 [![QQGroup](https://img.shields.io/badge/QQGroup-20867961-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=8fcc6a2f88552ea44b1411582c94fd124f7bb3ec227e2a400dbbfaad3dc2f5ad)
 
-**AppTemplate** 是一个App快速构建模板 [Demo App](https://gitee.com/jenly1314/AppTemplate/raw/master/app/flavors_release/release/app-flavors_release-release.apk)
+**AppTemplate** 是一个App快速构建模板 [Demo App](https://github.com/jenly1314/AppTemplate/raw/master/app/release/app-release.apk)
 
 ## 相关介绍
 
