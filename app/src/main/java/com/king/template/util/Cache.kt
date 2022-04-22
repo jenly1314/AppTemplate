@@ -13,98 +13,99 @@ object Cache {
         MMKV.initialize(context)
     }
 
-    private fun mmkv() = MMKV.defaultMMKV()!!
+    private val mmkv by lazy {
+        MMKV.defaultMMKV()!!
+    }
 
     fun put(key: String,value: Boolean?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Int?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Long?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Float?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Double?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: String?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Set<String>?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: ByteArray?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
     fun put(key: String,value: Parcelable?){
         if(value != null){
-            mmkv().encode(key,value)
+            mmkv.encode(key,value)
         }else{
-            removeValueForKey(key)
+            remove(key)
         }
     }
 
-    fun getBoolean(key: String, defValue: Boolean = false) = mmkv().getBoolean(key,defValue)
+    fun getBoolean(key: String, defValue: Boolean = false) = mmkv.getBoolean(key,defValue)
 
-    fun getInt(key: String, defValue: Int = 0) = mmkv().getInt(key,defValue)
+    fun getInt(key: String, defValue: Int = 0) = mmkv.getInt(key,defValue)
 
-    fun getLong(key: String, defValue: Long = 0) = mmkv().getLong(key,defValue)
+    fun getLong(key: String, defValue: Long = 0) = mmkv.getLong(key,defValue)
 
-    fun getFloat(key: String, defValue: Float = 0F) = mmkv().getFloat(key,defValue)
+    fun getFloat(key: String, defValue: Float = 0F) = mmkv.getFloat(key,defValue)
 
-    fun getDouble(key: String, defValue: Double = 0.0) = mmkv().decodeDouble(key,defValue)
+    fun getDouble(key: String, defValue: Double = 0.0) = mmkv.decodeDouble(key,defValue)
 
-    fun getString(key: String, defValue: String? = null): String? = mmkv().getString(key,defValue)
+    fun getString(key: String, defValue: String? = null): String? = mmkv.getString(key,defValue)
 
-    fun getByteArray(key: String, defValue: ByteArray? = null): ByteArray? = mmkv().getBytes(key,defValue)
+    fun getByteArray(key: String, defValue: ByteArray? = null): ByteArray? = mmkv.getBytes(key,defValue)
 
-    fun <T: Parcelable> getParcelable(key: String, clazz: Class<T>, defValue: T? = null): T? = mmkv().decodeParcelable(key,clazz,defValue)
+    fun <T: Parcelable> getParcelable(key: String, clazz: Class<T>, defValue: T? = null): T? = mmkv.decodeParcelable(key,clazz,defValue)
 
-
-    fun removeValueForKey(key: String){
-        mmkv().removeValueForKey(key)
+    fun remove(key: String){
+        mmkv.removeValueForKey(key)
     }
 }

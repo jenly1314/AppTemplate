@@ -21,7 +21,7 @@ import javax.inject.Inject
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @HiltViewModel
-open class BaseViewModel @Inject constructor(application: Application, model: BaseModel?) : DataViewModel(application,model) {
+open class BaseViewModel @Inject constructor(application: Application, model: BaseModel?) : DataViewModel(application, model) {
 
     open fun getApp() = getApplication<App>()
 
@@ -32,33 +32,33 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
     open val liveDataTag by lazy { SingleLiveEvent<Int>() }
 
 
-    open fun isSuccess(result : Result<*>?,showError: Boolean = true): Boolean{
-        if(result?.isSuccess() == true){
+    open fun isSuccess(result: Result<*>?, showError: Boolean = true): Boolean {
+        if (result?.isSuccess() == true) {
             return true
         }
-        if(showError){
+        if (showError) {
             sendMessage(result?.getErrorMessage() ?: getString(R.string.result_failure))
         }
         return false
     }
 
 
-    fun launch(showLoading: Boolean = true,tag: Int? = null,block: suspend () -> Unit) = launch(showLoading,tag,block,{
+    fun launch(showLoading: Boolean = true, tag: Int? = null, block: suspend () -> Unit) = launch(showLoading, tag, block) {
         Timber.w(it)
-        if(SystemUtils.isNetWorkActive(getApp())){
-            when(it){
+        if (SystemUtils.isNetWorkActive(getApp())) {
+            when (it) {
                 is SocketTimeoutException -> sendMessage(getString(R.string.result_connect_timeout_error))
                 is ConnectException -> sendMessage(getString(R.string.result_connect_failed_error))
                 else -> sendMessage(getString(R.string.result_error))
             }
-        }else{
+        } else {
             sendMessage(getString(R.string.result_network_unavailable_error))
         }
-    })
+    }
 
-    fun launch(showLoading: Boolean,tag: Int? = null,block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
+    fun launch(showLoading: Boolean, tag: Int? = null, block: suspend () -> Unit, error: suspend (Throwable) -> Unit) = viewModelScope.launch {
         try {
-            if(showLoading) {
+            if (showLoading) {
                 showLoading()
             }
             block()
