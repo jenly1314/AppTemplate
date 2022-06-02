@@ -8,7 +8,6 @@ import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.ViewDataBinding
 import com.king.base.util.StringUtils
-import com.king.base.util.ToastUtils
 import com.king.frame.mvvmframe.base.BaseFragment
 import com.king.frame.mvvmframe.base.BaseModel
 import com.king.frame.mvvmframe.base.BaseViewModel

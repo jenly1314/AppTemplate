@@ -3,20 +3,19 @@ package com.king.template.app.base
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.adapter.BaseBindingAdapter
-import com.king.template.databinding.ListActivityBinding
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListActivityBinding>() {
+abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : BaseActivity<VM, VDB>() {
 
     var curPage : Int = 1
     var pageSize = Constants.PAGE_SIZE
@@ -26,15 +25,13 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         setToolbarTitle(intent.getStringExtra(Constants.KEY_TITLE))
-        viewModel?.let {
-            pageSize = it.pageSize()
-        }
-        initRecyclerView(viewDataBinding.rv)
+
+        initRecyclerView(recyclerView())
         mAdapter = createAdapter()
-        viewDataBinding.rv.adapter = mAdapter
+        recyclerView().adapter = mAdapter
         mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position)}
         observeData()
-        initRefreshLayout(viewDataBinding.srl)
+        initRefreshLayout(smartRefreshLayout())
     }
 
     open fun initRecyclerView(rv: RecyclerView){
@@ -53,7 +50,9 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
     }
 
     open fun observeData(){
-        viewModel.liveData.observe(this, Observer{ t -> updateUI(t,curPage > 1) })
+        viewModel.liveData.observe(this) {
+            updateUI(it,curPage > 1)
+        }
     }
 
     open fun isSupportRefresh() = true
@@ -64,13 +63,13 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
 
     override fun hideLoading() {
         super.hideLoading()
-        viewDataBinding.srl.closeHeaderOrFooter()
+        smartRefreshLayout().closeHeaderOrFooter()
         initEmptyView()
     }
 
     private fun initEmptyView(){
         if(mAdapter.emptyLayout == null){
-            createEmptyView(viewDataBinding.rv)?.let {
+            createEmptyView(recyclerView())?.let {
                 mAdapter.setEmptyView(it)
             }
         }
@@ -89,20 +88,26 @@ abstract class ListActivity<T, VM : ListViewModel<T>> : BaseActivity<VM, ListAct
     }
 
     open fun updateUI(data: Collection<T>?,loadMore: Boolean){
-        data?.let {
-            if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
+        if(loadMore) {
+            data?.let {
+                mAdapter.addData(it)
+            }
+        } else mAdapter.setList(data)
 
-            if(isSupportRefresh()){
-                if(mAdapter.itemCount >= curPage * pageSize){
-                    viewDataBinding.srl.setEnableLoadMore(true)
-                    curPage++
-                }else{
-                    viewDataBinding.srl.setEnableLoadMore(false)
-                    viewDataBinding.srl.finishLoadMoreWithNoMoreData()
-                }
+        if(isSupportRefresh()){
+            if(mAdapter.itemCount >= curPage * pageSize){
+                smartRefreshLayout().setEnableLoadMore(true)
+                curPage++
+            }else{
+                smartRefreshLayout().setEnableLoadMore(false)
+                smartRefreshLayout().finishLoadMoreWithNoMoreData()
             }
         }
     }
+
+    abstract fun smartRefreshLayout() : SmartRefreshLayout
+
+    abstract fun recyclerView() : RecyclerView
 
     abstract fun createAdapter(): BaseBindingAdapter<T>
 }

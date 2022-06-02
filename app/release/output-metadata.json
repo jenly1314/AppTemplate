@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.king.template",
+  "applicationId": "com.king.iiv",
   "variantName": "release",
   "elements": [
     {
@@ -12,7 +12,7 @@
       "filters": [],
       "versionCode": 1,
       "versionName": "1.0.0",
-      "outputFile": "app-release.apk"
+      "outputFile": "IIV_1.0.0_1_2022-05-18.apk"
     }
   ]
 }

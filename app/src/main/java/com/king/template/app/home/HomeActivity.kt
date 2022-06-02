@@ -16,14 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
+class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
 
-    var fragment1 : Fragment? = null
-    var fragment2 : Fragment? = null
-    var fragment3 : Fragment? = null
-    var fragment4 : Fragment? = null
+    var fragment1: Fragment? = null
+    var fragment2: Fragment? = null
+    var fragment3: Fragment? = null
+    var fragment4: Fragment? = null
 
-    var lastTime : Long = 0
+    var lastTime: Long = 0
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -35,7 +35,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
     }
 
     override fun onBackPressed() {
-        if(lastTime < System.currentTimeMillis() - Constants.DOUBLE_CLICK_EXIT_TIME){
+        if (lastTime < System.currentTimeMillis() - Constants.DOUBLE_CLICK_EXIT_TIME) {
             lastTime = System.currentTimeMillis()
             showToast(R.string.tips_double_click_exit)
             return
@@ -57,58 +57,62 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
         }
     }
 
-    private fun showFragment(block:(FragmentTransaction) -> Fragment){
+    private fun showFragment(block: (FragmentTransaction) -> Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         hideAllFragment(fragmentTransaction)
         fragmentTransaction.show(block(fragmentTransaction))
         fragmentTransaction.commit()
     }
 
-    private fun getFragment1(fragmentTransaction: FragmentTransaction): Fragment{
-        if(fragment1 == null){
+    private fun getFragment1(fragmentTransaction: FragmentTransaction): Fragment {
+        if (fragment1 == null) {
             //TODO 替换成菜单对应的Fragment
             fragment1 = HomeFragment.newInstance()
-            fragment1?.let{
-                fragmentTransaction.add(R.id.fragmentContent,it)
+            fragment1?.let {
+                fragmentTransaction.add(R.id.fragmentContent, it)
             }
         }
         return fragment1!!
     }
 
-    private fun getFragment2(fragmentTransaction: FragmentTransaction): Fragment{
-        if(fragment2 == null){
+    private fun getFragment2(fragmentTransaction: FragmentTransaction): Fragment {
+        if (fragment2 == null) {
             //TODO 替换成菜单对应的Fragment
-            fragment2 = TabFragment.newInstance(arrayOf("Tab1","Tab2")){
-                when(it){
-                    0 -> MenuFragment.newInstance("Tab1",false)
-                    else -> MenuFragment.newInstance("Tab2",false)
+            fragment2 = TabFragment.newInstance(
+                arrayOf("Tab1", "Tab2"),
+                showToolbar = true,
+                showBack = false
+            ) {
+                when (it) {
+                    0 -> MenuFragment.newInstance("Tab1", false)
+                    else -> MenuFragment.newInstance("Tab2", false)
                 }
             }
-            fragment2?.let{
-                fragmentTransaction.add(R.id.fragmentContent,it)
+            fragment2?.let {
+                fragmentTransaction.add(R.id.fragmentContent, it)
             }
         }
         return fragment2!!
     }
 
-    private fun getFragment3(fragmentTransaction: FragmentTransaction): Fragment{
-        if(fragment3 == null){
+    private fun getFragment3(fragmentTransaction: FragmentTransaction): Fragment {
+        if (fragment3 == null) {
             //TODO 替换成菜单对应的Fragment
 
             fragment3 = MenuFragment.newInstance(getString(R.string.home_menu3))
-            fragment3?.let{
-                fragmentTransaction.add(R.id.fragmentContent,it)
+            fragment3?.let {
+                fragmentTransaction.add(R.id.fragmentContent, it)
             }
         }
         return fragment3!!
     }
 
-    private fun getFragment4(fragmentTransaction: FragmentTransaction): Fragment{
-        if(fragment4 == null){
+    private fun getFragment4(fragmentTransaction: FragmentTransaction): Fragment {
+        if (fragment4 == null) {
             //TODO 替换成菜单对应的Fragment
             fragment4 = MeFragment.newInstance()
-            fragment4?.let{
-                fragmentTransaction.add(R.id.fragmentContent,it)
+            fragment4?.let {
+                fragmentTransaction.add(R.id.fragmentContent, it)
             }
         }
         return fragment4!!
@@ -116,11 +120,11 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>(){
 
 
     override fun onClick(v: View) {
-        when(v.id){
-            R.id.rbMenu1 -> showFragment {getFragment1(it)}
-            R.id.rbMenu2 -> showFragment {getFragment2(it)}
-            R.id.rbMenu3 -> showFragment {getFragment3(it)}
-            R.id.rbMenu4 -> showFragment {getFragment4(it)}
+        when (v.id) {
+            R.id.rbMenu1 -> showFragment { getFragment1(it) }
+            R.id.rbMenu2 -> showFragment { getFragment2(it) }
+            R.id.rbMenu3 -> showFragment { getFragment3(it) }
+            R.id.rbMenu4 -> showFragment { getFragment4(it) }
         }
     }
 

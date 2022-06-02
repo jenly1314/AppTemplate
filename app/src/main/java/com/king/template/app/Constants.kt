@@ -55,5 +55,9 @@ object Constants {
 
     const val KEY_SHOW_TOOLBAR = "key_show_toolbar"
 
+    const val KEY_SHOW_BACK = "key_show_back"
+
+    const val KEY_TEXT = "key_text"
+
     //---------------------------------------------
 }

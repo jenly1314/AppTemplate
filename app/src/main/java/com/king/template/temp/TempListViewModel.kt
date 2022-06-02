@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TempListViewModel @Inject constructor(application: Application, model: BaseModel?) : ListViewModel<Bean>(application, model){
 
-    fun requestData(curPage: Int){
+    fun requestData(curPage: Int, pageSize: Int){
         launch {
             val result = apiService.getListBean("").await()
             if(isSuccess(result)){

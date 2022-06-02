@@ -1,16 +1,18 @@
 package com.king.template.app.base
 
 import android.os.Bundle
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.king.template.R
-import com.king.template.databinding.BaseTabActivityBinding
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBinding>(){
+abstract class BaseTabActivity<VDB: ViewDataBinding> : BaseActivity<BaseViewModel, VDB>(){
 
     private val titles by lazy { getTabTitles() }
 
@@ -21,12 +23,12 @@ abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBind
 
     open fun initTab(){
         for(title in titles){
-            var tab = viewDataBinding.tabLayout.newTab()
+            var tab = tabLayout().newTab()
             tab.text  = title
-            viewDataBinding.tabLayout.addTab(tab)
+            tabLayout().addTab(tab)
         }
 
-        viewDataBinding.viewPager.adapter = object : FragmentStateAdapter(this){
+        viewPager().adapter = object : FragmentStateAdapter(this){
             override fun getItemCount(): Int {
                 return titles.size
             }
@@ -35,7 +37,7 @@ abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBind
             }
         }
 
-        TabLayoutMediator(viewDataBinding.tabLayout,viewDataBinding.viewPager) { tab, position ->
+        TabLayoutMediator(tabLayout(),viewPager()) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }
@@ -45,6 +47,10 @@ abstract class BaseTabActivity : BaseActivity<BaseViewModel, BaseTabActivityBind
     }
 
     abstract fun getTabTitles(): Array<String>
+
+    abstract fun tabLayout(): TabLayout
+
+    abstract fun viewPager(): ViewPager2
 
     abstract fun createTabItemFragment(position: Int): Fragment
 }

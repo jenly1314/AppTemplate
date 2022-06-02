@@ -3,7 +3,6 @@ package com.king.template.app.home
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.king.base.adapter.divider.DividerItemDecoration
 import com.king.image.imageviewer.ImageViewer
@@ -57,10 +56,10 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
             setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
         }
 
-        viewModel.liveDataBanner.observe(this, Observer {
+        viewModel.liveDataBanner.observe(viewLifecycleOwner) {
             mImageAdapter.setDatas(it)
             mImageAdapter.notifyDataSetChanged()
-        })
+        }
 
         //---------------------------------
         //TODO 列表初始化示例
@@ -73,9 +72,9 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         viewDataBinding.srl.setEnableLoadMore(false)
         viewDataBinding.srl.setOnRefreshListener{requestData(1)}
         viewDataBinding.srl.setOnLoadMoreListener {requestData(curPage)}
-        viewModel.liveData.observe(this, Observer {
+        viewModel.liveData.observe(viewLifecycleOwner){
             updateUI(it,curPage > 1)
-        })
+        }
         viewDataBinding.srl.autoRefresh()
 
         //---------------------------------
