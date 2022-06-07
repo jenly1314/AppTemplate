@@ -16,10 +16,17 @@ class TempActivity : BaseActivity<TempViewModel, ViewDataBinding>(){
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
+        viewModel.liveData.observe(this){
+            updateUI(it)
+        }
     }
 
     override fun getLayoutId(): Int {
         return R.layout.temp_activity
+    }
+
+    private fun updateUI(data: Any?){
+
     }
 
     override fun onClick(v: View) {

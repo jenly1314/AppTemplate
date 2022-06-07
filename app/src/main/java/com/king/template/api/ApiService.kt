@@ -13,7 +13,7 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("api/getRequest")
-    fun getRequest(@Header("token") token: String): Call<Result<Any>>
+    fun getRequest(@Header("token") token: String): Call<Result<Bean>>
 
     @FormUrlEncoded
     @POST("api/postRequest")

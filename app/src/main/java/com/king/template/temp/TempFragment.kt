@@ -20,9 +20,17 @@ class TempFragment : BaseFragment<TempViewModel,ViewDataBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
+
+        viewModel.liveData.observe(viewLifecycleOwner){
+            updateUI(it)
+        }
     }
 
     override fun getLayoutId(): Int {
         return R.layout.temp_fragment
+    }
+
+    private fun updateUI(data: Any?){
+
     }
 }
