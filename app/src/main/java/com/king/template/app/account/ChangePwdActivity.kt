@@ -61,9 +61,9 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
             }
 
         })
-        setClickRightClearListener(viewDataBinding.etOldPassword)
-        setClickRightClearListener(viewDataBinding.etNewPassword)
-        setClickRightClearListener(viewDataBinding.etConfirmPassword)
+        setClickRightEyeListener(viewDataBinding.etOldPassword)
+        setClickRightEyeListener(viewDataBinding.etNewPassword)
+        setClickRightEyeListener(viewDataBinding.etConfirmPassword)
 
     }
 

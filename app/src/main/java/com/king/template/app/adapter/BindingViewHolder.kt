@@ -10,6 +10,13 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  */
 class BindingViewHolder<VDB: ViewDataBinding>(view: View) : BaseViewHolder(view) {
 
-    var mBinding = DataBindingUtil.bind<VDB>(view)
+    var mBinding: VDB? = null
 
+    init {
+        try {
+            mBinding = DataBindingUtil.bind(view)
+        }catch(e: Exception){
+
+        }
+    }
 }

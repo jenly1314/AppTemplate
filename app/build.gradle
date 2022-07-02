@@ -26,6 +26,10 @@ android {
 
     }
 
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
+
     if(rootProject.ext.signingEnabled){
         signingConfigs {
             config  {
@@ -93,8 +97,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
-    implementation "androidx.core:core-ktx:$versions.coreKtx"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+//    implementation "androidx.core:core-ktx:$versions.coreKtx"
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
     implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
@@ -164,8 +168,12 @@ dependencies {
 
     implementation "me.jessyan:autosize:$versions.autosize"
 
+    implementation "io.github.androidktx:android-ktx:$versions.androidktx"
+
     implementation "com.king.image:imageviewer:$versions.imageviewer"
 //    implementation "com.king.guide:guidepage:$versions.guidepage"
+
+
 
 //    implementation "org.greenrobot:eventbus:$versions.eventbus"
 //

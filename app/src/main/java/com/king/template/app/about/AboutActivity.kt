@@ -30,12 +30,11 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         //TODO 处理点击“版本更新”逻辑
 
         //当检测到新版本时，这里只是演示检测到新版本的大概流程
-        var config = AppDialogConfig(context)
-        with(config){
+        var config = AppDialogConfig(context).apply {
             title = "版本更新"
             content = "发现新版本(这里只是演示模板步骤)"
             ok = "更新"
-            onClickOk = View.OnClickListener {
+            onClickConfirm = View.OnClickListener {
                 AppDialog.INSTANCE.dismissDialog()
                 showToast("后台下载更新中...")
                 //下载App

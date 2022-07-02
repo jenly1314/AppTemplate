@@ -1,7 +1,9 @@
 package com.king.template.app.home
 
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.View
+import androidx.core.util.valueIterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.king.template.R
@@ -11,6 +13,7 @@ import com.king.template.app.base.TabFragment
 import com.king.template.app.me.MeFragment
 import com.king.template.databinding.HomeActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.NullPointerException
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -18,16 +21,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
 
-    var fragment1: Fragment? = null
-    var fragment2: Fragment? = null
-    var fragment3: Fragment? = null
-    var fragment4: Fragment? = null
+    private val fragments by lazy {
+        SparseArray<Fragment>()
+    }
 
     var lastTime: Long = 0
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
-        showFragment { getFragment1(it) }
+        showFragment(0)
+
     }
 
     override fun getLayoutId(): Int {
@@ -45,40 +48,35 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
 
 
     private fun hideAllFragment(fragmentTransaction: FragmentTransaction) {
-        hideFragment(fragmentTransaction, fragment1)
-        hideFragment(fragmentTransaction, fragment2)
-        hideFragment(fragmentTransaction, fragment3)
-        hideFragment(fragmentTransaction, fragment4)
-    }
-
-    private fun hideFragment(fragmentTransaction: FragmentTransaction, fragment: Fragment?) {
-        fragment?.let {
+        fragments.valueIterator().forEach {
             fragmentTransaction.hide(it)
         }
     }
 
-    private fun showFragment(block: (FragmentTransaction) -> Fragment) {
+    private fun showFragment(position: Int) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         hideAllFragment(fragmentTransaction)
-        fragmentTransaction.show(block(fragmentTransaction))
+        fragmentTransaction.show(getFragment(fragmentTransaction, position))
         fragmentTransaction.commit()
     }
 
-    private fun getFragment1(fragmentTransaction: FragmentTransaction): Fragment {
-        if (fragment1 == null) {
-            //TODO 替换成菜单对应的Fragment
-            fragment1 = HomeFragment.newInstance()
-            fragment1?.let {
+    private fun getFragment(fragmentTransaction: FragmentTransaction, position: Int): Fragment {
+        var fragment: Fragment? = fragments[position]
+        if (fragment == null) {
+            fragment = createFragment(position)
+            fragment?.let {
                 fragmentTransaction.add(R.id.fragmentContent, it)
+                fragments.put(position, it)
             }
         }
-        return fragment1!!
+        return fragment!!
     }
 
-    private fun getFragment2(fragmentTransaction: FragmentTransaction): Fragment {
-        if (fragment2 == null) {
-            //TODO 替换成菜单对应的Fragment
-            fragment2 = TabFragment.newInstance(
+    private fun createFragment(position: Int): Fragment {
+        val fragment = when (position) {
+            0 -> HomeFragment.newInstance()
+            1 -> TabFragment.newInstance(
+                getString(R.string.app_name),
                 arrayOf("Tab1", "Tab2"),
                 showToolbar = true,
                 showBack = false
@@ -88,43 +86,20 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
                     else -> MenuFragment.newInstance("Tab2", false)
                 }
             }
-            fragment2?.let {
-                fragmentTransaction.add(R.id.fragmentContent, it)
-            }
+            2 -> MenuFragment.newInstance(getString(R.string.home_menu3))
+            3 -> MeFragment.newInstance()
+            else -> throw NullPointerException()
         }
-        return fragment2!!
-    }
-
-    private fun getFragment3(fragmentTransaction: FragmentTransaction): Fragment {
-        if (fragment3 == null) {
-            //TODO 替换成菜单对应的Fragment
-
-            fragment3 = MenuFragment.newInstance(getString(R.string.home_menu3))
-            fragment3?.let {
-                fragmentTransaction.add(R.id.fragmentContent, it)
-            }
-        }
-        return fragment3!!
-    }
-
-    private fun getFragment4(fragmentTransaction: FragmentTransaction): Fragment {
-        if (fragment4 == null) {
-            //TODO 替换成菜单对应的Fragment
-            fragment4 = MeFragment.newInstance()
-            fragment4?.let {
-                fragmentTransaction.add(R.id.fragmentContent, it)
-            }
-        }
-        return fragment4!!
+        return fragment
     }
 
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.rbMenu1 -> showFragment { getFragment1(it) }
-            R.id.rbMenu2 -> showFragment { getFragment2(it) }
-            R.id.rbMenu3 -> showFragment { getFragment3(it) }
-            R.id.rbMenu4 -> showFragment { getFragment4(it) }
+            R.id.rbMenu1 -> showFragment(0)
+            R.id.rbMenu2 -> showFragment(1)
+            R.id.rbMenu3 -> showFragment(2)
+            R.id.rbMenu4 -> showFragment(3)
         }
     }
 
