@@ -27,7 +27,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
     }
 
     private fun clickVersionUpdate(){
-        //TODO 处理点击“版本更新”逻辑
+        // TODO 处理点击“版本更新”逻辑
 
         //当检测到新版本时，这里只是演示检测到新版本的大概流程
         var config = AppDialogConfig(context).apply {
@@ -45,7 +45,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
     }
 
     private fun clickAbout(){
-        //TODO 处理点击“关于”逻辑
+        // TODO 处理点击“关于”逻辑
 
         startWebActivity("https://github.com/jenly1314/AppTemplate",getString(R.string.app_name))
     }

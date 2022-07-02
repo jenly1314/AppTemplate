@@ -101,7 +101,7 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             return
         }
 
-        //TODO 点击“重置密码”逻辑
+        // TODO 点击“重置密码”逻辑
         showToast(R.string.reset_password)
 
         val username = viewDataBinding.etUsername.text.toString()

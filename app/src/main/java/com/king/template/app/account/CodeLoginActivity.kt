@@ -64,7 +64,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
 
 
     private fun clickLogin(){
-        //TODO 点击“登录”逻辑
+        // TODO 点击“登录”逻辑
 
         if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
             return
@@ -73,7 +73,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
             return
         }
 
-        //TODO 点击“登录”逻辑
+        // TODO 点击“登录”逻辑
         showToast(R.string.login)
 
         val username = viewDataBinding.etUsername.text.toString()

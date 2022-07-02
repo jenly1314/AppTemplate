@@ -40,11 +40,11 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
-        //TODO Banner初始化示例
+        // TODO Banner初始化示例
         with(viewDataBinding.banner){
             setAdapter(mImageAdapter)
             adapter.setOnBannerListener { data, position ->
-                //TODO 点击 Banner Item 示例
+                // TODO 点击 Banner Item 示例
 //                showToast("banner:$position")
                 ImageViewer.load(mImageAdapter.getDatas())
                         .imageLoader(GlideImageLoader())
@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         }
 
         //---------------------------------
-        //TODO 列表初始化示例
+        // TODO 列表初始化示例
         viewDataBinding.rv.layoutManager = LinearLayoutManager(context)
         viewDataBinding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL,R.drawable.line_space_divider))
 
@@ -102,7 +102,7 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
     }
 
     private fun clickItem(position: Int){
-        //TODO 点击Item处理逻辑
+        // TODO 点击Item处理逻辑
         mAdapter.getItem(position).title?.let {
             showToast(it)
         }

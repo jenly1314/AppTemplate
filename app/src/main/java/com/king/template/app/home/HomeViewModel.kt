@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
 
     fun getRequestBanner(){
         launch(false) {
-            //TODO 模拟请求
+            // TODO 模拟请求
             val data = arrayOf(
                 "https://jenly1314.gitee.io/medias/banner/1.jpg",
                 "https://jenly1314.gitee.io/medias/banner/2.jpg",
@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(application: Application, model: BaseMod
     }
 
     fun getRequestData(curPage: Int,pageSize : Int){
-        //TODO 模拟请求
+        // TODO 模拟请求
         launch(false) {
             var start = (curPage - 1) * pageSize + 1
             var end = (curPage) * pageSize

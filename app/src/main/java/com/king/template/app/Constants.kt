@@ -10,10 +10,10 @@ object Constants {
      */
     const val isDomain = false
 
-    //TODO 接口地址
+    // TODO 接口地址
     const val BASE_URL = "https://github.com"
 
-    //TODO Bugly申请的AppId
+    // TODO Bugly 申请的 AppId
     const val BUGLY_APP_ID = "5e7c47b81a"
 
     const val TAG = "Jenly"

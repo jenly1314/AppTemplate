@@ -58,12 +58,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
 
 
     private fun clickTermOfService(){
-        //TODO 点击“用户服务协议条款”逻辑
+        // TODO 点击“用户服务协议条款”逻辑
         showToast(R.string.tips_user_terms_of_service)
     }
 
     private fun clickGetCode(){
-        //TODO 点击“发送验证码”逻辑
+        // TODO 点击“发送验证码”逻辑
     }
 
     private fun clickLoginNow(){
@@ -87,7 +87,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
         }
 
 
-        //TODO 点击“注册”逻辑
+        // TODO 点击“注册”逻辑
         showToast(R.string.register)
 
         val username = viewDataBinding.etUsername.text.toString()

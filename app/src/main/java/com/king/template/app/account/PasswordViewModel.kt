@@ -4,6 +4,7 @@ import android.app.Application
 import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import retrofit2.await
 import javax.inject.Inject
 
 /**
@@ -17,12 +18,12 @@ class PasswordViewModel @Inject constructor(application: Application, model: Bas
      */
     fun resetPwd(username: String,verifyCode: String,newPassword: String){
         launch {
-//            //TODO Http请求
-//            val result = apiService.getRequest("").await()
-//            //TODO 只需处理成功的场景，失败的场景都已统一处理
-//            if(isSuccess(result)){
-//
-//            }
+            // TODO Http请求
+            val result = apiService.getRequest("").await()
+            // TODO 只需处理成功的场景，失败的场景都已统一处理
+            if(isSuccess(result)){
+
+            }
         }
     }
 
@@ -31,12 +32,12 @@ class PasswordViewModel @Inject constructor(application: Application, model: Bas
      */
     fun changePwd(oldPassword: String,newPassword: String){
         launch {
-//            //TODO Http请求
-//            val result = apiService.getRequest("").await()
-//            //TODO 只需处理成功的场景，失败的场景都已统一处理
-//            if(isSuccess(result)){
-//
-//            }
+            // TODO Http请求
+            val result = apiService.getRequest("").await()
+            // TODO 只需处理成功的场景，失败的场景都已统一处理
+            if(isSuccess(result)){
+
+            }
         }
     }
 

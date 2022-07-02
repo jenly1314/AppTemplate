@@ -1,11 +1,9 @@
 package com.king.template.app.home
 
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import com.king.android.ktx.fragment.argument
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseFragment
 import com.king.template.databinding.MenuFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint

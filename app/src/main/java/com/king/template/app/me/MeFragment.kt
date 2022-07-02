@@ -2,7 +2,6 @@ package com.king.template.app.me
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.ViewDataBinding
 import com.king.template.BuildConfig
 import com.king.template.R
 import com.king.template.app.Constants
@@ -30,7 +29,7 @@ class MeFragment : BaseFragment<MeViewModel,MeFragmentBinding>(),View.OnClickLis
         updateUI()
         viewDataBinding.tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
 
-        //TODO 对应的菜单按钮
+        // TODO 对应的菜单按钮
         viewDataBinding.rlUser.setOnClickListener(this)
         viewDataBinding.tvMenu1.setOnClickListener(this)
         viewDataBinding.tvMenu2.setOnClickListener(this)
@@ -40,7 +39,7 @@ class MeFragment : BaseFragment<MeViewModel,MeFragmentBinding>(),View.OnClickLis
     }
 
     private fun updateUI(){
-        //TODO 更新UI显示
+        // TODO 更新UI显示
         viewDataBinding.tvName.text = Constants.TAG
         viewDataBinding.tvUsername.text = "138****8888"
     }
@@ -56,7 +55,7 @@ class MeFragment : BaseFragment<MeViewModel,MeFragmentBinding>(),View.OnClickLis
     }
 
     private fun clickUser(){
-        //TODO 点击用户信息逻辑
+        // TODO 点击用户信息逻辑
         startLoginActivity()
     }
 

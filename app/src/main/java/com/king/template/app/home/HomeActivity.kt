@@ -72,25 +72,26 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
         return fragment!!
     }
 
-    private fun createFragment(position: Int): Fragment {
-        val fragment = when (position) {
-            0 -> HomeFragment.newInstance()
-            1 -> TabFragment.newInstance(
-                getString(R.string.app_name),
-                arrayOf("Tab1", "Tab2"),
-                showToolbar = true,
-                showBack = false
-            ) {
-                when (it) {
-                    0 -> MenuFragment.newInstance("Tab1", false)
-                    else -> MenuFragment.newInstance("Tab2", false)
-                }
+    /**
+     * 创建 Fragment
+     */
+    private fun createFragment(position: Int): Fragment = when (position) {
+        // TODO 只需修改此处，改为对应的 Fragment
+        0 -> HomeFragment.newInstance()
+        1 -> TabFragment.newInstance(
+            getString(R.string.app_name),
+            arrayOf("Tab1", "Tab2"),
+            showToolbar = true,
+            showBack = false
+        ) {
+            when (it) {
+                0 -> MenuFragment.newInstance("Tab1", false)
+                else -> MenuFragment.newInstance("Tab2", false)
             }
-            2 -> MenuFragment.newInstance(getString(R.string.home_menu3))
-            3 -> MeFragment.newInstance()
-            else -> throw NullPointerException()
         }
-        return fragment
+        2 -> MenuFragment.newInstance(getString(R.string.home_menu3))
+        3 -> MeFragment.newInstance()
+        else -> throw NullPointerException()
     }
 
 

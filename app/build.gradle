@@ -81,11 +81,11 @@ android {
 
 //    flavorDimensions "flavor"
 //    productFlavors {
-//        //正式
+//        // 正式
 //        flavors_release {
 //            dimension "flavor"
 //        }
-//        //开发
+//        // 开发
 //        flavors_dev {
 //            dimension "flavor"
 //        }

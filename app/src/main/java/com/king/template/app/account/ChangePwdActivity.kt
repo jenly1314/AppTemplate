@@ -94,7 +94,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
             return
         }
 
-        //TODO 点击“修改密码”逻辑
+        // TODO 点击“修改密码”逻辑
         showToast(R.string.change_password)
 
         var oldPwd = viewDataBinding.etOldPassword.text.toString()

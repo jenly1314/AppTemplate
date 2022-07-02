@@ -58,7 +58,7 @@ class App : Application() {
         NeverCrash.init { t, e ->
             CrashReport.postCatchedException(e)
         }
-        if(Constants.isDomain){//提供动态切换环境
+        if(Constants.isDomain){// 提供动态切换环境
             if(BaseUrlManager.getInstance().count == 0){
                 BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }
