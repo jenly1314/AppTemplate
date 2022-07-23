@@ -1,15 +1,14 @@
 package com.king.template.app.account
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
 import android.view.View
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ChangePwdActivityBinding
+import com.king.template.extension.disableCopyAndPaste
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -22,48 +21,21 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
         setToolbarTitle(getString(R.string.change_password))
 
-        viewDataBinding.etOldPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etOldPassword.isSelected = !TextUtils.isEmpty(s)
-            }
-
-        })
-        viewDataBinding.etNewPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etNewPassword.isSelected = !TextUtils.isEmpty(s)
-            }
-
-        })
-        viewDataBinding.etConfirmPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etConfirmPassword.isSelected = !TextUtils.isEmpty(s)
-            }
-
-        })
         setClickRightEyeListener(viewDataBinding.etOldPassword)
         setClickRightEyeListener(viewDataBinding.etNewPassword)
         setClickRightEyeListener(viewDataBinding.etConfirmPassword)
+
+        viewDataBinding.etOldPassword.disableCopyAndPaste()
+        viewDataBinding.etNewPassword.disableCopyAndPaste()
+        viewDataBinding.etConfirmPassword.disableCopyAndPaste()
+
+        viewModel.liveDataUpdatePassword.observe(this) {
+            if (it) {
+                // TODO 密码修改成功后的逻辑处理
+                showToast(R.string.successfully_modified)
+                finish()
+            }
+        }
 
     }
 
@@ -95,11 +67,11 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
         }
 
         // TODO 点击“修改密码”逻辑
-        showToast(R.string.change_password)
+        Timber.d(getString(R.string.change_password))
 
         var oldPwd = viewDataBinding.etOldPassword.text.toString()
 
-        viewModel.changePwd(oldPwd,newPwd)
+        viewModel.updatePassword(oldPwd,newPwd)
     }
 
     override fun onClick(v: View) {

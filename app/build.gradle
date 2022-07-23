@@ -170,6 +170,8 @@ dependencies {
 
     implementation "io.github.androidktx:android-ktx:$versions.androidktx"
 
+    implementation "com.github.jenly1314:kvcache:$versions.kvcache"
+
     implementation "com.king.image:imageviewer:$versions.imageviewer"
 //    implementation "com.king.guide:guidepage:$versions.guidepage"
 

@@ -9,7 +9,9 @@ import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.LoginActivityBinding
+import com.king.template.extension.disableCopyAndPaste
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -39,6 +41,15 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
         })
         setClickRightClearListener(viewDataBinding.etUsername)
         setClickRightEyeListener(viewDataBinding.etPassword)
+
+        viewDataBinding.etPassword.disableCopyAndPaste()
+
+        viewModel.liveData.observe(this) {
+            // TODO 登录成功后的逻辑处理
+            getApp().login(it.token, it.user)
+            startHomeActivity()
+            finish()
+        }
 
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
@@ -78,7 +89,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
         }
 
         // TODO 点击“登录”逻辑
-        showToast(R.string.login)
+        Timber.d(getString(R.string.login))
 
         val username = viewDataBinding.etUsername.text.toString()
         val password = viewDataBinding.etPassword.text.toString()

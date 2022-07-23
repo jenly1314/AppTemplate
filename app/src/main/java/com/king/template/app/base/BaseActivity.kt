@@ -17,6 +17,7 @@ import com.king.base.util.StringUtils
 import com.king.frame.mvvmframe.base.BaseActivity
 import com.king.frame.mvvmframe.base.BaseModel
 import com.king.frame.mvvmframe.base.BaseViewModel
+import com.king.template.App
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
@@ -29,6 +30,7 @@ import es.dmoral.toasty.Toasty
  */
 abstract class BaseActivity<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBinding> : BaseActivity<VM,VDB>(){
 
+    fun getApp() = application as App
 
     fun setToolbarTitle(title: String?){
         title?.let {
@@ -175,7 +177,7 @@ abstract class BaseActivity<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBind
 
     open fun onClick(v : View){
         if(v.id == R.id.ivLeft){
-            onBackPressed()
+            finish()
         }
     }
 

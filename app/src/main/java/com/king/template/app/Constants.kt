@@ -24,6 +24,9 @@ object Constants {
 
     //---------------------------------------------
 
+    const val VERIFY_CODE_COUNT_DOWN_DURATION = 60_000L
+    const val VERIFY_CODE_COUNT_DOWN_INTERVAL = 1_000L
+
     //---------------------------------------------
 
     const val KEY_TITLE = "key_title"

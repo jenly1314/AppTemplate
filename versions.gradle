@@ -45,6 +45,7 @@ versions.guidepage = "1.0.0"
 versions.imageviewer = "1.0.2"
 versions.timber = "5.0.1"
 versions.androidktx = "1.0.0"
+versions.kvcache = "1.0.1"
 
 versions.baseUrlManager = "1.2.0"
 versions.logger = "2.2.0"

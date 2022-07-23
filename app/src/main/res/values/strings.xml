@@ -68,4 +68,12 @@
     <string name="reset_password">重置密码</string>
     <string name="change_password">修改密码</string>
 
+    <string name="successfully_modified">修改成功</string>
+    <string name="successfully_reset">重置成功</string>
+    <string name="successfully_saved">保存成功</string>
+    <string name="successfully_set">设置成功</string>
+    <string name="successfully_registration">注册成功</string>
+    <string name="successfully_operation">操作成功</string>
+    <string name="successfully_submitted">提交成功</string>
+
 </resources>

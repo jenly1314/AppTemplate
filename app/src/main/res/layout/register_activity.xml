@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_line_v"
-            android:minWidth="@dimen/size_100dp"
+            android:minWidth="@dimen/size_110dp"
             android:layout_marginLeft="@dimen/size_16dp"
             android:layout_marginRight="@dimen/size_16dp"
             android:layout_marginTop="@dimen/size_20dp"
@@ -100,6 +100,7 @@
             android:drawableRight="@drawable/btn_password_eye_selector"
             android:hint="@string/hint_password"
             android:imeOptions="actionDone"
+            android:textSelectHandle="@null"
             app:layout_constraintTop_toBottomOf="@+id/tvGetCode"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>

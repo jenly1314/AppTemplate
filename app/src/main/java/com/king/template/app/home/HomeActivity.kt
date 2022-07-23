@@ -12,6 +12,7 @@ import com.king.template.app.base.BaseActivity
 import com.king.template.app.base.TabFragment
 import com.king.template.app.me.MeFragment
 import com.king.template.databinding.HomeActivityBinding
+import com.king.template.dict.HomeMenu
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.NullPointerException
 
@@ -29,7 +30,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
-        showFragment(0)
+        showFragment(HomeMenu.MENU1)
 
     }
 
@@ -53,20 +54,20 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
         }
     }
 
-    private fun showFragment(position: Int) {
+    private fun showFragment(@HomeMenu menu: Int) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         hideAllFragment(fragmentTransaction)
-        fragmentTransaction.show(getFragment(fragmentTransaction, position))
+        fragmentTransaction.show(getFragment(fragmentTransaction, menu))
         fragmentTransaction.commit()
     }
 
-    private fun getFragment(fragmentTransaction: FragmentTransaction, position: Int): Fragment {
-        var fragment: Fragment? = fragments[position]
+    private fun getFragment(fragmentTransaction: FragmentTransaction,@HomeMenu menu: Int): Fragment {
+        var fragment: Fragment? = fragments[menu]
         if (fragment == null) {
-            fragment = createFragment(position)
+            fragment = createFragment(menu)
             fragment?.let {
                 fragmentTransaction.add(R.id.fragmentContent, it)
-                fragments.put(position, it)
+                fragments.put(menu, it)
             }
         }
         return fragment!!
@@ -75,10 +76,10 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
     /**
      * 创建 Fragment
      */
-    private fun createFragment(position: Int): Fragment = when (position) {
+    private fun createFragment(@HomeMenu menu: Int): Fragment = when (menu) {
         // TODO 只需修改此处，改为对应的 Fragment
-        0 -> HomeFragment.newInstance()
-        1 -> TabFragment.newInstance(
+        HomeMenu.MENU1 -> HomeFragment.newInstance()
+        HomeMenu.MENU2 -> TabFragment.newInstance(
             getString(R.string.app_name),
             arrayOf("Tab1", "Tab2"),
             showToolbar = true,
@@ -89,18 +90,18 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
                 else -> MenuFragment.newInstance("Tab2", false)
             }
         }
-        2 -> MenuFragment.newInstance(getString(R.string.home_menu3))
-        3 -> MeFragment.newInstance()
+        HomeMenu.MENU3 -> MenuFragment.newInstance(getString(R.string.home_menu3))
+        HomeMenu.MENU4 -> MeFragment.newInstance()
         else -> throw NullPointerException()
     }
 
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.rbMenu1 -> showFragment(0)
-            R.id.rbMenu2 -> showFragment(1)
-            R.id.rbMenu3 -> showFragment(2)
-            R.id.rbMenu4 -> showFragment(3)
+            R.id.rbMenu1 -> showFragment(HomeMenu.MENU1)
+            R.id.rbMenu2 -> showFragment(HomeMenu.MENU2)
+            R.id.rbMenu3 -> showFragment(HomeMenu.MENU3)
+            R.id.rbMenu4 -> showFragment(HomeMenu.MENU4)
         }
     }
 

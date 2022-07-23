@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.king.base.util.SystemUtils
 import com.king.frame.mvvmframe.base.DataViewModel
 import com.king.frame.mvvmframe.base.livedata.SingleLiveEvent
+import com.king.kvcache.KVCache
 import com.king.template.App
 import com.king.template.R
 import com.king.template.api.ApiService
+import com.king.template.app.Constants
 import com.king.template.bean.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,14 +25,16 @@ import javax.inject.Inject
 @HiltViewModel
 open class BaseViewModel @Inject constructor(application: Application, model: BaseModel?) : DataViewModel(application, model) {
 
-    open fun getApp() = getApplication<App>()
+    fun getApp() = getApplication<App>()
 
-    open fun getString(@StringRes resId: Int) = getApp().getString(resId)
+    fun getString(@StringRes resId: Int) = getApp().getString(resId)
 
     val apiService: ApiService by lazy { getRetrofitService(ApiService::class.java) }
 
     open val liveDataTag by lazy { SingleLiveEvent<Int>() }
 
+    //TODO Token 获取来源
+    fun getToken(): String = KVCache.getString(Constants.KEY_TOKEN) ?: ""
 
     open fun isSuccess(result: Result<*>?, showError: Boolean = true): Boolean {
         if (result?.isSuccess() == true) {

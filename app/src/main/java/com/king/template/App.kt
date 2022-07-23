@@ -5,9 +5,10 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.king.base.baseurlmanager.BaseUrlManager
 import com.king.base.baseurlmanager.bean.UrlInfo
+import com.king.kvcache.KVCache
 import com.king.template.app.Constants
+import com.king.template.bean.User
 import com.king.template.component.ComponentAppManager
-import com.king.template.util.Cache
 import com.king.thread.nevercrash.NeverCrash
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -49,9 +50,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         initLogger()
-        Cache.initialize(this)
+        KVCache.initialize(this)
         Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
-        componentAppManager.initComponentApp(this)
 
         Toasty.Config.getInstance().allowQueue(false).apply()
 
@@ -63,7 +63,7 @@ class App : Application() {
                 BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }
         }
-
+        componentAppManager.initComponentApp(this)
 
     }
 
@@ -84,6 +84,23 @@ class App : Application() {
             }
         })
 
+    }
+
+    /**
+     * 登录
+     */
+    fun login(token: String, user: User){
+        // 缓存token
+        KVCache.put(Constants.KEY_TOKEN, token)
+        // TODO 是否需要缓存 user需根据需求决定
+    }
+
+    /**
+     * 登出
+     */
+    fun logout(){
+        // 移除 token
+        KVCache.remove(Constants.KEY_TOKEN)
     }
 
 }

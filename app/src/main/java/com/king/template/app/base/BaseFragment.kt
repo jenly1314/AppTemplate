@@ -11,6 +11,7 @@ import com.king.base.util.StringUtils
 import com.king.frame.mvvmframe.base.BaseFragment
 import com.king.frame.mvvmframe.base.BaseModel
 import com.king.frame.mvvmframe.base.BaseViewModel
+import com.king.template.App
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
@@ -23,6 +24,7 @@ import es.dmoral.toasty.Toasty
  */
 abstract class BaseFragment<VM : BaseViewModel<out BaseModel>,VDB : ViewDataBinding> : BaseFragment<VM,VDB>(){
 
+    fun getApp() = requireActivity().application as App
 
     override fun initData(savedInstanceState: Bundle?) {
         registerMessageEvent {
