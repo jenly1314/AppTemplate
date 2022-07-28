@@ -4,13 +4,15 @@ import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.king.template.R
 import com.king.template.app.base.BaseFragment
+import com.king.template.bean.Bean
+import com.king.template.databinding.TempFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class TempFragment : BaseFragment<TempViewModel,ViewDataBinding>() {
+class TempFragment : BaseFragment<TempViewModel, TempFragmentBinding>() {
 
     companion object{
         fun newInstance(): TempFragment{
@@ -21,16 +23,22 @@ class TempFragment : BaseFragment<TempViewModel,ViewDataBinding>() {
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
-        viewModel.liveData.observe(viewLifecycleOwner){
-            updateUI(it)
-        }
+        observeData()
     }
 
     override fun getLayoutId(): Int {
         return R.layout.temp_fragment
     }
 
-    private fun updateUI(data: Any?){
+    private fun observeData(){
+        viewModel.liveData.observe(viewLifecycleOwner){
+            updateUI(it)
+        }
+    }
 
+    private fun updateUI(data: Bean?){
+        data?.let {
+            binding.data = it
+        }
     }
 }

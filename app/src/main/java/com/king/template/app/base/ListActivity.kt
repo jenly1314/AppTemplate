@@ -18,7 +18,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : BaseActivity<VM, VDB>() {
 
     var curPage : Int = 1
-    var pageSize = Constants.PAGE_SIZE
+    val pageSize by lazy { pageSize() }
 
     lateinit var mAdapter : BaseBindingAdapter<T>
 
@@ -57,6 +57,10 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
 
     open fun isSupportRefresh() = true
 
+    open fun isSupportPagination() = true
+
+    open fun pageSize() = Constants.PAGE_SIZE
+
     open fun requestData(curPage: Int){
         this.curPage = curPage
     }
@@ -87,14 +91,14 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
 
     }
 
-    open fun updateUI(data: Collection<T>?,loadMore: Boolean){
+    open fun updateUI(data: Collection<T>?, loadMore: Boolean){
         if(loadMore) {
             data?.let {
                 mAdapter.addData(it)
             }
         } else mAdapter.setList(data)
 
-        if(isSupportRefresh()){
+        if(isSupportRefresh() && isSupportPagination()){
             if(mAdapter.itemCount >= curPage * pageSize){
                 smartRefreshLayout().setEnableLoadMore(true)
                 curPage++
