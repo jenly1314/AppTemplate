@@ -7,6 +7,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.king.template.R
 import com.king.template.app.Constants
 import com.king.template.app.adapter.BaseBindingAdapter
@@ -20,7 +22,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
     var curPage : Int = 1
     val pageSize by lazy { pageSize() }
 
-    lateinit var mAdapter : BaseBindingAdapter<T>
+    lateinit var mAdapter : BaseQuickAdapter<T, out BaseViewHolder>
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -112,5 +114,5 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
 
     abstract fun recyclerView() : RecyclerView
 
-    abstract fun createAdapter(): BaseBindingAdapter<T>
+    abstract fun createAdapter(): BaseQuickAdapter<T, out BaseViewHolder>
 }

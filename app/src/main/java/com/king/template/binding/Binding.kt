@@ -2,6 +2,7 @@ package com.king.template.binding
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.king.base.util.TimeUtils
@@ -25,4 +26,9 @@ fun TextView.dateFormat(time: String?){
 fun ImageView.imageUrl(imageUrl: String?){
     var requestOptions = RequestOptions().centerCrop().override(300,200)
     GlideApp.with(context).load(imageUrl).apply(requestOptions).error(R.drawable.default_image).into(this@imageUrl)
+}
+
+@BindingAdapter(value = ["img"])
+fun ImageView.img(@DrawableRes resId: Int){
+    setImageResource(resId)
 }

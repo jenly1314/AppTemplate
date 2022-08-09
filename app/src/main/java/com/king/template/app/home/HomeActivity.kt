@@ -90,7 +90,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
                 else -> MenuFragment.newInstance("Tab2", false)
             }
         }
-        HomeMenu.MENU3 -> MenuFragment.newInstance(getString(R.string.home_menu3))
+        HomeMenu.MENU3 -> MenuListFragment.newInstance(getString(R.string.home_menu3))
         HomeMenu.MENU4 -> MeFragment.newInstance()
         else -> throw NullPointerException()
     }

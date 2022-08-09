@@ -66,6 +66,11 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+    }
+
     buildFeatures {
         dataBinding = true
     }
