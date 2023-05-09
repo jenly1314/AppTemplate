@@ -41,7 +41,7 @@ open class BaseViewModel @Inject constructor(application: Application, model: Ba
             return true
         }
         if (showError) {
-            sendMessage(result?.getErrorMessage() ?: getString(R.string.result_failure))
+            sendMessage(result?.errorMsg ?: getString(R.string.result_failure))
         }
         return false
     }

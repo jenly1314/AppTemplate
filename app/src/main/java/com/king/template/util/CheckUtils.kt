@@ -7,7 +7,6 @@ import java.util.regex.Pattern
  */
 object CheckUtils{
 
-
     /**
      * 校验密码
      */
@@ -25,7 +24,7 @@ object CheckUtils{
      * 校验手机号
      */
     fun checkPhoneNumber(phoneNumber: String): Boolean{
-        val regex = "^([1][3456789])\\d{9}\$"
+        val regex = "^(1[3456789])\\d{9}\$"
         return Pattern.matches(regex,phoneNumber)
     }
 

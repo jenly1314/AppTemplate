@@ -5,7 +5,6 @@ import com.king.template.app.base.BaseModel
 import com.king.template.app.base.ListViewModel
 import com.king.template.bean.Bean
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.await
 import javax.inject.Inject
 
 /**
@@ -16,7 +15,7 @@ class TempListViewModel @Inject constructor(application: Application, model: Bas
 
     fun requestData(curPage: Int, pageSize: Int){
         launch {
-            val result = apiService.getListBean("").await()
+            val result = apiService.getListBean("")
             if(isSuccess(result)){
                 liveData.value = result.data
             }

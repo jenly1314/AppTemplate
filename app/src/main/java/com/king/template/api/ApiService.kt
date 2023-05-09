@@ -3,9 +3,7 @@ package com.king.template.api
 import com.king.template.bean.Bean
 import com.king.template.bean.Login
 import com.king.template.bean.Result
-import retrofit2.Call
 import retrofit2.http.*
-
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -17,54 +15,54 @@ interface ApiService {
      * 登录
      */
     @POST("api/user/login")
-    fun login(@Body params: Any): Call<Result<Login>>
+    suspend fun login(@Body params: Any): Result<Login>
 
     /**
      * 注册
      */
     @POST("api/user/register")
-    fun register(@Body params: Any): Call<Result<Any>>
+    suspend fun register(@Body params: Any): Result<Any>
 
     /**
      * 重置密码
      */
     @POST("api/user/password/reset")
-    fun resetPassword(@Body params: Any): Call<Result<Any>>
+    suspend fun resetPassword(@Body params: Any): Result<Any>
 
     /**
      * 修改密码
      */
     @POST("api/user/password/update")
-    fun updatePassword(@Header("Authorization") token: String, @Body params: Any): Call<Result<Any>>
+    suspend fun updatePassword(@Header("Authorization") token: String, @Body params: Any): Result<Any>
 
     /**
      * 获取验证码
      */
     @GET("api/sms/code")
-    fun getVerifyCode(@QueryMap params: Any): Call<Result<Any>>
+    suspend fun getVerifyCode(@QueryMap params: Any): Result<Any>
 
     //--------------------------------
 
     @GET("api/getRequest")
-    fun getRequest(@Header("Authorization") token: String): Call<Result<Bean>>
+    suspend fun getRequest(@Header("Authorization") token: String): Result<Bean>
 
     @FormUrlEncoded
     @POST("api/postRequest")
-    fun postRequest(@Header("Authorization") token: String, @Field("username") username: String): Call<Result<Any>>
+    suspend fun postRequest(@Header("Authorization") token: String, @Field("username") username: String): Result<Any>
 
     @POST("api/postRequest")
-    fun postRequest(@Header("Authorization") token: String, @Body bean: Bean): Call<Result<Any>>
+    suspend fun postRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
 
     @PUT("api/putRequest")
-    fun putRequest(@Header("Authorization") token: String, @Body bean: Bean): Call<Result<Any>>
+    suspend fun putRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
 
     @PATCH("api/patchRequest")
-    fun patchRequest(@Header("Authorization") token: String, @Body bean: Bean): Call<Result<Any>>
+    suspend fun patchRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
 
     @DELETE("api/deleteRequest/{id}")
-    fun deleteRequest(@Header("Authorization") token: String, @Path("id") id: Long): Call<Result<Any>>
+    suspend fun deleteRequest(@Header("Authorization") token: String, @Path("id") id: Long): Result<Any>
 
     @GET("api/getListBean")
-    fun getListBean(@Header("Authorization") token: String): Call<Result<MutableList<Bean>>>
+    suspend fun getListBean(@Header("Authorization") token: String): Result<List<Bean>>
 
 }

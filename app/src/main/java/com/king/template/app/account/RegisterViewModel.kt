@@ -6,7 +6,6 @@ import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.await
 import javax.inject.Inject
 
 /**
@@ -28,7 +27,7 @@ class RegisterViewModel @Inject constructor(application: Application, model: Bas
             params["username"] = username
             params["verifyCode"] = verifyCode
             params["password"] = password
-            val result = apiService.register(params).await()
+            val result = apiService.register(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 // TODO 注册成功后，是否还需要登录，需根据实际需求决定
@@ -46,7 +45,7 @@ class RegisterViewModel @Inject constructor(application: Application, model: Bas
             val params = HashMap<String, String>()
             params["phoneNumber"] = phoneNumber
             params["scene"] = scene
-            val result = apiService.getVerifyCode(params).await()
+            val result = apiService.getVerifyCode(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 liveDataGetCode.value = true

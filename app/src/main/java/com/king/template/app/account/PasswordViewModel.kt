@@ -6,7 +6,6 @@ import com.king.template.app.base.BaseModel
 import com.king.template.app.base.BaseViewModel
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.await
 import javax.inject.Inject
 
 /**
@@ -29,7 +28,7 @@ class PasswordViewModel @Inject constructor(application: Application, model: Bas
             params["username"] = username
             params["verifyCode"] = verifyCode
             params["newPassword"] = newPassword
-            val result = apiService.resetPassword(params).await()
+            val result = apiService.resetPassword(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 liveDataResetPassword.value = true
@@ -46,7 +45,7 @@ class PasswordViewModel @Inject constructor(application: Application, model: Bas
             val params = HashMap<String, Any>()
             params["oldPassword"] = oldPassword
             params["newPassword"] = newPassword
-            val result = apiService.updatePassword(getToken(), params).await()
+            val result = apiService.updatePassword(getToken(), params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 liveDataUpdatePassword.value = true
@@ -63,7 +62,7 @@ class PasswordViewModel @Inject constructor(application: Application, model: Bas
             val params = HashMap<String, String>()
             params["phoneNumber"] = phoneNumber
             params["scene"] = scene
-            val result = apiService.getVerifyCode(params).await()
+            val result = apiService.getVerifyCode(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 liveDataGetCode.value = true

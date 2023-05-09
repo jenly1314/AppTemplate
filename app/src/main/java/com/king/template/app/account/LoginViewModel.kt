@@ -7,7 +7,6 @@ import com.king.template.app.base.BaseViewModel
 import com.king.template.bean.Login
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.await
 import javax.inject.Inject
 
 /**
@@ -28,7 +27,7 @@ class LoginViewModel @Inject constructor(application: Application, model: BaseMo
             val params = HashMap<String, Any>()
             params["username"] = username
             params["password"] = password
-            val result = apiService.login(params).await()
+            val result = apiService.login(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 result.data.let {
@@ -47,7 +46,7 @@ class LoginViewModel @Inject constructor(application: Application, model: BaseMo
             val params = HashMap<String, Any>()
             params["username"] = username
             params["verifyCode"] = verifyCode
-            val result = apiService.login(params).await()
+            val result = apiService.login(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 result.data.let {
@@ -66,7 +65,7 @@ class LoginViewModel @Inject constructor(application: Application, model: BaseMo
             val params = HashMap<String, String>()
             params["phoneNumber"] = phoneNumber
             params["scene"] = scene
-            val result = apiService.getVerifyCode(params).await()
+            val result = apiService.getVerifyCode(params)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
             if(isSuccess(result)){
                 liveDataGetCode.value = true
