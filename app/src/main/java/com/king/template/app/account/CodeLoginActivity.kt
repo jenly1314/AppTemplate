@@ -28,7 +28,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
 
         setToolbarTitle(getString(R.string.login))
 
-        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
+        binding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -37,11 +37,11 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
+                binding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(viewDataBinding.etUsername)
+        setClickRightClearListener(binding.etUsername)
 
         viewModel.liveData.observe(this) {
             startHomeActivity()
@@ -57,7 +57,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            viewDataBinding.etUsername.setText(it)
+            binding.etUsername.setText(it)
         }
 
     }
@@ -69,9 +69,9 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     private fun startCountDownTime() {
         object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
-                viewDataBinding.tvGetCode.isEnabled = false
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_9))
-                viewDataBinding.tvGetCode.text =
+                binding.tvGetCode.isEnabled = false
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
+                binding.tvGetCode.text =
                     java.lang.String.format(
                         getString(R.string.verify_code_down_time_),
                         millisUntilFinished / 1000
@@ -79,9 +79,9 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
             }
 
             override fun onFinish() {
-                viewDataBinding.tvGetCode.isEnabled = true
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_theme))
-                viewDataBinding.tvGetCode.setText(R.string.send_verify_code)
+                binding.tvGetCode.isEnabled = true
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
     }
@@ -93,15 +93,15 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
      */
     private fun clickGetCode(){
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         viewModel.getVerifyCode(username!!, VerifyCodeScene.LOGIN)
     }
 
     private fun clickRegister(){
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         startActivity(RegisterActivity::class.java,username)
     }
 
@@ -113,18 +113,18 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     private fun clickLogin(){
         // TODO 点击“登录”逻辑
 
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        if(!checkInput(viewDataBinding.etCode,R.string.hint_verify_code)){
+        if(!checkInput(binding.etCode,R.string.hint_verify_code)){
             return
         }
 
         // TODO 点击“登录”逻辑
         Timber.d(getString(R.string.verify_code_login))
 
-        val username = viewDataBinding.etUsername.text.toString()
-        val verifyCode = viewDataBinding.etCode.text.toString()
+        val username = binding.etUsername.text.toString()
+        val verifyCode = binding.etCode.text.toString()
         viewModel.verifyCodeLogin(username,verifyCode)
     }
 

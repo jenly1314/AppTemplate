@@ -28,7 +28,7 @@
                     android:layout_width="@dimen/size_60dp"
                     android:layout_height="@dimen/size_60dp"
                     android:src="@drawable/default_avatar"
-                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_marginEnd="@dimen/size_16dp"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="@dimen/size_1dp"/>
                 <TextView
@@ -73,15 +73,15 @@
                     android:paddingTop="@dimen/size_15dp"
                     android:paddingBottom="@dimen/size_15dp"
                     android:drawablePadding="@dimen/size_4dp"
-                    android:drawableLeft="@drawable/ic_me_menu"
-                    android:drawableRight="@drawable/ic_jump"
+                    android:drawableStart="@drawable/ic_me_menu"
+                    android:drawableEnd="@drawable/ic_jump"
                     android:text="@string/me_menu1"
                     android:background="@drawable/white_selector" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_line"
-                    android:layout_marginLeft="@dimen/size_16sp"
-                    android:layout_marginRight="@dimen/size_16sp"
+                    android:layout_marginStart="@dimen/size_16sp"
+                    android:layout_marginEnd="@dimen/size_16sp"
                     android:background="@color/line"/>
                 <TextView
                     android:id="@+id/tvMenu2"
@@ -92,15 +92,15 @@
                     android:paddingTop="@dimen/size_15dp"
                     android:paddingBottom="@dimen/size_15dp"
                     android:drawablePadding="@dimen/size_4dp"
-                    android:drawableLeft="@drawable/ic_me_menu"
-                    android:drawableRight="@drawable/ic_jump"
+                    android:drawableStart="@drawable/ic_me_menu"
+                    android:drawableEnd="@drawable/ic_jump"
                     android:text="@string/me_menu2"
                     android:background="@drawable/white_selector" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_line"
-                    android:layout_marginLeft="@dimen/size_16sp"
-                    android:layout_marginRight="@dimen/size_16sp"
+                    android:layout_marginStart="@dimen/size_16sp"
+                    android:layout_marginEnd="@dimen/size_16sp"
                     android:background="@color/line"/>
                 <TextView
                     android:id="@+id/tvMenu3"
@@ -111,8 +111,8 @@
                     android:paddingTop="@dimen/size_15dp"
                     android:paddingBottom="@dimen/size_15dp"
                     android:drawablePadding="@dimen/size_4dp"
-                    android:drawableLeft="@drawable/ic_me_menu"
-                    android:drawableRight="@drawable/ic_jump"
+                    android:drawableStart="@drawable/ic_me_menu"
+                    android:drawableEnd="@drawable/ic_jump"
                     android:text="@string/me_menu3"
                     android:background="@drawable/white_selector" />
             </LinearLayout>
@@ -131,15 +131,15 @@
                     android:paddingTop="@dimen/size_15dp"
                     android:paddingBottom="@dimen/size_15dp"
                     android:drawablePadding="@dimen/size_4dp"
-                    android:drawableLeft="@drawable/ic_me_menu"
-                    android:drawableRight="@drawable/ic_jump"
+                    android:drawableStart="@drawable/ic_me_menu"
+                    android:drawableEnd="@drawable/ic_jump"
                     android:text="@string/me_menu4"
                     android:background="@drawable/white_selector" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_line"
-                    android:layout_marginLeft="@dimen/size_16sp"
-                    android:layout_marginRight="@dimen/size_16sp"
+                    android:layout_marginStart="@dimen/size_16sp"
+                    android:layout_marginEnd="@dimen/size_16sp"
                     android:background="@color/line"/>
                 <LinearLayout
                     android:id="@+id/btnAbout"
@@ -157,14 +157,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawablePadding="@dimen/size_4dp"
-                        android:drawableLeft="@drawable/ic_me_about"
+                        android:drawableStart="@drawable/ic_me_about"
                         android:text="@string/me_about" />
                     <TextView
                         android:id="@+id/tvAppVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_9"
-                        android:drawableRight="@drawable/ic_jump"
+                        android:drawableEnd="@drawable/ic_jump"
                         tools:text="V 1.0.0" />
                 </LinearLayout>
 

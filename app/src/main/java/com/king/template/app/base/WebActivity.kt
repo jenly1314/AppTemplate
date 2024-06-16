@@ -38,11 +38,11 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             url = it
         }
 
-        viewDataBinding.pbFirst.isVisible = true
+        binding.pbFirst.isVisible = true
 
-        intWebSettings(viewDataBinding.web)
+        intWebSettings(binding.web)
 
-        viewDataBinding.web.webChromeClient = object : WebChromeClient(){
+        binding.web.webChromeClient = object : WebChromeClient(){
 
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
@@ -60,7 +60,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
             }
 
         }
-        viewDataBinding.web.webViewClient = object : WebViewClient(){
+        binding.web.webViewClient = object : WebViewClient(){
 
             override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
@@ -125,7 +125,7 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
         }
 
-        viewDataBinding.web.loadUrl(url)
+        binding.web.loadUrl(url)
 
     }
 
@@ -170,24 +170,24 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
     private fun updateProgress(progress: Int,isError: Boolean){
 
         if(isError){
-            viewDataBinding.pb.progress = 0
-            viewDataBinding.pb.visibility = View.GONE
-            viewDataBinding.llError.visibility = View.VISIBLE
-            viewDataBinding.pbFirst.isVisible = false
+            binding.pb.progress = 0
+            binding.pb.visibility = View.GONE
+            binding.llError.visibility = View.VISIBLE
+            binding.pbFirst.isVisible = false
         }else{
-            viewDataBinding.pb.progress = progress
-            if(viewDataBinding.llError.visibility != View.GONE){
-                viewDataBinding.llError.visibility = View.GONE
+            binding.pb.progress = progress
+            if(binding.llError.visibility != View.GONE){
+                binding.llError.visibility = View.GONE
             }
 
             if(progress < 100){
-                if(viewDataBinding.pb.visibility != View.VISIBLE){
-                    viewDataBinding.pb.visibility = View.VISIBLE
+                if(binding.pb.visibility != View.VISIBLE){
+                    binding.pb.visibility = View.VISIBLE
                 }
 
             }else{
-                viewDataBinding.pb.visibility = View.GONE
-                viewDataBinding.pbFirst.isVisible = false
+                binding.pb.visibility = View.GONE
+                binding.pbFirst.isVisible = false
             }
 
         }
@@ -200,20 +200,20 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
 
     private fun retry(){
-        viewDataBinding.web.loadUrl(url)
+        binding.web.loadUrl(url)
     }
 
     private fun isGoBack(): Boolean {
-        return viewDataBinding.web != null && viewDataBinding.web.canGoBack()
+        return binding.web != null && binding.web.canGoBack()
     }
 
 
     override fun onBackPressed() {
         if(isGoBack()){
-            viewDataBinding.web.goBack()
+            binding.web.goBack()
             if(curl.equals(BLANK_URL,true)){//返回上一页时如果是空白页，表示之前加载页面出错过
                 if(isGoBack()){
-                    viewDataBinding.web.goBack()
+                    binding.web.goBack()
                 }else{
                     super.onBackPressed()
                 }

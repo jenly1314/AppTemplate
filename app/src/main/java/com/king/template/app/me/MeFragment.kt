@@ -1,5 +1,6 @@
 package com.king.template.app.me
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.king.template.BuildConfig
@@ -23,25 +24,26 @@ class MeFragment : BaseFragment<MeViewModel,MeFragmentBinding>(),View.OnClickLis
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
         updateUI()
-        viewDataBinding.tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
+        binding.tvAppVersion.text = "v${BuildConfig.VERSION_NAME}"
 
         // TODO 对应的菜单按钮
-        viewDataBinding.rlUser.setOnClickListener(this)
-        viewDataBinding.tvMenu1.setOnClickListener(this)
-        viewDataBinding.tvMenu2.setOnClickListener(this)
-        viewDataBinding.tvMenu3.setOnClickListener(this)
-        viewDataBinding.tvMenu4.setOnClickListener(this)
-        viewDataBinding.btnAbout.setOnClickListener(this)
+        binding.rlUser.setOnClickListener(this)
+        binding.tvMenu1.setOnClickListener(this)
+        binding.tvMenu2.setOnClickListener(this)
+        binding.tvMenu3.setOnClickListener(this)
+        binding.tvMenu4.setOnClickListener(this)
+        binding.btnAbout.setOnClickListener(this)
     }
 
     private fun updateUI(){
         // TODO 更新UI显示
-        viewDataBinding.tvName.text = Constants.TAG
-        viewDataBinding.tvUsername.text = "138****8888"
+        binding.tvName.text = Constants.TAG
+        binding.tvUsername.text = "138****8888"
     }
 
     override fun getLayoutId(): Int {

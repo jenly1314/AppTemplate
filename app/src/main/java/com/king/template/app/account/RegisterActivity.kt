@@ -30,7 +30,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
 
         setToolbarTitle(getString(R.string.register))
 
-        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
+        binding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -39,14 +39,14 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
+                binding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(viewDataBinding.etUsername)
-        setClickRightEyeListener(viewDataBinding.etPassword)
+        setClickRightClearListener(binding.etUsername)
+        setClickRightEyeListener(binding.etPassword)
 
-        viewDataBinding.etPassword.disableCopyAndPaste()
+        binding.etPassword.disableCopyAndPaste(false)
 
         viewModel.liveData.observe(this) {
             if (it) {
@@ -65,7 +65,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            viewDataBinding.etUsername.setText(it)
+            binding.etUsername.setText(it)
         }
 
     }
@@ -77,9 +77,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
     private fun startCountDownTime() {
         object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
-                viewDataBinding.tvGetCode.isEnabled = false
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_9))
-                viewDataBinding.tvGetCode.text =
+                binding.tvGetCode.isEnabled = false
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
+                binding.tvGetCode.text =
                     java.lang.String.format(
                         getString(R.string.verify_code_down_time_),
                         millisUntilFinished / 1000
@@ -87,9 +87,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
             }
 
             override fun onFinish() {
-                viewDataBinding.tvGetCode.isEnabled = true
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_theme))
-                viewDataBinding.tvGetCode.setText(R.string.send_verify_code)
+                binding.tvGetCode.isEnabled = true
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
     }
@@ -105,10 +105,10 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
 
     private fun clickGetCode(){
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         viewModel.getVerifyCode(username!!, VerifyCodeScene.REGISTER)
     }
 
@@ -117,26 +117,26 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
     }
 
     private fun clickRegister(){
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        if(!CheckUtils.checkUsername(viewDataBinding.etUsername.text.toString())){
+        if(!CheckUtils.checkUsername(binding.etUsername.text.toString())){
             showToast(R.string.tips_username_matcher)
             return
         }
-        if(!checkInput(viewDataBinding.etCode,R.string.hint_verify_code)){
+        if(!checkInput(binding.etCode,R.string.hint_verify_code)){
             return
         }
-        if(!checkInput(viewDataBinding.etPassword,R.string.hint_password)){
+        if(!checkInput(binding.etPassword,R.string.hint_password)){
             return
         }
 
         // TODO 点击“注册”逻辑
         Timber.d(getString(R.string.register))
 
-        val username = viewDataBinding.etUsername.text.toString()
-        val verifyCode = viewDataBinding.etCode.text.toString()
-        val password = viewDataBinding.etPassword.text.toString()
+        val username = binding.etUsername.text.toString()
+        val verifyCode = binding.etCode.text.toString()
+        val password = binding.etPassword.text.toString()
         viewModel.register(username,verifyCode,password)
     }
 

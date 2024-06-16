@@ -15,20 +15,22 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-open class TabFragment(var block: (Int) -> Fragment) : BaseTabFragment<BaseTabFragmentBinding>() {
+open class TabFragment : BaseTabFragment<BaseTabFragmentBinding>() {
 
     private var title by argument<String>()
     private var titles by argument(defaultValue = arrayOf(""))
     private var showToolbar by argument(defaultValue = true)
     private var showBack by argument(defaultValue = true)
+    private lateinit var block: (Int) -> Fragment
 
     companion object{
         fun newInstance(title: String, titles: Array<String>, showToolbar: Boolean = true, showBack: Boolean = true, block: (Int) -> Fragment): TabFragment {
-            return TabFragment(block).apply {
+            return TabFragment().apply {
                 this.title = title
                 this.titles = titles
                 this.showToolbar = showToolbar
                 this.showBack = showBack
+                this.block = block
             }
         }
     }
@@ -36,9 +38,9 @@ open class TabFragment(var block: (Int) -> Fragment) : BaseTabFragment<BaseTabFr
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
-        viewDataBinding.toolbar.tvTitle.text = title
-        viewDataBinding.toolbar.toolbar.isVisible = showToolbar
-        viewDataBinding.toolbar.ivLeft.isInvisible = !showBack
+        binding.toolbar.tvTitle.text = title
+        binding.toolbar.toolbar.isVisible = showToolbar
+        binding.toolbar.ivLeft.isInvisible = !showBack
     }
 
 

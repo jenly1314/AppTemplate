@@ -19,7 +19,7 @@ class SplashActivity : BaseActivity<SplashViewModel, SplashActivityBinding>(){
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
-        startAnimation(viewDataBinding.rootView)
+        startAnimation(binding.rootView)
     }
 
     override fun getLayoutId(): Int {
@@ -27,10 +27,10 @@ class SplashActivity : BaseActivity<SplashViewModel, SplashActivityBinding>(){
     }
 
     private fun startAnimation(view: View) {
-        val anim = AnimationUtils.loadAnimation(context, R.anim.splash_anim)
+        val anim = AnimationUtils.loadAnimation(getContext(), R.anim.splash_anim)
         anim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {
-
+                binding.tvAppName.start()
             }
 
             override fun onAnimationEnd(animation: Animation) {

@@ -27,12 +27,12 @@ class MenuListFragment : ListFragment<ImgMenu, MenuListViewModel, MenuListFragme
     private val menuList by lazy {
         val list: MutableList<ImgMenu> = ArrayList()
         list.add(ImgMenu("菜单标题1"))
-        list.add(ImgMenu(MenuType.MENU_1, "菜单1", R.drawable.ic_menu_list_1))
-        list.add(ImgMenu(MenuType.MENU_2, "菜单2", R.drawable.ic_menu_list_2))
-        list.add(ImgMenu(MenuType.MENU_3, "菜单3", R.drawable.ic_menu_list_3))
-        list.add(ImgMenu(MenuType.MENU_4, "菜单4", R.drawable.ic_menu_list_4))
+        list.add(ImgMenu(MenuType.MENU_1, "菜单1", R.drawable.ic_menu_list_item))
+        list.add(ImgMenu(MenuType.MENU_2, "菜单2", R.drawable.ic_menu_list_item))
+        list.add(ImgMenu(MenuType.MENU_3, "菜单3", R.drawable.ic_menu_list_item))
+        list.add(ImgMenu(MenuType.MENU_4, "菜单4", R.drawable.ic_menu_list_item))
         list.add(ImgMenu("菜单标题2"))
-        list.add(ImgMenu(MenuType.MENU_5, "菜单5", R.drawable.ic_menu_list_5))
+        list.add(ImgMenu(MenuType.MENU_5, "菜单5", R.drawable.ic_menu_list_item))
         list
     }
 

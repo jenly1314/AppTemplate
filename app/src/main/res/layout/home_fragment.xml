@@ -11,30 +11,10 @@
             android:id="@+id/srl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <androidx.core.widget.NestedScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_line"
-                        android:background="@color/colorAccent"/>
-                    <com.youth.banner.Banner
-                        android:id="@+id/banner"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_120dp"
-                        android:layout_marginBottom="@dimen/size_space"/>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
+                android:layout_height="match_parent"/>
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     </LinearLayout>

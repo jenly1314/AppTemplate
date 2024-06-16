@@ -39,7 +39,7 @@ interface ApiService {
      * 获取验证码
      */
     @GET("api/sms/code")
-    suspend fun getVerifyCode(@QueryMap params: Any): Result<Any>
+    suspend fun getVerifyCode(@QueryMap params: Map<String, String>): Result<Any>
 
     //--------------------------------
 

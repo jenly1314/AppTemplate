@@ -1,29 +1,30 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-parcelize'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
+}
 
 android {
-    compileSdkVersion build_versions.compileSdk
-    buildToolsVersion build_versions.buildTools
+    namespace 'com.king.template'
+    compileSdk build_versions.compileSdk
 
     defaultConfig {
         applicationId "com.king.template"
-        minSdkVersion build_versions.minSdk
-        targetSdkVersion build_versions.targetSdk
+        minSdk build_versions.minSdk
+        targetSdk build_versions.targetSdk
         versionCode app_version.versionCode
         versionName app_version.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
 
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
-            abiFilters "armeabi-v7a", "arm64-v8a"//, "x86","x86_64"
+            abiFilters "armeabi-v7a","x86_64" //, "arm64-v8a""x86",
         }
 
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     packagingOptions {
@@ -55,7 +56,6 @@ android {
         }
     }
 
-
     buildTypes {
         release {
             minifyEnabled false
@@ -75,13 +75,13 @@ android {
         dataBinding = true
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 //    flavorDimensions "flavor"
@@ -101,25 +101,20 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
-//    implementation "androidx.core:core-ktx:$versions.coreKtx"
+    implementation "androidx.core:core-ktx:$versions.coreKtx"
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
     implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.androidExtJunit"
-    androidTestImplementation "androidx.test:runner:$versions.runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCore"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinxCoroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinxCoroutines"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleKtx"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleKtx"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinxCoroutines"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinxCoroutines"
+//    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleKtx"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleKtx"
 
-    //lifecycle
-    kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
     //room
     kapt "androidx.room:room-compiler:$versions.room"
     //hilt
@@ -131,15 +126,10 @@ dependencies {
     implementation "com.github.jenly1314.AppUpdater:app-updater:$versions.appUpdater"
     //app-dialog
     implementation "com.github.jenly1314.AppUpdater:app-dialog:$versions.appUpdater"
-
-    implementation "com.king.thread:nevercrash:$versions.nevercrash"
-
-    implementation "com.king.base:util:$versions.base"
-    implementation "com.king.base:adapter:$versions.base"
-
+    implementation "com.github.jenly1314:NeverCrash:$versions.nevercrash"
     implementation "com.github.jenly1314:BaseUrlManager:$versions.baseUrlManager"
-
-    implementation "com.orhanobut:logger:$versions.logger"
+    implementation "com.github.jenly1314:SuperTextView:$versions.superTextView"
+    implementation "com.github.jenly1314:logx:$versions.logx"
 
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.brvah"
 
@@ -154,36 +144,24 @@ dependencies {
 
     implementation "com.tencent:mmkv:$versions.mmkv"
 
-//    implementation "com.github.tbruyelle:rxpermissions:$versions.rxpermissions"
-
-    implementation "com.tencent.bugly:crashreport_upgrade:$versions.bugly"
-
-    implementation "com.tencent.tinker:tinker-android-lib:$versions.tinker"
-
-    implementation "androidx.multidex:multidex:$versions.multidex"
-
     //leakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
-
-    implementation "com.github.GrenderG:Toasty:$versions.toasty"
 
     implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 
     implementation "io.github.youth5201314:banner:$versions.banner"
 
-    implementation "me.jessyan:autosize:$versions.autosize"
+    implementation "com.github.JessYanCoding:AndroidAutoSize:$versions.autosize"
 
     implementation "io.github.androidktx:android-ktx:$versions.androidktx"
 
+    implementation "com.github.AndroidUtil:AndroidUtil:$versions.androidutil"
+
     implementation "com.github.jenly1314:kvcache:$versions.kvcache"
 
-    implementation "com.king.image:imageviewer:$versions.imageviewer"
-//    implementation "com.king.guide:guidepage:$versions.guidepage"
+    implementation "com.github.jenly1314:imageviewer:$versions.imageviewer"
+//    implementation "com.github.jenly1314:GuidePage:$versions.guidepage"
 
-
-
-//    implementation "org.greenrobot:eventbus:$versions.eventbus"
-//
 //    implementation "de.hdodenhof:circleimageview:$versions.circleimageview"
 //
 //    implementation "com.github.chrisbanes:PhotoView:$versions.photoView"

@@ -2,7 +2,7 @@ package com.king.template.app.account
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.king.template.app.base.BaseModel
+import com.king.frame.mvvmframe.data.Repository
 import com.king.template.app.base.BaseViewModel
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @HiltViewModel
-class PasswordViewModel @Inject constructor(application: Application, model: BaseModel?) : BaseViewModel(application, model){
+class PasswordViewModel @Inject constructor(repository: Repository, application: Application) : BaseViewModel(repository, application){
 
     val liveDataResetPassword by lazy { MutableLiveData<Boolean>() }
     val liveDataUpdatePassword by lazy { MutableLiveData<Boolean>() }

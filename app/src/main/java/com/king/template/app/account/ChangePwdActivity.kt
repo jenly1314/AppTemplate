@@ -21,13 +21,13 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
         setToolbarTitle(getString(R.string.change_password))
 
-        setClickRightEyeListener(viewDataBinding.etOldPassword)
-        setClickRightEyeListener(viewDataBinding.etNewPassword)
-        setClickRightEyeListener(viewDataBinding.etConfirmPassword)
+        setClickRightEyeListener(binding.etOldPassword)
+        setClickRightEyeListener(binding.etNewPassword)
+        setClickRightEyeListener(binding.etConfirmPassword)
 
-        viewDataBinding.etOldPassword.disableCopyAndPaste()
-        viewDataBinding.etNewPassword.disableCopyAndPaste()
-        viewDataBinding.etConfirmPassword.disableCopyAndPaste()
+        binding.etOldPassword.disableCopyAndPaste(false)
+        binding.etNewPassword.disableCopyAndPaste(false)
+        binding.etConfirmPassword.disableCopyAndPaste(false)
 
         viewModel.liveDataUpdatePassword.observe(this) {
             if (it) {
@@ -47,21 +47,21 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
 
     private fun clickChangePassword(){
-        if(!checkInput(viewDataBinding.etOldPassword,R.string.hint_old_password)){
+        if(!checkInput(binding.etOldPassword,R.string.hint_old_password)){
             return
         }
-        if(!checkInput(viewDataBinding.etNewPassword,R.string.hint_new_password)){
+        if(!checkInput(binding.etNewPassword,R.string.hint_new_password)){
             return
         }
-        if(!CheckUtils.checkPassword(viewDataBinding.etNewPassword.text.toString())){
+        if(!CheckUtils.checkPassword(binding.etNewPassword.text.toString())){
             showToast(R.string.tips_password_matcher)
             return
         }
-        if(!checkInput(viewDataBinding.etConfirmPassword,R.string.hint_confirm_new_password)){
+        if(!checkInput(binding.etConfirmPassword,R.string.hint_confirm_new_password)){
             return
         }
-        var newPwd = viewDataBinding.etNewPassword.text.toString()
-        if(newPwd != viewDataBinding.etConfirmPassword.text.toString()){
+        var newPwd = binding.etNewPassword.text.toString()
+        if(newPwd != binding.etConfirmPassword.text.toString()){
             showToast(R.string.hint_new_password_not_match)
             return
         }
@@ -69,7 +69,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
         // TODO 点击“修改密码”逻辑
         Timber.d(getString(R.string.change_password))
 
-        var oldPwd = viewDataBinding.etOldPassword.text.toString()
+        var oldPwd = binding.etOldPassword.text.toString()
 
         viewModel.updatePassword(oldPwd,newPwd)
     }

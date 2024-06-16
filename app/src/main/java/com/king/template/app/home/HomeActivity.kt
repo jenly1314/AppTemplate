@@ -3,6 +3,8 @@ package com.king.template.app.home
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
+import androidx.core.util.forEach
+import androidx.core.util.size
 import androidx.core.util.valueIterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -30,8 +32,18 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
-        showFragment(HomeMenu.MENU1)
 
+        if (savedInstanceState == null) {
+            showFragment(HomeMenu.MENU1)
+        } else {
+            for (index in 0 until fragments.size) {
+                supportFragmentManager.also {
+                    it.findFragmentByTag(index.toString())?.also { fragment ->
+                        fragments.put(index, fragment)
+                    }
+                }
+            }
+        }
     }
 
     override fun getLayoutId(): Int {
@@ -61,12 +73,15 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
         fragmentTransaction.commit()
     }
 
-    private fun getFragment(fragmentTransaction: FragmentTransaction,@HomeMenu menu: Int): Fragment {
+    private fun getFragment(
+        fragmentTransaction: FragmentTransaction,
+        @HomeMenu menu: Int
+    ): Fragment {
         var fragment: Fragment? = fragments[menu]
         if (fragment == null) {
             fragment = createFragment(menu)
             fragment?.let {
-                fragmentTransaction.add(R.id.fragmentContent, it)
+                fragmentTransaction.add(R.id.fragmentContent, it, menu.toString())
                 fragments.put(menu, it)
             }
         }
@@ -90,6 +105,7 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
                 else -> MenuFragment.newInstance("Tab2", false)
             }
         }
+
         HomeMenu.MENU3 -> MenuListFragment.newInstance(getString(R.string.home_menu3))
         HomeMenu.MENU4 -> MeFragment.newInstance()
         else -> throw NullPointerException()

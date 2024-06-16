@@ -4,8 +4,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import com.androidutil.util.TimeUtils
 import com.bumptech.glide.request.RequestOptions
-import com.king.base.util.TimeUtils
 import com.king.template.R
 import com.king.template.glide.GlideApp
 

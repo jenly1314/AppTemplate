@@ -1,20 +1,18 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdkVersion build_versions.compileSdk
-    buildToolsVersion build_versions.buildTools
+    namespace 'com.king.template.umeng'
+    compileSdk build_versions.compileSdk
 
     defaultConfig {
-        minSdkVersion build_versions.minSdk
-        targetSdkVersion build_versions.targetSdk
-        versionCode app_version.versionCode
-        versionName app_version.versionName
+        minSdk build_versions.minSdk
+        targetSdk build_versions.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -23,19 +21,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
 }
 
 dependencies {
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation "androidx.core:core-ktx:$versions.coreKtx"
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.androidExtJunit"
@@ -44,7 +44,7 @@ dependencies {
     compileOnly project(":lib-component")
 
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
-    api "com.umeng.umsdk:common:9.4.4" //（必选）
-    api "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
-    api 'com.umeng.umsdk:apm:1.5.2' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+    api "com.umeng.umsdk:common:9.6.7" //（必选）
+    api "com.umeng.umsdk:asms:1.8.2" // asms包依赖(必选)
+    api 'com.umeng.umsdk:apm:1.9.5' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
 }

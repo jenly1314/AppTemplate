@@ -1,6 +1,7 @@
 package com.king.template.app.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
@@ -15,12 +16,13 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : BaseActivity<VM, VDB>() {
+abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
+    BaseActivity<VM, VDB>() {
 
-    var curPage : Int = 1
+    var curPage: Int = 1
     val pageSize by lazy { pageSize() }
 
-    lateinit var mAdapter : BaseBindingAdapter<T>
+    lateinit var mAdapter: BaseBindingAdapter<T>
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -29,29 +31,29 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
         initRecyclerView(recyclerView())
         mAdapter = createAdapter()
         recyclerView().adapter = mAdapter
-        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(view, position)}
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(view, position) }
         observeData()
         initRefreshLayout(smartRefreshLayout())
     }
 
-    open fun initRecyclerView(rv: RecyclerView){
-        rv.layoutManager = LinearLayoutManager(context)
-        rv.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
+    open fun initRecyclerView(rv: RecyclerView) {
+        rv.layoutManager = LinearLayoutManager(getContext())
+        rv.addItemDecoration(DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL))
     }
 
-    open fun initRefreshLayout(srl: SmartRefreshLayout){
+    open fun initRefreshLayout(srl: SmartRefreshLayout) {
         srl.setEnableRefresh(isSupportRefresh())
         srl.setEnableLoadMore(false)
-        srl.setOnRefreshListener{ requestData(1)}
-        srl.setOnLoadMoreListener { requestData(curPage)}
-        if(isSupportRefresh()){
+        srl.setOnRefreshListener { requestData(1) }
+        srl.setOnLoadMoreListener { requestData(curPage) }
+        if (isSupportRefresh()) {
             srl.autoRefresh()
         }
     }
 
-    open fun observeData(){
+    open fun observeData() {
         viewModel.liveData.observe(this) {
-            updateUI(it,curPage > 1)
+            updateUI(it, curPage > 1)
         }
     }
 
@@ -61,8 +63,15 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
 
     open fun pageSize() = Constants.PAGE_SIZE
 
-    open fun requestData(curPage: Int){
+    open fun requestData(curPage: Int) {
         this.curPage = curPage
+    }
+
+    override fun showLoading() {
+        if(smartRefreshLayout().isRefreshing || smartRefreshLayout().isLoading) {
+            return
+        }
+        super.showLoading()
     }
 
     override fun hideLoading() {
@@ -71,8 +80,8 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
         initEmptyView()
     }
 
-    private fun initEmptyView(){
-        if(mAdapter.emptyLayout == null){
+    private fun initEmptyView() {
+        if (mAdapter.emptyLayout == null) {
             createEmptyView(recyclerView())?.let {
                 mAdapter.setEmptyView(it)
             }
@@ -80,38 +89,38 @@ abstract class ListActivity<T, VM : ListViewModel<T>, VDB : ViewDataBinding> : B
     }
 
     open fun createEmptyView(root: ViewGroup): View? {
-        return inflate(R.layout.layout_empty,root,false)
+        return LayoutInflater.from(getContext()).inflate(R.layout.layout_empty, root, false)
     }
 
     override fun getLayoutId(): Int {
         return R.layout.list_activity
     }
 
-    open fun clickItem(view: View, position: Int){
+    open fun clickItem(view: View, position: Int) {
 
     }
 
-    open fun updateUI(data: Collection<T>?, loadMore: Boolean){
-        if(loadMore) {
+    open fun updateUI(data: Collection<T>?, loadMore: Boolean) {
+        if (loadMore) {
             data?.let {
                 mAdapter.addData(it)
             }
         } else mAdapter.setList(data)
 
-        if(isSupportRefresh() && isSupportPagination()){
-            if(mAdapter.itemCount >= curPage * pageSize){
+        if (isSupportRefresh() && isSupportPagination()) {
+            if (mAdapter.itemCount >= curPage * pageSize) {
                 smartRefreshLayout().setEnableLoadMore(true)
                 curPage++
-            }else{
+            } else {
                 smartRefreshLayout().setEnableLoadMore(false)
                 smartRefreshLayout().finishLoadMoreWithNoMoreData()
             }
         }
     }
 
-    abstract fun smartRefreshLayout() : SmartRefreshLayout
+    abstract fun smartRefreshLayout(): SmartRefreshLayout
 
-    abstract fun recyclerView() : RecyclerView
+    abstract fun recyclerView(): RecyclerView
 
     abstract fun createAdapter(): BaseBindingAdapter<T>
 }

@@ -10,6 +10,7 @@ import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.LoginActivityBinding
 import com.king.template.extension.disableCopyAndPaste
+import com.king.template.manager.LoginManager
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -26,7 +27,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
 
         setToolbarTitle(getString(R.string.login))
 
-        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
+        binding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -35,18 +36,18 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
+                binding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
-        setClickRightClearListener(viewDataBinding.etUsername)
-        setClickRightEyeListener(viewDataBinding.etPassword)
+        setClickRightClearListener(binding.etUsername)
+        setClickRightEyeListener(binding.etPassword)
 
-        viewDataBinding.etPassword.disableCopyAndPaste()
+        binding.etPassword.disableCopyAndPaste(false)
 
         viewModel.liveData.observe(this) {
             // TODO 登录成功后的逻辑处理
-            getApp().login(it.token, it.user)
+            LoginManager.login(it.token, it.user)
             startHomeActivity()
             finish()
         }
@@ -54,7 +55,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            viewDataBinding.etUsername.setText(it)
+            binding.etUsername.setText(it)
         }
 
     }
@@ -66,33 +67,33 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
     //-------------------------------
 
     private fun clickRegister(){
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         startActivity(RegisterActivity::class.java,username)
     }
 
     private fun clickCodeLogin(){
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         startLoginActivity(username, isCode = true)
     }
 
     private fun clickForgotPwd(){
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         startActivity(ResetPwdActivity::class.java,username)
     }
 
     private fun clickLogin(){
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        if(!checkInput(viewDataBinding.etPassword,R.string.hint_password)){
+        if(!checkInput(binding.etPassword,R.string.hint_password)){
             return
         }
 
         // TODO 点击“登录”逻辑
         Timber.d(getString(R.string.login))
 
-        val username = viewDataBinding.etUsername.text.toString()
-        val password = viewDataBinding.etPassword.text.toString()
+        val username = binding.etUsername.text.toString()
+        val password = binding.etPassword.text.toString()
         viewModel.login(username,password)
     }
 

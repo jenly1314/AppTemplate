@@ -1,5 +1,6 @@
 package com.king.template.app.about
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.king.app.dialog.AppDialog
@@ -16,10 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
 
+    @SuppressLint("SetTextI18n")
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         setToolbarTitle(getString(R.string.about_title))
-        viewDataBinding.tvAppVersion.text = "V ${BuildConfig.VERSION_NAME}"
+        binding.tvAppVersion.text = "v${BuildConfig.VERSION_NAME}"
     }
 
     override fun getLayoutId(): Int {
@@ -30,10 +32,10 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         // TODO 处理点击“版本更新”逻辑
 
         // 当检测到新版本时，这里只是演示检测到新版本的大概流程
-        var config = AppDialogConfig(context).apply {
+        var config = AppDialogConfig(getContext()).apply {
             title = "版本更新"
             content = "发现新版本(这里只是演示模板步骤)"
-            ok = "更新"
+            confirm = "更新"
             onClickConfirm = View.OnClickListener {
                 AppDialog.INSTANCE.dismissDialog()
                 showToast("后台下载更新中...")

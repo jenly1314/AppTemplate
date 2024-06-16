@@ -30,7 +30,7 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
 
         setToolbarTitle(getString(R.string.reset_password))
 
-        viewDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
+        binding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -39,17 +39,17 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewDataBinding.etUsername.isSelected = !TextUtils.isEmpty(s)
+                binding.etUsername.isSelected = !TextUtils.isEmpty(s)
             }
 
         })
 
-        setClickRightClearListener(viewDataBinding.etUsername)
-        setClickRightEyeListener(viewDataBinding.etNewPassword)
-        setClickRightEyeListener(viewDataBinding.etConfirmPassword)
+        setClickRightClearListener(binding.etUsername)
+        setClickRightEyeListener(binding.etNewPassword)
+        setClickRightEyeListener(binding.etConfirmPassword)
 
-        viewDataBinding.etNewPassword.disableCopyAndPaste()
-        viewDataBinding.etConfirmPassword.disableCopyAndPaste()
+        binding.etNewPassword.disableCopyAndPaste(false)
+        binding.etConfirmPassword.disableCopyAndPaste(false)
 
         viewModel.liveDataResetPassword.observe(this) {
             if (it) {
@@ -68,7 +68,7 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
         username = intent.getStringExtra(Constants.KEY_USERNAME)
 
         username?.let {
-            viewDataBinding.etUsername.setText(it)
+            binding.etUsername.setText(it)
         }
 
     }
@@ -80,9 +80,9 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
     private fun startCountDownTime() {
         object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
-                viewDataBinding.tvGetCode.isEnabled = false
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_9))
-                viewDataBinding.tvGetCode.text =
+                binding.tvGetCode.isEnabled = false
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
+                binding.tvGetCode.text =
                     java.lang.String.format(
                         getString(R.string.verify_code_down_time_),
                         millisUntilFinished / 1000
@@ -90,9 +90,9 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
             }
 
             override fun onFinish() {
-                viewDataBinding.tvGetCode.isEnabled = true
-                viewDataBinding.tvGetCode.setTextColor(ContextCompat.getColor(context, R.color.text_theme))
-                viewDataBinding.tvGetCode.setText(R.string.send_verify_code)
+                binding.tvGetCode.isEnabled = true
+                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
     }
@@ -104,10 +104,10 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
      */
     private fun clickGetCode(){
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(viewDataBinding.etUsername,R.string.hint_username)){
+        if(!checkInput(binding.etUsername,R.string.hint_username)){
             return
         }
-        username = viewDataBinding.etUsername.text.toString()
+        username = binding.etUsername.text.toString()
         viewModel.getVerifyCode(username!!, VerifyCodeScene.PASSWORD)
     }
 
@@ -115,20 +115,20 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
      * 重置
      */
     private fun clickReset() {
-        if (!checkInput(viewDataBinding.etUsername, R.string.hint_username)) {
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
-        if (!CheckUtils.checkUsername(viewDataBinding.etUsername.text.toString())) {
+        if (!CheckUtils.checkUsername(binding.etUsername.text.toString())) {
             showToast(R.string.tips_username_matcher)
             return
         }
-        if (!checkInput(viewDataBinding.etCode, R.string.hint_verify_code)) {
+        if (!checkInput(binding.etCode, R.string.hint_verify_code)) {
             return
         }
-        if (!checkInput(viewDataBinding.etNewPassword, R.string.hint_password)) {
+        if (!checkInput(binding.etNewPassword, R.string.hint_password)) {
             return
         }
-        if (!CheckUtils.checkPassword(viewDataBinding.etNewPassword.text.toString())) {
+        if (!CheckUtils.checkPassword(binding.etNewPassword.text.toString())) {
             showToast(R.string.tips_password_matcher)
             return
         }
@@ -136,9 +136,9 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
         // TODO 点击“重置密码”逻辑
         Timber.d(getString(R.string.reset_password))
 
-        val username = viewDataBinding.etUsername.text.toString()
-        val verifyCode = viewDataBinding.etCode.text.toString()
-        val password = viewDataBinding.etNewPassword.text.toString()
+        val username = binding.etUsername.text.toString()
+        val verifyCode = binding.etCode.text.toString()
+        val password = binding.etNewPassword.text.toString()
         viewModel.resetPassword(username, verifyCode, password)
 
     }

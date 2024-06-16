@@ -1,10 +1,12 @@
 package com.king.template.app.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.king.base.adapter.divider.DividerItemDecoration
 import com.king.image.imageviewer.ImageViewer
 import com.king.image.imageviewer.loader.GlideImageLoader
 import com.king.template.R
@@ -15,24 +17,29 @@ import com.king.template.app.base.BaseFragment
 import com.king.template.bean.BannerBean
 import com.king.template.bean.Bean
 import com.king.template.databinding.HomeFragmentBinding
+import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
+class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
 
     val mAdapter by lazy { BaseBindingAdapter<Bean>(R.layout.rv_bean_item) }
 
-    val mImageAdapter by lazy{ BannerImageAdapter<BannerBean>()}
+    val mImageAdapter by lazy { BannerImageAdapter<BannerBean>() }
 
+    private var banner: Banner<BannerBean, BannerImageAdapter<BannerBean>>? = null
+    
     var curPage = 1
+    
 
-    companion object{
-        fun newInstance(): HomeFragment{
+    companion object {
+        fun newInstance(): HomeFragment {
             return HomeFragment()
         }
     }
@@ -41,67 +48,90 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
         super.initData(savedInstanceState)
 
         // TODO Banner初始化示例
-        with(viewDataBinding.banner){
-            setAdapter(mImageAdapter)
-            adapter.setOnBannerListener { data, position ->
+        LayoutInflater.from(context).inflate(
+            R.layout.home_banner,
+            binding.srl,
+            false
+        ).apply {
+            mAdapter.addHeaderView(this)
+            banner = findViewById(R.id.banner)
+        }
+        banner?.also {
+            it.setAdapter(mImageAdapter)
+            it.adapter.setOnBannerListener { data, position ->
                 // TODO 点击 Banner Item 示例
 //                showToast("banner:$position")
                 ImageViewer.load(mImageAdapter.getDatas())
-                        .imageLoader(GlideImageLoader())
-                        .selection(position)
-                        .indicator(true)
-                        .start(this@HomeFragment,this)
+                    .imageLoader(GlideImageLoader())
+                    .selection(position)
+                    .indicator(true)
+                    .start(this@HomeFragment, it)
             }
-            indicator = CircleIndicator(context)
-            setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
+            it.indicator = CircleIndicator(context)
+            it.setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
         }
 
         viewModel.liveDataBanner.observe(viewLifecycleOwner) {
             mImageAdapter.setDatas(it)
-            mImageAdapter.notifyDataSetChanged()
         }
 
         //---------------------------------
         // TODO 列表初始化示例
-        viewDataBinding.rv.layoutManager = LinearLayoutManager(context)
-        viewDataBinding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL,R.drawable.line_space_divider))
+        binding.rv.layoutManager = LinearLayoutManager(context)
+        binding.rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            ).apply {
+                setDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.line_space_divider
+                    )!!
+                )
+            })
 
-        viewDataBinding.rv.adapter = mAdapter
-        viewDataBinding.rv.isNestedScrollingEnabled = false
-        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position)}
-        viewDataBinding.srl.setEnableLoadMore(false)
-        viewDataBinding.srl.setOnRefreshListener{requestData(1)}
-        viewDataBinding.srl.setOnLoadMoreListener {requestData(curPage)}
-        viewModel.liveData.observe(viewLifecycleOwner){
-            updateUI(it,curPage > 1)
+        binding.rv.adapter = mAdapter
+        binding.rv.isNestedScrollingEnabled = false
+        mAdapter.setOnItemClickListener { adapter, view, position -> clickItem(position) }
+        binding.srl.setEnableLoadMore(false)
+        binding.srl.setOnRefreshListener { requestData(1) }
+        binding.srl.setOnLoadMoreListener { requestData(curPage) }
+        viewModel.liveData.observe(viewLifecycleOwner) {
+            updateUI(it, curPage > 1)
         }
-        viewDataBinding.srl.autoRefresh()
+
+        requestData(1)
 
         //---------------------------------
 
     }
 
-    private fun requestData(curPage: Int){
+    private fun requestData(curPage: Int) {
         this.curPage = curPage
         viewModel.getRequestBanner()
-        viewModel.getRequestData(curPage,Constants.PAGE_SIZE)
+        viewModel.getRequestData(curPage, Constants.PAGE_SIZE)
     }
 
-    private fun updateUI(data: Collection<Bean>?,loadMore: Boolean){
+    private fun updateUI(data: Collection<Bean>?, loadMore: Boolean) {
         data?.let {
-            if(loadMore) mAdapter.addData(data) else mAdapter.setList(data)
+            if (loadMore) mAdapter.addData(data) else mAdapter.setList(data)
 
-            if(mAdapter.itemCount >= curPage * Constants.PAGE_SIZE){
-                viewDataBinding.srl.setEnableLoadMore(true)
+            if (mAdapter.itemCount >= curPage * Constants.PAGE_SIZE) {
+                binding.srl.setEnableLoadMore(true)
                 curPage++
-            }else{
-                viewDataBinding.srl.setEnableLoadMore(false)
-                viewDataBinding.srl.finishLoadMoreWithNoMoreData()
+            } else {
+                binding.srl.setEnableLoadMore(false)
+                binding.srl.finishLoadMoreWithNoMoreData()
             }
+        }
+
+        if(mAdapter.itemCount == 0) {
+            initEmptyView()
         }
     }
 
-    private fun clickItem(position: Int){
+    private fun clickItem(position: Int) {
         // TODO 点击Item处理逻辑
         mAdapter.getItem(position).title?.let {
             showToast(it)
@@ -111,32 +141,31 @@ class HomeFragment : BaseFragment<HomeViewModel,HomeFragmentBinding>() {
 
     override fun onStart() {
         super.onStart()
-        viewDataBinding.banner.start()
+        banner?.start()
     }
 
     override fun onStop() {
         super.onStop()
-        viewDataBinding.banner.stop()
-        viewDataBinding.srl.closeHeaderOrFooter()
+        banner?.stop()
+        binding.srl.closeHeaderOrFooter()
     }
 
+    override fun showLoading() {
+        if(binding.srl.isRefreshing || binding.srl.isLoading) {
+            return
+        }
+        super.showLoading()
+    }
 
     override fun hideLoading() {
         super.hideLoading()
-        viewDataBinding.srl.closeHeaderOrFooter()
-        initEmptyView()
+        binding.srl.closeHeaderOrFooter()
     }
 
-    private fun initEmptyView(){
-        if(mAdapter.emptyLayout == null){
-            createEmptyView(viewDataBinding.rv)?.let {
-                mAdapter.setEmptyView(it)
-            }
+    private fun initEmptyView() {
+        if (mAdapter.emptyLayout == null) {
+            mAdapter.setEmptyView(R.layout.layout_empty)
         }
-    }
-
-    private fun createEmptyView(root: ViewGroup): View? {
-        return inflate(R.layout.layout_empty,root,false)
     }
 
     override fun getLayoutId(): Int {
