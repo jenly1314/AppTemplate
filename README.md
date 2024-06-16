@@ -1,26 +1,27 @@
 # AppTemplate
 
 ![Image](app/src/main/ic_launcher-playstore.png)
+
 [![Download](https://img.shields.io/badge/download-App-blue.svg)](https://raw.githubusercontent.com/jenly1314/AppTemplate/master/app/release/app-release.apk)
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php)
 
-**AppTemplate** 是一个App快速构建模板 [Demo App](https://github.com/jenly1314/AppTemplate/raw/master/app/release/app-release.apk)
+**AppTemplate** 是一个App快速构建模板； 你可以直接下载[演示 App](https://github.com/jenly1314/AppTemplate/raw/master/app/release/app-release.apk) 进行体验。
 
-## 相关介绍
+## 相关说明
 
 - 开发一款App时，前期一般都需要做很多的准备工作。包括但不限于：搭建项目主框架，写各种基类和分层，画界面，关联交互逻辑等。
 - 而大部分App都有一些相通的主体和功能，包括但不限于：主界面、Banner、登录、注册、修改/重置密码、列表数据、Tab切换等。
 - **AppTemplate** 的出现就是尽可能的将这些相通的一些主体功能写成通用的模板，大大的简化这些重复性的一些工作，从而更加快速的去开发实现一款App。
 
-> 当您的需求与 **AppTemplate** 中的模板有类似功能的时候，您可以通过简单的一些修改，就能快速的去实现您的功能。
+> 当你的需求与 **AppTemplate** 中的模板有类似功能的时候，你可以通过简单的一些修改，就能快速的去实现你的功能。
 >
-> 当您的需求在中 **AppTemplate** 没有找到类似的模板时，你也可以基于 **AppTemplate** 已有的主体架构，很方便的去实现您的功能。
+> 当你的需求在中 **AppTemplate** 没有找到类似的模板时，你也可以基于 **AppTemplate** 已有的主体架构，很方便的去实现你的功能。
 >
-> 如果您有好的想法或建议，可以反馈给我。也可以一起参与到其中,提交Pull Request。和我一起去完善 **AppTemplate**。
+> 如果你有好的想法或建议，可以反馈给我。也可以一起参与到其中,提交Pull Request。和我一起去完善 **AppTemplate**。
 
 ` 
-温馨提示：模板中写了一些示例，方便更友好的查看模板效果。如果想通过模板快速的实现相关类似功能，您可以通过查看 TODO 标记，快速定位一些需要处理的地方。
+温馨提示：模板中写了一些示例，方便更友好的查看模板效果。如果想通过模板快速的实现相关类似功能，你可以通过查看 TODO 标记，快速定位一些需要处理的地方。
 `
 
 ## 赞赏
