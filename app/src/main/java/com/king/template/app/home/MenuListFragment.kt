@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.king.android.ktx.fragment.argument
 import com.king.template.R
 import com.king.template.app.base.ListFragment
-import com.king.template.bean.ImgMenu
+import com.king.template.data.model.ImgMenu
 import com.king.template.databinding.MenuListFragmentBinding
 import com.king.template.dict.MenuType
 import com.scwang.smart.refresh.layout.SmartRefreshLayout

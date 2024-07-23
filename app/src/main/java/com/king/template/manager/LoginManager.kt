@@ -2,7 +2,7 @@ package com.king.template.manager
 
 import com.king.kvcache.KVCache
 import com.king.template.app.Constants
-import com.king.template.bean.User
+import com.king.template.data.model.User
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>

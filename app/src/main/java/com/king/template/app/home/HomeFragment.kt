@@ -2,8 +2,6 @@ package com.king.template.app.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,14 +12,13 @@ import com.king.template.app.Constants
 import com.king.template.app.adapter.BannerImageAdapter
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.app.base.BaseFragment
-import com.king.template.bean.BannerBean
-import com.king.template.bean.Bean
+import com.king.template.data.model.BannerBean
+import com.king.template.data.model.Bean
 import com.king.template.databinding.HomeFragmentBinding
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>

@@ -13,10 +13,8 @@ class BindingViewHolder<VDB: ViewDataBinding>(view: View) : BaseViewHolder(view)
     var mBinding: VDB? = null
 
     init {
-        try {
+        kotlin.runCatching {
             mBinding = DataBindingUtil.bind(view)
-        }catch(e: Exception){
-
         }
     }
 }

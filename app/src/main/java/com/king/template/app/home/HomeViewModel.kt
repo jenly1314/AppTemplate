@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.king.frame.mvvmframe.data.Repository
 import com.king.template.app.Constants
 import com.king.template.app.base.BaseViewModel
-import com.king.template.bean.BannerBean
-import com.king.template.bean.Bean
+import com.king.template.data.model.BannerBean
+import com.king.template.data.model.Bean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -27,10 +27,10 @@ class HomeViewModel @Inject constructor(repository: Repository, application: App
         launch {
             // TODO 模拟请求
             val data = arrayOf(
-                "${Constants.BASE_URL}medias/banner/1.jpg",
-                "${Constants.BASE_URL}medias/banner/2.jpg",
-                "${Constants.BASE_URL}medias/banner/3.jpg",
-                "${Constants.BASE_URL}medias/banner/4.jpg"
+                "https://jenly.pages.dev/medias/banner/1.jpg",
+                "https://jenly.pages.dev/medias/banner/2.jpg",
+                "https://jenly.pages.dev/medias/banner/3.jpg",
+                "https://jenly.pages.dev/medias/banner/4.jpg"
             )
             delay(1000)
             liveDataBanner.value = data.map { BannerBean(it) }
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(repository: Repository, application: App
             var start = (curPage - 1) * pageSize + 1
             var end = (curPage) * pageSize
             if (curPage > 1) {
-                end -= pageSize / 2
+                end = end.coerceAtMost(30)
             }
             var data = ArrayList<Bean>()
             for (index in start..end) {

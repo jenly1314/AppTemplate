@@ -6,7 +6,6 @@ import com.king.frame.mvvmframe.base.BaseApplication
 import com.king.kvcache.KVCache
 import com.king.logx.LogX
 import com.king.template.app.Constants
-import com.king.template.component.ComponentAppManager
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -18,8 +17,6 @@ import timber.log.Timber
  */
 @HiltAndroidApp
 class App : BaseApplication() {
-
-    val componentAppManager by lazy { ComponentAppManager() }
 
     init {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
@@ -35,8 +32,6 @@ class App : BaseApplication() {
         super.onCreate()
         initLogger()
         KVCache.initialize(this)
-//        Bugly.init(this, Constants.BUGLY_APP_ID, BuildConfig.DEBUG)
-//
 //        NeverCrash.init { t, e ->
 //            CrashReport.postCatchedException(e)
 //        }
@@ -45,7 +40,6 @@ class App : BaseApplication() {
                 BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }
         }
-        componentAppManager.initComponentApp(this)
 
     }
 

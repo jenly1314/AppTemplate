@@ -8,8 +8,8 @@ import com.king.template.BR
  */
 open class BaseBindingAdapter<T>(layoutResId: Int, data: MutableList<T>? = null) : BaseQuickAdapter<T, BindingViewHolder<*>>(layoutResId, data) {
 
-    override fun convert(helper: BindingViewHolder<*>, item: T) {
-        helper.mBinding?.let {
+    override fun convert(holder: BindingViewHolder<*>, item: T) {
+        holder.mBinding?.let {
             it.setVariable(BR.data,item)
             it.executePendingBindings()
         }

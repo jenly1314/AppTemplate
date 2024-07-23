@@ -41,10 +41,10 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$versions.androidExtJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCore"
 
-    compileOnly project(":lib-component")
+    implementation "androidx.startup:startup-runtime:$versions.startup"
 
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
-    api "com.umeng.umsdk:common:9.6.7" //（必选）
-    api "com.umeng.umsdk:asms:1.8.2" // asms包依赖(必选)
-    api 'com.umeng.umsdk:apm:1.9.5' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+    api "com.umeng.umsdk:common:9.7.3" //（必选）
+    api "com.umeng.umsdk:asms:1.8.3" // asms包依赖(必选)
+    api 'com.umeng.umsdk:apm:1.9.8' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
 }

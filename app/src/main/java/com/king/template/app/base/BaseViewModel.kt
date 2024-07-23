@@ -7,9 +7,9 @@ import com.king.frame.mvvmframe.base.BaseAndroidViewModel
 import com.king.frame.mvvmframe.data.Repository
 import com.king.kvcache.KVCache
 import com.king.template.R
-import com.king.template.api.ApiService
+import com.king.template.data.remote.service.ApiService
 import com.king.template.app.Constants
-import com.king.template.bean.Result
+import com.king.template.data.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -26,6 +26,7 @@ open class BaseViewModel @Inject constructor(
     application: Application
 ) : BaseAndroidViewModel(application) {
 
+    //TODO 这里只是演示，逻辑复杂一点的，可单独定义Repository，去获取apiService；比如：SearchHistoryRepository
     val apiService: ApiService by lazy { repository.getRetrofitService(ApiService::class.java) }
 
     //TODO Token 获取来源

@@ -3,7 +3,7 @@ package com.king.template.template
 import android.os.Bundle
 import com.king.template.R
 import com.king.template.app.base.BaseFragment
-import com.king.template.bean.Bean
+import com.king.template.data.model.Bean
 import com.king.template.databinding.TempFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 

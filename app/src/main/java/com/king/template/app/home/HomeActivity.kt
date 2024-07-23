@@ -3,7 +3,7 @@ package com.king.template.app.home
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
-import androidx.core.util.forEach
+import androidx.activity.addCallback
 import androidx.core.util.size
 import androidx.core.util.valueIterator
 import androidx.fragment.app.Fragment
@@ -28,35 +28,25 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
         SparseArray<Fragment>()
     }
 
-    var lastTime: Long = 0
+    private var lastTime: Long = 0
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
-        if (savedInstanceState == null) {
-            showFragment(HomeMenu.MENU1)
-        } else {
-            for (index in 0 until fragments.size) {
-                supportFragmentManager.also {
-                    it.findFragmentByTag(index.toString())?.also { fragment ->
-                        fragments.put(index, fragment)
-                    }
-                }
+        showFragment(HomeMenu.MENU1)
+
+        onBackPressedDispatcher.addCallback(this) {
+            if (lastTime < System.currentTimeMillis() - Constants.DOUBLE_CLICK_EXIT_TIME) {
+                lastTime = System.currentTimeMillis()
+                showToast(R.string.tips_double_click_exit)
+            } else {
+                finish()
             }
         }
     }
 
     override fun getLayoutId(): Int {
         return R.layout.home_activity
-    }
-
-    override fun onBackPressed() {
-        if (lastTime < System.currentTimeMillis() - Constants.DOUBLE_CLICK_EXIT_TIME) {
-            lastTime = System.currentTimeMillis()
-            showToast(R.string.tips_double_click_exit)
-            return
-        }
-        super.onBackPressed()
     }
 
 
@@ -80,12 +70,12 @@ class HomeActivity : BaseActivity<HomeViewModel, HomeActivityBinding>() {
         var fragment: Fragment? = fragments[menu]
         if (fragment == null) {
             fragment = createFragment(menu)
-            fragment?.let {
+            fragment.let {
                 fragmentTransaction.add(R.id.fragmentContent, it, menu.toString())
                 fragments.put(menu, it)
             }
         }
-        return fragment!!
+        return fragment
     }
 
     /**

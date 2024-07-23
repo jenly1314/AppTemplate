@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.king.template.R
-import com.king.template.bean.BannerImage
+import com.king.template.data.model.BannerImage
 import com.king.template.glide.ImageLoader
 import com.youth.banner.adapter.BannerAdapter
 

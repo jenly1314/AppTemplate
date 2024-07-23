@@ -131,7 +131,7 @@ dependencies {
     implementation "com.github.jenly1314:SuperTextView:$versions.superTextView"
     implementation "com.github.jenly1314:logx:$versions.logx"
 
-    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.brvah"
+    implementation "io.github.cymchad:BaseRecyclerViewAdapterHelper:$versions.brvah"
 
     implementation "io.github.scwang90:refresh-layout-kernel:$versions.smartRefreshLayout"
     implementation "io.github.scwang90:refresh-header-material:$versions.smartRefreshLayout"
@@ -157,6 +157,8 @@ dependencies {
 
     implementation "com.github.AndroidUtil:AndroidUtil:$versions.androidutil"
 
+    implementation "androidx.startup:startup-runtime:$versions.startup"
+
     implementation "com.github.jenly1314:kvcache:$versions.kvcache"
 
     implementation "com.github.jenly1314:imageviewer:$versions.imageviewer"
@@ -168,7 +170,6 @@ dependencies {
 //
 //    debugImplementation "com.amitshekhar.android:debug-db:$versions.debugDb"
 
-    implementation project(":lib-component")
     implementation project(":lib-umeng")
 
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
-import com.king.template.bean.Bean
+import com.king.template.data.model.Bean
 import com.king.template.databinding.TempActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 

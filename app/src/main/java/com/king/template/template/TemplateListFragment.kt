@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.king.template.R
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.app.base.ListFragment
-import com.king.template.bean.Bean
+import com.king.template.data.model.Bean
 import com.king.template.databinding.ListFragmentBinding
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint

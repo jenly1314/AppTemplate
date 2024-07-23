@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.king.frame.mvvmframe.data.Repository
 import com.king.template.app.base.BaseViewModel
-import com.king.template.bean.Bean
+import com.king.template.data.model.Bean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

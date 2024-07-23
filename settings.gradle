@@ -16,5 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name='AppTemplate'
 include ':app'
-include ':lib-component'
 include ':lib-umeng'

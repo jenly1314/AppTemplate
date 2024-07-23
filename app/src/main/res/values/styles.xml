@@ -19,7 +19,6 @@
     </style>
 
     <style name="SplashAppTheme" parent="AppTheme">
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@color/splash_bg</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
