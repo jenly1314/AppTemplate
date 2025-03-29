@@ -1,25 +1,23 @@
 package com.king.template.data.repository
 
-import com.king.frame.mvvmframe.data.DataRepository
+import com.king.frame.mvvmframe.data.datasource.DataSource
 import com.king.template.data.local.AppDatabase
 import com.king.template.data.model.entity.SearchHistory
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filterNotNull
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 
 /**
  * 搜索历史
  *
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
- * <p>
- * <a href="https://github.com/jenly1314">Follow me</a>
  */
 @Singleton
-class SearchHistoryRepository @Inject constructor() : DataRepository() {
+class SearchHistoryRepository @Inject constructor(private val dataSource: DataSource) {
 
     private val database by lazy {
-        getRoomDatabase(AppDatabase::class.java)
+        dataSource.getRoomDatabase(AppDatabase::class.java)
     }
 
     /**

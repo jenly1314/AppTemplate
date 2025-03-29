@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
+import com.king.template.constant.Constants
 import com.king.template.databinding.CodeLoginActivityBinding
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +19,9 @@ import timber.log.Timber
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>(){
+class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>() {
 
-    var username : String? = null
+    var username: String? = null
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -67,7 +67,10 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     }
 
     private fun startCountDownTime() {
-        object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
+        object : CountDownTimer(
+            Constants.VERIFY_CODE_COUNT_DOWN_DURATION,
+            Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL
+        ) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvGetCode.isEnabled = false
                 binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
@@ -80,7 +83,12 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
 
             override fun onFinish() {
                 binding.tvGetCode.isEnabled = true
-                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setTextColor(
+                    ContextCompat.getColor(
+                        getContext(),
+                        R.color.text_theme
+                    )
+                )
                 binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
@@ -91,32 +99,32 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
     /**
      * 获取验证码
      */
-    private fun clickGetCode(){
+    private fun clickGetCode() {
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
         username = binding.etUsername.text.toString()
         viewModel.getVerifyCode(username!!, VerifyCodeScene.LOGIN)
     }
 
-    private fun clickRegister(){
+    private fun clickRegister() {
         username = binding.etUsername.text.toString()
-        startActivity(RegisterActivity::class.java,username)
+        startActivity(RegisterActivity::class.java, username)
     }
 
-    private fun clickPwdLogin(){
+    private fun clickPwdLogin() {
         finish()
     }
 
 
-    private fun clickLogin(){
+    private fun clickLogin() {
         // TODO 点击“登录”逻辑
 
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
-        if(!checkInput(binding.etCode,R.string.hint_verify_code)){
+        if (!checkInput(binding.etCode, R.string.hint_verify_code)) {
             return
         }
 
@@ -125,12 +133,12 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
 
         val username = binding.etUsername.text.toString()
         val verifyCode = binding.etCode.text.toString()
-        viewModel.verifyCodeLogin(username,verifyCode)
+        viewModel.verifyCodeLogin(username, verifyCode)
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
-        when(v.id){
+        when (v.id) {
             R.id.tvGetCode -> clickGetCode()
             R.id.btnLogin -> clickLogin()
             R.id.tvPwdLogin -> clickPwdLogin()

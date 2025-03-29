@@ -1,6 +1,7 @@
 package com.king.template.template
 
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.king.template.R
 import com.king.template.app.adapter.BaseBindingAdapter
 import com.king.template.app.base.ListFragment
@@ -15,12 +16,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TemplateListFragment : ListFragment<Bean, TemplateListViewModel, ListFragmentBinding>() {
 
-    override fun requestData(curPage: Int) {
-        super.requestData(curPage)
-        viewModel.requestData(curPage, pageSize)
+    override fun requestData(page: Int) {
+        super.requestData(page)
+        viewModel.requestData(page, pageSize)
     }
 
-    override fun createAdapter(): BaseBindingAdapter<Bean> {
+    override fun createAdapter(): BaseQuickAdapter<Bean, out RecyclerView.ViewHolder> {
         return BaseBindingAdapter(R.layout.rv_item)
     }
 

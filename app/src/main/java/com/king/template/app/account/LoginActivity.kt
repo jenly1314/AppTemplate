@@ -6,8 +6,8 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
+import com.king.template.constant.Constants
 import com.king.template.databinding.LoginActivityBinding
 import com.king.template.extension.disableCopyAndPaste
 import com.king.template.manager.LoginManager
@@ -18,9 +18,9 @@ import timber.log.Timber
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
+class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>() {
 
-    var username : String? = null
+    var username: String? = null
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -66,26 +66,26 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
 
     //-------------------------------
 
-    private fun clickRegister(){
+    private fun clickRegister() {
         username = binding.etUsername.text.toString()
-        startActivity(RegisterActivity::class.java,username)
+        startActivity(RegisterActivity::class.java, username)
     }
 
-    private fun clickCodeLogin(){
+    private fun clickCodeLogin() {
         username = binding.etUsername.text.toString()
         startLoginActivity(username, isCode = true)
     }
 
-    private fun clickForgotPwd(){
+    private fun clickForgotPwd() {
         username = binding.etUsername.text.toString()
-        startActivity(ResetPwdActivity::class.java,username)
+        startActivity(ResetPwdActivity::class.java, username)
     }
 
-    private fun clickLogin(){
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+    private fun clickLogin() {
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
-        if(!checkInput(binding.etPassword,R.string.hint_password)){
+        if (!checkInput(binding.etPassword, R.string.hint_password)) {
             return
         }
 
@@ -94,12 +94,12 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(){
 
         val username = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
-        viewModel.login(username,password)
+        viewModel.login(username, password)
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
-        when(v.id){
+        when (v.id) {
             R.id.btnLogin -> clickLogin()
             R.id.tvForgotPwd -> clickForgotPwd()
             R.id.tvCodeLogin -> clickCodeLogin()

@@ -12,7 +12,7 @@ import com.king.template.R
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class BaseTabFragment<VDB: ViewDataBinding> : BaseFragment<BaseViewModel, VDB>() {
+abstract class BaseTabFragment<VDB : ViewDataBinding> : BaseFragment<BaseViewModel, VDB>() {
 
     private val titles by lazy { getTabTitles() }
 
@@ -21,23 +21,24 @@ abstract class BaseTabFragment<VDB: ViewDataBinding> : BaseFragment<BaseViewMode
         initTab()
     }
 
-    open fun initTab(){
-        for(title in titles){
-            var tab = tabLayout().newTab()
-            tab.text  = title
+    open fun initTab() {
+        for (title in titles) {
+            val tab = tabLayout().newTab()
+            tab.text = title
             tabLayout().addTab(tab)
         }
 
-        viewPager().adapter = object : FragmentStateAdapter(this){
+        viewPager().adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return titles.size
             }
+
             override fun createFragment(position: Int): Fragment {
                 return createTabItemFragment(position)
             }
         }
 
-        TabLayoutMediator(tabLayout(),viewPager()) { tab, position ->
+        TabLayoutMediator(tabLayout(), viewPager()) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }

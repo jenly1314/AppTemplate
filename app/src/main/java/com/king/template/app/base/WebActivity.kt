@@ -1,31 +1,40 @@
 package com.king.template.app.base
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.net.http.SslError
 import android.os.Bundle
 import android.view.View
-import android.webkit.*
+import android.webkit.SslErrorHandler
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import com.king.template.R
-import com.king.template.app.Constants
+import com.king.template.constant.Constants
 import com.king.template.databinding.WebActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 
 /**
- * 通用 WebActivity，细节处理待完善
+ * 通用 WebActivity
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
+open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
 
     private var url = BLANK_URL
     private lateinit var curl: String
 
     private var isError = false
 
-    companion object{
+    companion object {
         const val BLANK_URL = "about:blank"
     }
 
@@ -42,12 +51,12 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
         intWebSettings(binding.web)
 
-        binding.web.webChromeClient = object : WebChromeClient(){
+        binding.web.webChromeClient = object : WebChromeClient() {
 
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
                 title?.let {
-                    if(!it.equals(BLANK_URL,true)){
+                    if (!it.equals(BLANK_URL, true)) {
                         setToolbarTitle(it)
                     }
                 }
@@ -56,33 +65,36 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
-                updateProgress(newProgress,isError)
+                updateProgress(newProgress, isError)
             }
 
         }
-        binding.web.webViewClient = object : WebViewClient(){
+        binding.web.webViewClient = object : WebViewClient() {
 
             override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 Timber.d("url:$url")
                 this@WebActivity.curl = url
-                if(!url.equals(BLANK_URL,true)){
+                if (!url.equals(BLANK_URL, true)) {
                     this@WebActivity.url = url
                     isError = false
                 }
-                updateProgress(0,false)
+                updateProgress(0, false)
             }
-
 
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 Timber.d("onPageFinished:$url")
-                updateProgress(100,isError)
+                updateProgress(100, isError)
 
             }
 
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError) {
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError
+            ) {
                 super.onReceivedError(view, request, error)
                 Timber.d("onReceivedError:$url")
 
@@ -102,7 +114,11 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
             }
 
-            override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse) {
+            override fun onReceivedHttpError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                errorResponse: WebResourceResponse
+            ) {
                 super.onReceivedHttpError(view, request, errorResponse)
                 Timber.d("onReceivedHttpError:$url")
                 val code = errorResponse.statusCode
@@ -115,27 +131,47 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
 
             }
 
-            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler, error: SslError?) {
+            @SuppressLint("WebViewClientOnReceivedSslError")
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: SslErrorHandler,
+                error: SslError?
+            ) {
                 super.onReceivedSslError(view, handler, error)
                 Timber.d("onReceivedSslError:$url")
                 handler.cancel()
                 handler.proceed()
             }
 
+        }
 
+        onBackPressedDispatcher.addCallback(this) {
+            if (canGoBack()) {
+                binding.web.goBack()
+                if (curl.equals(BLANK_URL, true)) {// 返回上一页时如果是空白页，表示之前加载页面出错过
+                    if (canGoBack()) {
+                        binding.web.goBack()
+                    } else {
+                        finish()
+                    }
+                }
+            } else {
+                finish()
+            }
         }
 
         binding.web.loadUrl(url)
 
     }
 
-    private fun initToolbarTitle(){
+    private fun initToolbarTitle() {
         intent.getStringExtra(Constants.KEY_TITLE)?.let {
             setToolbarTitle(it)
         }
     }
 
-    open fun intWebSettings(webView: WebView){
+    @SuppressLint("SetJavaScriptEnabled")
+    open fun intWebSettings(webView: WebView) {
         webView.settings.apply {
             //如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript
             this.javaScriptEnabled = true
@@ -167,25 +203,25 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
     /**
      * 更新进度
      */
-    private fun updateProgress(progress: Int,isError: Boolean){
+    private fun updateProgress(progress: Int, isError: Boolean) {
 
-        if(isError){
+        if (isError) {
             binding.pb.progress = 0
             binding.pb.visibility = View.GONE
             binding.llError.visibility = View.VISIBLE
             binding.pbFirst.isVisible = false
-        }else{
+        } else {
             binding.pb.progress = progress
-            if(binding.llError.visibility != View.GONE){
+            if (binding.llError.visibility != View.GONE) {
                 binding.llError.visibility = View.GONE
             }
 
-            if(progress < 100){
-                if(binding.pb.visibility != View.VISIBLE){
+            if (progress < 100) {
+                if (binding.pb.visibility != View.VISIBLE) {
                     binding.pb.visibility = View.VISIBLE
                 }
 
-            }else{
+            } else {
                 binding.pb.visibility = View.GONE
                 binding.pbFirst.isVisible = false
             }
@@ -199,32 +235,16 @@ open class WebActivity : BaseActivity<BaseViewModel,WebActivityBinding>() {
     }
 
 
-    private fun retry(){
+    private fun retry() {
         binding.web.loadUrl(url)
     }
 
-    private fun isGoBack(): Boolean {
-        return binding.web != null && binding.web.canGoBack()
-    }
-
-
-    override fun onBackPressed() {
-        if(isGoBack()){
-            binding.web.goBack()
-            if(curl.equals(BLANK_URL,true)){//返回上一页时如果是空白页，表示之前加载页面出错过
-                if(isGoBack()){
-                    binding.web.goBack()
-                }else{
-                    super.onBackPressed()
-                }
-            }
-            return
-        }
-        super.onBackPressed()
+    private fun canGoBack(): Boolean {
+        return binding.web.canGoBack()
     }
 
     override fun onClick(v: View) {
-        when(v.id){
+        when (v.id) {
             R.id.ivLeft -> finish()
             R.id.llError -> retry()
         }

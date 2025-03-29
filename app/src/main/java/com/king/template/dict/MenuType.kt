@@ -33,14 +33,17 @@ annotation class MenuType {
          * 菜单2
          */
         const val MENU_2 = 2
+
         /**
          * 菜单3
          */
         const val MENU_3 = 3
+
         /**
          * 菜单4
          */
         const val MENU_4 = 4
+
         /**
          * 菜单5
          */

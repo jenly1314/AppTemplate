@@ -10,10 +10,10 @@ import com.androidutil.util.StringUtils
 import com.king.frame.mvvmframe.base.BaseFragment
 import com.king.frame.mvvmframe.base.BaseViewModel
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
 import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
+import com.king.template.constant.Constants
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -94,7 +94,6 @@ abstract class BaseFragment<VM : BaseViewModel, VDB : ViewDataBinding> : BaseFra
         )
         startActivity(intent, optionsCompat.toBundle())
     }
-
 
     fun startWebActivity(url: String, title: String? = null) {
         val intent = Intent(context, WebActivity::class.java)

@@ -4,19 +4,17 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
 import androidx.activity.addCallback
-import androidx.core.util.size
 import androidx.core.util.valueIterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
 import com.king.template.app.base.TabFragment
 import com.king.template.app.me.MeFragment
+import com.king.template.constant.Constants
 import com.king.template.databinding.HomeActivityBinding
 import com.king.template.dict.HomeMenu
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.NullPointerException
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>

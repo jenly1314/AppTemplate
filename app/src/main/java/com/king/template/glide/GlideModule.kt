@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @GlideModule
-class GlideModule : AppGlideModule(){
+class GlideModule : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         super.applyOptions(context, builder)

@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
+import com.king.template.constant.Constants
 import com.king.template.databinding.RegisterActivityBinding
 import com.king.template.dict.VerifyCodeScene
 import com.king.template.extension.disableCopyAndPaste
@@ -21,9 +21,9 @@ import timber.log.Timber
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding>(){
+class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding>() {
 
-    var username : String? = null
+    var username: String? = null
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -75,7 +75,10 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
     }
 
     private fun startCountDownTime() {
-        object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
+        object : CountDownTimer(
+            Constants.VERIFY_CODE_COUNT_DOWN_DURATION,
+            Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL
+        ) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvGetCode.isEnabled = false
                 binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
@@ -88,7 +91,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
 
             override fun onFinish() {
                 binding.tvGetCode.isEnabled = true
-                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setTextColor(
+                    ContextCompat.getColor(
+                        getContext(),
+                        R.color.text_theme
+                    )
+                )
                 binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
@@ -98,36 +106,36 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
     //-------------------------------
 
 
-    private fun clickTermOfService(){
+    private fun clickTermOfService() {
         // TODO 点击“用户服务协议条款”逻辑
         showToast(R.string.tips_user_terms_of_service)
     }
 
-    private fun clickGetCode(){
+    private fun clickGetCode() {
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
         username = binding.etUsername.text.toString()
         viewModel.getVerifyCode(username!!, VerifyCodeScene.REGISTER)
     }
 
-    private fun clickLoginNow(){
+    private fun clickLoginNow() {
         finish()
     }
 
-    private fun clickRegister(){
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+    private fun clickRegister() {
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
-        if(!CheckUtils.checkUsername(binding.etUsername.text.toString())){
+        if (!CheckUtils.checkUsername(binding.etUsername.text.toString())) {
             showToast(R.string.tips_username_matcher)
             return
         }
-        if(!checkInput(binding.etCode,R.string.hint_verify_code)){
+        if (!checkInput(binding.etCode, R.string.hint_verify_code)) {
             return
         }
-        if(!checkInput(binding.etPassword,R.string.hint_password)){
+        if (!checkInput(binding.etPassword, R.string.hint_password)) {
             return
         }
 
@@ -137,12 +145,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
         val username = binding.etUsername.text.toString()
         val verifyCode = binding.etCode.text.toString()
         val password = binding.etPassword.text.toString()
-        viewModel.register(username,verifyCode,password)
+        viewModel.register(username, verifyCode, password)
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
-        when(v.id){
+        when (v.id) {
             R.id.btnRegister -> clickRegister()
             R.id.tvLogin -> clickLoginNow()
             R.id.tvGetCode -> clickGetCode()

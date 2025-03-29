@@ -10,10 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class TemplateDialogFragment : BaseDialogFragment<TemplateViewModel,ViewDataBinding>() {
+class TemplateDialogFragment : BaseDialogFragment<TemplateViewModel, ViewDataBinding>() {
 
-    companion object{
-        fun newInstance(): TemplateDialogFragment{
+    companion object {
+        fun newInstance(): TemplateDialogFragment {
             return TemplateDialogFragment()
         }
     }

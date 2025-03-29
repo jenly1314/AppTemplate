@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class TemplateActivity : BaseActivity<TemplateViewModel, TempActivityBinding>(){
+class TemplateActivity : BaseActivity<TemplateViewModel, TempActivityBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -24,13 +24,13 @@ class TemplateActivity : BaseActivity<TemplateViewModel, TempActivityBinding>(){
         return R.layout.temp_activity
     }
 
-    private fun observeData(){
-        viewModel.liveData.observe(this){
+    private fun observeData() {
+        viewModel.liveData.observe(this) {
             updateUI(it)
         }
     }
 
-    private fun updateUI(data: Bean?){
+    private fun updateUI(data: Bean?) {
         data?.let {
             binding.data = it
         }

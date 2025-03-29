@@ -1,7 +1,7 @@
 package com.king.template.manager
 
 import com.king.kvcache.KVCache
-import com.king.template.app.Constants
+import com.king.template.constant.Constants
 import com.king.template.data.model.User
 
 /**
@@ -10,7 +10,6 @@ import com.king.template.data.model.User
  * <a href="https://github.com/jenly1314">Follow me</a>
  */
 object LoginManager {
-
 
     /**
      * 登录

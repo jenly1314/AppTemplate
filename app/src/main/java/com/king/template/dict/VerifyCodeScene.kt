@@ -13,9 +13,9 @@ import androidx.annotation.StringDef
 )
 @Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.FUNCTION)
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-annotation class VerifyCodeScene{
+annotation class VerifyCodeScene {
 
-    companion object{
+    companion object {
         /**
          * 登录时，验证码校验场景
          */

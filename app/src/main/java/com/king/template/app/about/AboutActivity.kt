@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
+class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>() {
 
     @SuppressLint("SetTextI18n")
     override fun initData(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         return R.layout.about_activity
     }
 
-    private fun clickVersionUpdate(){
+    private fun clickVersionUpdate() {
         // TODO 处理点击“版本更新”逻辑
 
         // 当检测到新版本时，这里只是演示检测到新版本的大概流程
@@ -46,15 +46,15 @@ class AboutActivity : BaseActivity<AboutViewModel, AboutActivityBinding>(){
         AppDialog.INSTANCE.showDialog(config)
     }
 
-    private fun clickAbout(){
+    private fun clickAbout() {
         // TODO 处理点击“关于”逻辑
 
-        startWebActivity("https://github.com/jenly1314/AppTemplate",getString(R.string.app_name))
+        startWebActivity("https://github.com/jenly1314/AppTemplate", getString(R.string.app_name))
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
-        when(v.id){
+        when (v.id) {
             R.id.tvVersionUpdate -> clickVersionUpdate()
             R.id.tvAbout -> clickAbout()
         }

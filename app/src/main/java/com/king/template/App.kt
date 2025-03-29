@@ -5,7 +5,7 @@ import com.king.base.baseurlmanager.bean.UrlInfo
 import com.king.frame.mvvmframe.base.BaseApplication
 import com.king.kvcache.KVCache
 import com.king.logx.LogX
-import com.king.template.app.Constants
+import com.king.template.constant.Constants
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -35,7 +35,7 @@ class App : BaseApplication() {
 //        NeverCrash.init { t, e ->
 //            CrashReport.postCatchedException(e)
 //        }
-        if (Constants.isDomain) {// 提供动态切换环境
+        if (Constants.test) {// 提供动态切换环境
             if (BaseUrlManager.getInstance().count == 0) {
                 BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }

@@ -31,6 +31,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginBottom="@dimen/size_30dp"
+            android:indeterminateDuration="1000"
+            android:indeterminateDrawable="@drawable/mvvmframe_loading"
             android:visibility="gone"/>
         <LinearLayout
             android:id="@+id/llError"

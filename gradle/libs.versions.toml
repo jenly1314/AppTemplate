@@ -1,0 +1,123 @@
+[versions]
+versionCode = "1"
+versionName = "1.0.0"
+
+minSdk = "21"
+targetSdk = "34"
+compileSdk = "34"
+
+agp = "8.7.2"
+kotlin = "1.9.24"
+
+coreKtx = "1.13.1"
+material = "1.12.0"
+appcompat = "1.7.0"
+fragmentKtx = "1.8.6"
+swiperefreshlayout = "1.1.0"
+recyclerview = "1.3.2"
+constraintlayout = "2.2.1"
+startup = "1.2.0"
+splashscreen = "1.0.1"
+lifecycleKtx = "2.8.7"
+viewpager2 = "1.1.0"
+room = "2.6.1"
+daggerHilt = "2.52"
+
+junit = "4.13.2"
+androidJunit = "1.2.1"
+espresso = "3.6.1"
+
+mvvmframe = "3.1.0"
+appUpdater = "1.2.0"
+nevercrash = "1.0.0"
+baseUrlManager = "1.2.0"
+superTextView = "1.0.1"
+logx = "1.1.0"
+kvcache = "1.3.0"
+guidepage = "1.0.0"
+imageviewer = "1.2.0"
+
+androidktx = "1.1.0"
+androidutil = "1.0.0"
+
+mmkv = "1.3.12"
+
+brvah = "4.1.4"
+smartRefreshLayout = "2.1.1"
+circleimageview = "3.1.0"
+glide = "4.16.0"
+
+leakcanary = "2.14"
+banner = "2.2.3"
+autosize = "v1.2.1"
+
+[libraries]
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib" }
+
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
+androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidJunit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+mvvmframe = { group = "com.github.jenly1314", name = "mvvmframe", version.ref = "mvvmframe" }
+appupdater = { group = "com.github.jenly1314.AppUpdater", name = "app-updater", version.ref = "appUpdater" }
+appdialog = { group = "com.github.jenly1314.AppUpdater", name = "app-dialog", version.ref = "appUpdater" }
+nevercrash = { group = "com.github.jenly1314", name = "NeverCrash", version.ref = "nevercrash" }
+baseurlmanager = { group = "com.github.jenly1314", name = "BaseUrlManager", version.ref = "baseUrlManager" }
+supertextview = { group = "com.github.jenly1314", name = "SuperTextView", version.ref = "superTextView" }
+logx = { group = "com.github.jenly1314", name = "logx", version.ref = "logx" }
+kvcache = { group = "com.github.jenly1314", name = "kvcache", version.ref = "kvcache" }
+imageviewer = { group = "com.github.jenly1314", name = "imageviewer", version.ref = "imageviewer" }
+guidepage = { group = "com.github.jenly1314", name = "GuidePage", version.ref = "guidepage" }
+
+androidktx = { group = "io.github.androidktx", name = "android-ktx", version.ref = "androidktx" }
+androidutil = { group = "com.github.AndroidUtil", name = "AndroidUtil", version.ref = "androidutil" }
+
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+
+brvah = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version.ref = "brvah" }
+
+refresh-layout-kernel = { group = "io.github.scwang90", name = "refresh-layout-kernel", version.ref = "smartRefreshLayout" }
+refresh-header-material = { group = "io.github.scwang90", name = "refresh-header-material", version.ref = "smartRefreshLayout" }
+refresh-footer-classics = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref = "smartRefreshLayout" }
+
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+banner = { group = "io.github.youth5201314", name = "banner", version.ref = "banner" }
+autosize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autosize" }
+
+# 友盟
+umeng-common = { group = "com.umeng.umsdk", name = "common", version = "9.7.3" }
+umeng-asms = { group = "com.umeng.umsdk", name = "asms", version = "1.8.3" }
+umeng-apm = { group = "com.umeng.umsdk", name = "apm", version = "1.9.8" }
+
+[bundles]
+jenly1314 = ["mvvmframe", "appupdater", "appdialog", "nevercrash", "baseurlmanager", "supertextview", "logx", "kvcache", "imageviewer"]
+smartrefreshlayout = ["refresh-layout-kernel", "refresh-header-material", "refresh-footer-classics"]
+umeng = ["umeng-common", "umeng-asms", "umeng-apm"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "1.9.24-1.0.20" }
+
+mvvmframe = { id = "com.github.jenly1314.mvvmframe", version.ref = "mvvmframe" }
+
+

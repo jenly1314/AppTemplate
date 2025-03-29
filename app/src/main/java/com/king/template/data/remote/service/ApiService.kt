@@ -1,68 +1,53 @@
 package com.king.template.data.remote.service
 
 import com.king.template.data.model.Bean
-import com.king.template.data.model.Login
+import com.king.template.data.model.City
 import com.king.template.data.model.Result
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
+ * API接口定义示例
+ *
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @JvmSuppressWildcards
 interface ApiService {
 
     /**
-     * 登录
+     * 获取热门城市示例
      */
-    @POST("api/user/login")
-    suspend fun login(@Body params: Any): Result<Login>
-
-    /**
-     * 注册
-     */
-    @POST("api/user/register")
-    suspend fun register(@Body params: Any): Result<Any>
-
-    /**
-     * 重置密码
-     */
-    @POST("api/user/password/reset")
-    suspend fun resetPassword(@Body params: Any): Result<Any>
-
-    /**
-     * 修改密码
-     */
-    @POST("api/user/password/update")
-    suspend fun updatePassword(@Header("Authorization") token: String, @Body params: Any): Result<Any>
-
-    /**
-     * 获取验证码
-     */
-    @GET("api/sms/code")
-    suspend fun getVerifyCode(@QueryMap params: Map<String, String>): Result<Any>
-
-    //--------------------------------
+    @GET("api/city/hotCities.json")
+    suspend fun getHotCities(): List<City>
 
     @GET("api/getRequest")
-    suspend fun getRequest(@Header("Authorization") token: String): Result<Bean>
+    suspend fun getRequest(): Result<Bean>
+
+    @GET("api/getListBean")
+    suspend fun getListBean(@Query("page") page: Int): Result<List<Bean>>
 
     @FormUrlEncoded
     @POST("api/postRequest")
-    suspend fun postRequest(@Header("Authorization") token: String, @Field("username") username: String): Result<Any>
+    suspend fun postRequest(@Field("username") username: String): Result<Any>
 
     @POST("api/postRequest")
-    suspend fun postRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
+    suspend fun postRequest(@Body bean: Bean): Result<Any>
 
     @PUT("api/putRequest")
-    suspend fun putRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
+    suspend fun putRequest(@Body bean: Bean): Result<Any>
 
     @PATCH("api/patchRequest")
-    suspend fun patchRequest(@Header("Authorization") token: String, @Body bean: Bean): Result<Any>
+    suspend fun patchRequest(@Body bean: Bean): Result<Any>
 
     @DELETE("api/deleteRequest/{id}")
-    suspend fun deleteRequest(@Header("Authorization") token: String, @Path("id") id: Long): Result<Any>
-
-    @GET("api/getListBean")
-    suspend fun getListBean(@Header("Authorization") token: String): Result<List<Bean>>
+    suspend fun deleteRequest(@Path("id") id: Long): Result<Any>
 
 }

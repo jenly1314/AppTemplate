@@ -5,7 +5,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="data"
+            name="item"
             type="com.king.template.data.model.Bean" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,8 @@
             app:layout_constraintRight_toLeftOf="@+id/tvTitle"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            bind:imageUrl="@{data.imageUrl}"/>
+            bind:imageUrl="@{item.imageUrl}"
+            tools:ignore="ContentDescription" />
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
@@ -34,7 +35,7 @@
             android:textSize="@dimen/size_16sp"
             android:layout_marginStart="@dimen/size_10dp"
             android:layout_marginEnd="@dimen/size_16dp"
-            android:text="@{data.title}"
+            android:text="@{item.title}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/iv"
             app:layout_constraintRight_toRightOf="parent"
@@ -49,7 +50,7 @@
             android:textSize="@dimen/size_14sp"
             android:layout_marginStart="@dimen/size_10dp"
             android:layout_marginEnd="@dimen/size_16dp"
-            android:text="@{data.content}"
+            android:text="@{item.content}"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             app:layout_constraintLeft_toRightOf="@+id/iv"
             app:layout_constraintRight_toRightOf="parent"

@@ -8,23 +8,21 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.king.template.R
-import com.king.template.app.Constants
-import com.king.template.app.adapter.BaseBindingAdapter
+import com.king.template.constant.Constants
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
-abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
+abstract class ListFragment<T : Any, VM : ListViewModel<T>, VDB : ViewDataBinding> :
     BaseFragment<VM, VDB>() {
 
     var curPage: Int = 1
-    val pageSize by lazy { pageSize() }
+    open val pageSize by lazy { Constants.PAGE_SIZE }
 
-    lateinit var mAdapter: BaseQuickAdapter<T, out BaseViewHolder>
+    lateinit var mAdapter: BaseQuickAdapter<T, out RecyclerView.ViewHolder>
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -44,7 +42,7 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
 
     open fun initRefreshLayout(srl: SmartRefreshLayout) {
         srl.setEnableRefresh(isSupportRefresh())
-        srl.setEnableLoadMore(false)
+        srl.setEnableLoadMore(isSupportLoadMore())
         srl.setOnRefreshListener { requestData(1) }
         srl.setOnLoadMoreListener { requestData(curPage) }
         if (isSupportRefresh()) {
@@ -60,16 +58,14 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
 
     open fun isSupportRefresh() = true
 
-    open fun isSupportPagination() = true
-
-    open fun pageSize() = Constants.PAGE_SIZE
+    open fun isSupportLoadMore() = true
 
     open fun requestData(page: Int) {
         curPage = page
     }
 
     override fun showLoading() {
-        if(smartRefreshLayout().isRefreshing || smartRefreshLayout().isLoading) {
+        if (smartRefreshLayout().isRefreshing || smartRefreshLayout().isLoading) {
             return
         }
         super.showLoading()
@@ -82,9 +78,10 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
     }
 
     private fun initEmptyView() {
-        if (mAdapter.emptyLayout == null) {
+        if (mAdapter.stateView == null) {
             createEmptyView(recyclerView())?.let {
-                mAdapter.setEmptyView(it)
+                mAdapter.stateView = it
+                mAdapter.isStateViewEnable = true
             }
         }
     }
@@ -101,20 +98,19 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
 
     }
 
-    open fun updateUI(data: Collection<T>?, loadMore: Boolean) {
-        if (loadMore) {
-            data?.let {
-                mAdapter.addData(it)
-            }
-        } else mAdapter.setList(data)
+    open fun updateUI(list: Collection<T>?, loadMore: Boolean) {
+        if (!loadMore && mAdapter.items.isNotEmpty()) {
+            mAdapter.removeAtRange(0..mAdapter.items.size)
+        }
+        list?.takeIf { it.isNotEmpty() }?.let {
+            mAdapter.addAll(it)
+        }
 
-        if (isSupportRefresh() && isSupportPagination()) {
-            if (mAdapter.itemCount >= curPage * pageSize) {
-                smartRefreshLayout().setEnableLoadMore(true)
-                curPage++
-            } else {
-                smartRefreshLayout().setEnableLoadMore(false)
+        if (isSupportLoadMore()) {
+            if (list.isNullOrEmpty() || list.size < pageSize) {
                 smartRefreshLayout().finishLoadMoreWithNoMoreData()
+            } else {
+                curPage++
             }
         }
     }
@@ -123,5 +119,5 @@ abstract class ListFragment<T, VM : ListViewModel<T>, VDB : ViewDataBinding> :
 
     abstract fun recyclerView(): RecyclerView
 
-    abstract fun createAdapter(): BaseQuickAdapter<T, out BaseViewHolder>
+    abstract fun createAdapter(): BaseQuickAdapter<T, out RecyclerView.ViewHolder>
 }

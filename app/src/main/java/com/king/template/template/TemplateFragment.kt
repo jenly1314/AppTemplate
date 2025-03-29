@@ -13,8 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TemplateFragment : BaseFragment<TemplateViewModel, TempFragmentBinding>() {
 
-    companion object{
-        fun newInstance(): TemplateFragment{
+    companion object {
+        fun newInstance(): TemplateFragment {
             return TemplateFragment()
         }
     }
@@ -29,13 +29,13 @@ class TemplateFragment : BaseFragment<TemplateViewModel, TempFragmentBinding>() 
         return R.layout.temp_fragment
     }
 
-    private fun observeData(){
-        viewModel.liveData.observe(viewLifecycleOwner){
+    private fun observeData() {
+        viewModel.liveData.observe(viewLifecycleOwner) {
             updateUI(it)
         }
     }
 
-    private fun updateUI(data: Bean?){
+    private fun updateUI(data: Bean?) {
         data?.let {
             binding.data = it
         }

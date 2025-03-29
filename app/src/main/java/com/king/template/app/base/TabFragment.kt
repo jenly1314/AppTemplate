@@ -23,8 +23,14 @@ open class TabFragment : BaseTabFragment<BaseTabFragmentBinding>() {
     private var showBack by argument(defaultValue = true)
     private lateinit var block: (Int) -> Fragment
 
-    companion object{
-        fun newInstance(title: String, titles: Array<String>, showToolbar: Boolean = true, showBack: Boolean = true, block: (Int) -> Fragment): TabFragment {
+    companion object {
+        fun newInstance(
+            title: String,
+            titles: Array<String>,
+            showToolbar: Boolean = true,
+            showBack: Boolean = true,
+            block: (Int) -> Fragment
+        ): TabFragment {
             return TabFragment().apply {
                 this.title = title
                 this.titles = titles

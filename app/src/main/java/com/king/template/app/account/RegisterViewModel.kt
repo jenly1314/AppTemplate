@@ -2,8 +2,8 @@ package com.king.template.app.account
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.king.frame.mvvmframe.data.Repository
 import com.king.template.app.base.BaseViewModel
+import com.king.template.data.repository.AuthRepository
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,7 +12,11 @@ import javax.inject.Inject
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @HiltViewModel
-class RegisterViewModel @Inject constructor(repository: Repository, application: Application) : BaseViewModel(repository, application){
+class RegisterViewModel @Inject constructor(
+    private val repository: AuthRepository,
+    application: Application
+) :
+    BaseViewModel(application) {
 
     val liveData by lazy { MutableLiveData<Boolean>() }
     val liveDataGetCode by lazy { MutableLiveData<Boolean>() }
@@ -20,16 +24,12 @@ class RegisterViewModel @Inject constructor(repository: Repository, application:
     /**
      * 注册
      */
-    fun register(username: String,verifyCode: String,password: String){
+    fun register(username: String, verifyCode: String, password: String) {
         launch {
-            // TODO Http请求
-            val params = HashMap<String, Any>()
-            params["username"] = username
-            params["verifyCode"] = verifyCode
-            params["password"] = password
-            val result = apiService.register(params)
+            // TODO 注册示例
+            val result = repository.register(username, verifyCode, password)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
-            if(isSuccess(result)){
+            if (isSuccess(result)) {
                 // TODO 注册成功后，是否还需要登录，需根据实际需求决定
                 liveData.value = true
             }
@@ -39,15 +39,12 @@ class RegisterViewModel @Inject constructor(repository: Repository, application:
     /**
      * 获取验证码
      */
-    fun getVerifyCode(phoneNumber: String, @VerifyCodeScene scene: String){
+    fun getVerifyCode(phoneNumber: String, @VerifyCodeScene scene: String) {
         launch {
-            // TODO Http请求
-            val params = HashMap<String, String>()
-            params["phoneNumber"] = phoneNumber
-            params["scene"] = scene
-            val result = apiService.getVerifyCode(params)
+            // TODO 获取验证码示例
+            val result = repository.getVerifyCode(phoneNumber, scene)
             // TODO 只需处理成功的场景，失败的场景都已统一处理
-            if(isSuccess(result)){
+            if (isSuccess(result)) {
                 liveDataGetCode.value = true
             }
         }

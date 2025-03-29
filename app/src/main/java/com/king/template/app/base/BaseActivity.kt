@@ -10,16 +10,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.androidutil.util.StringUtils
 import com.king.frame.mvvmframe.base.BaseActivity
 import com.king.frame.mvvmframe.base.BaseViewModel
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
 import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
+import com.king.template.constant.Constants
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -34,7 +33,6 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding> : BaseAct
     override fun initData(savedInstanceState: Bundle?) {
 
     }
-
 
     //-----------------------------------
 
@@ -96,6 +94,7 @@ abstract class BaseActivity<VM : BaseViewModel, VDB : ViewDataBinding> : BaseAct
                     }
                     return@setOnTouchListener false
                 }
+
                 else -> false
             }
         }

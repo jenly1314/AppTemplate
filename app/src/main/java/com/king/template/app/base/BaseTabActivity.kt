@@ -23,7 +23,7 @@ abstract class BaseTabActivity<VDB: ViewDataBinding> : BaseActivity<BaseViewMode
 
     open fun initTab(){
         for(title in titles){
-            var tab = tabLayout().newTab()
+            val tab = tabLayout().newTab()
             tab.text  = title
             tabLayout().addTab(tab)
         }

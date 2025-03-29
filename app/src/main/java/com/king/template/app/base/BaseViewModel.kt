@@ -4,33 +4,23 @@ import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.androidutil.util.NetworkUtils
 import com.king.frame.mvvmframe.base.BaseAndroidViewModel
-import com.king.frame.mvvmframe.data.Repository
-import com.king.kvcache.KVCache
+import com.king.logx.LogX
 import com.king.template.R
-import com.king.template.data.remote.service.ApiService
-import com.king.template.app.Constants
 import com.king.template.data.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.launch
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @HiltViewModel
-open class BaseViewModel @Inject constructor(
-    private val repository: Repository,
-    application: Application
-) : BaseAndroidViewModel(application) {
-
-    //TODO 这里只是演示，逻辑复杂一点的，可单独定义Repository，去获取apiService；比如：SearchHistoryRepository
-    val apiService: ApiService by lazy { repository.getRetrofitService(ApiService::class.java) }
-
-    //TODO Token 获取来源
-    fun getToken(): String = KVCache.getString(Constants.KEY_TOKEN) ?: ""
+open class BaseViewModel @Inject constructor(application: Application) :
+    BaseAndroidViewModel(application) {
 
     open fun isSuccess(result: Result<*>, showError: Boolean = true): Boolean {
         if (result.isSuccess()) {
@@ -45,11 +35,13 @@ open class BaseViewModel @Inject constructor(
     }
 
     /**
-     * 协程
+     * 启动一个协程
      */
-    fun launch(showLoading: Boolean = true, block: suspend () -> Unit) =
-        launch(showLoading, block) {
-            Timber.w(it)
+    fun launch(
+        showLoading: Boolean = true,
+        context: CoroutineContext = EmptyCoroutineContext,
+        error: suspend (Throwable) -> Unit = {
+            LogX.w(it)
             if (NetworkUtils.isNetWorkActive(getApplication())) {
                 when (it) {
                     is SocketTimeoutException -> sendMessage(R.string.result_connect_timeout_error)
@@ -59,16 +51,9 @@ open class BaseViewModel @Inject constructor(
             } else {
                 sendMessage(R.string.result_network_unavailable_error)
             }
-        }
-
-    /**
-     * 协程
-     */
-    fun launch(
-        showLoading: Boolean,
+        },
         block: suspend () -> Unit,
-        error: suspend (Throwable) -> Unit
-    ) = viewModelScope.launch {
+    ) = viewModelScope.launch(context = context) {
         try {
             if (showLoading) {
                 showLoading()
@@ -76,9 +61,10 @@ open class BaseViewModel @Inject constructor(
             block()
         } catch (e: Throwable) {
             error(e)
-        }
-        if (showLoading) {
-            hideLoading()
+        } finally {
+            if (showLoading) {
+                hideLoading()
+            }
         }
     }
 

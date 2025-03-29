@@ -14,7 +14,7 @@ import timber.log.Timber
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint
-class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBinding>(){
+class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBinding>() {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
@@ -46,22 +46,22 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
     //-------------------------------
 
 
-    private fun clickChangePassword(){
-        if(!checkInput(binding.etOldPassword,R.string.hint_old_password)){
+    private fun clickChangePassword() {
+        if (!checkInput(binding.etOldPassword, R.string.hint_old_password)) {
             return
         }
-        if(!checkInput(binding.etNewPassword,R.string.hint_new_password)){
+        if (!checkInput(binding.etNewPassword, R.string.hint_new_password)) {
             return
         }
-        if(!CheckUtils.checkPassword(binding.etNewPassword.text.toString())){
+        if (!CheckUtils.checkPassword(binding.etNewPassword.text.toString())) {
             showToast(R.string.tips_password_matcher)
             return
         }
-        if(!checkInput(binding.etConfirmPassword,R.string.hint_confirm_new_password)){
+        if (!checkInput(binding.etConfirmPassword, R.string.hint_confirm_new_password)) {
             return
         }
         var newPwd = binding.etNewPassword.text.toString()
-        if(newPwd != binding.etConfirmPassword.text.toString()){
+        if (newPwd != binding.etConfirmPassword.text.toString()) {
             showToast(R.string.hint_new_password_not_match)
             return
         }
@@ -71,12 +71,12 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
 
         var oldPwd = binding.etOldPassword.text.toString()
 
-        viewModel.updatePassword(oldPwd,newPwd)
+        viewModel.updatePassword(oldPwd, newPwd)
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
-        when(v.id){
+        when (v.id) {
             R.id.btnChangePassword -> clickChangePassword()
         }
     }

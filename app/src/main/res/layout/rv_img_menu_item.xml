@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <variable
+            name="item"
+            type="com.king.template.data.model.ImgMenu" />
     </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/size_8dp">
+        android:padding="@dimen/size_8dp"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:imageRes="@{item.resId}"/>
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_2dp"
-            android:textSize="@dimen/size_13dp"
-            android:singleLine="true" />
+            android:textSize="@dimen/size_13sp"
+            android:singleLine="true"
+            android:text="@{item.name}"/>
     </LinearLayout>
 </layout>

@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.base.BaseActivity
+import com.king.template.constant.Constants
 import com.king.template.databinding.ResetPwdActivityBinding
 import com.king.template.dict.VerifyCodeScene
 import com.king.template.extension.disableCopyAndPaste
@@ -78,7 +78,10 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
     }
 
     private fun startCountDownTime() {
-        object : CountDownTimer(Constants.VERIFY_CODE_COUNT_DOWN_DURATION, Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL) {
+        object : CountDownTimer(
+            Constants.VERIFY_CODE_COUNT_DOWN_DURATION,
+            Constants.VERIFY_CODE_COUNT_DOWN_INTERVAL
+        ) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvGetCode.isEnabled = false
                 binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_9))
@@ -91,7 +94,12 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
 
             override fun onFinish() {
                 binding.tvGetCode.isEnabled = true
-                binding.tvGetCode.setTextColor(ContextCompat.getColor(getContext(), R.color.text_theme))
+                binding.tvGetCode.setTextColor(
+                    ContextCompat.getColor(
+                        getContext(),
+                        R.color.text_theme
+                    )
+                )
                 binding.tvGetCode.setText(R.string.send_verify_code)
             }
         }.start()
@@ -102,9 +110,9 @@ class ResetPwdActivity : BaseActivity<PasswordViewModel, ResetPwdActivityBinding
     /**
      * 获取验证码
      */
-    private fun clickGetCode(){
+    private fun clickGetCode() {
         // TODO 点击“发送验证码”逻辑
-        if(!checkInput(binding.etUsername,R.string.hint_username)){
+        if (!checkInput(binding.etUsername, R.string.hint_username)) {
             return
         }
         username = binding.etUsername.text.toString()

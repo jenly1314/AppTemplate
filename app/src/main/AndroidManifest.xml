@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute">
         <activity android:name=".app.splash.SplashActivity"
-            android:theme="@style/SplashAppTheme"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,51 +39,48 @@
 
         <activity android:name=".app.home.HomeActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
 
         <activity android:name=".app.about.AboutActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
 
         <activity android:name=".app.base.WebActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
 
         <activity android:name=".app.account.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            tools:ignore="LockedOrientationActivity"/>
+            android:windowSoftInputMode="stateVisible|adjustPan" />
 
         <activity android:name=".app.account.CodeLoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
 
         <activity android:name=".app.account.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
 
         <activity android:name=".app.account.ResetPwdActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
 
         <activity android:name=".app.account.ChangePwdActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
 
         <meta-data android:name="com.king.template.config.AppConfigModule"
             android:value="FrameConfigModule"/>
-
 
         <meta-data
             android:name="design_width_in_dp"
             android:value="360"/>
 
         <meta-data android:name="android.max_aspect"
-            android:value="2.2" />
+            android:value="2.4" />
     </application>
 
 </manifest>

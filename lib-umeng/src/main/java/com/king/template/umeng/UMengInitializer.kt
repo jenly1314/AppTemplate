@@ -12,6 +12,12 @@ import com.umeng.commonsdk.UMConfigure
  */
 class UMengInitializer : Initializer<Unit> {
     override fun create(context: Context) {
+        UMConfigure.preInit(
+            context,
+            APP_KEY,
+            "Umeng",
+        )
+
         UMConfigure.init(
             context,
             APP_KEY,

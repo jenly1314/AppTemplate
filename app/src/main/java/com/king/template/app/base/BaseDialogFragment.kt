@@ -11,10 +11,10 @@ import com.king.frame.mvvmframe.base.BaseDialogFragment
 import com.king.frame.mvvmframe.base.BaseViewModel
 import com.king.template.App
 import com.king.template.R
-import com.king.template.app.Constants
 import com.king.template.app.account.CodeLoginActivity
 import com.king.template.app.account.LoginActivity
 import com.king.template.app.home.HomeActivity
+import com.king.template.constant.Constants
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -27,7 +27,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel, VDB : ViewDataBinding> :
     override fun initData(savedInstanceState: Bundle?) {
 
     }
-
 
     //-----------------------------------
 
@@ -57,7 +56,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel, VDB : ViewDataBinding> :
     //-----------------------------------
 
     fun startActivity(clazz: Class<*>, username: String? = null) {
-        var intent = Intent(context, clazz)
+        val intent = Intent(context, clazz)
         intent.putExtra(Constants.KEY_USERNAME, username)
         startActivity(intent)
     }

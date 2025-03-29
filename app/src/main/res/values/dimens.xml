@@ -7,7 +7,7 @@
     <dimen name="app_bar_height">260dp</dimen>
     
     <dimen name="size_line">0.7dp</dimen>
-    <dimen name="size_space">6dp</dimen>
+    <dimen name="size_space">8dp</dimen>
 
     <dimen name="btn_bg_radius">30dp</dimen>
 
