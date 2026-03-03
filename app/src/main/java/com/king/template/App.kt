@@ -10,7 +10,6 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -30,7 +29,6 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        initLogger()
         KVCache.initialize(this)
 //        NeverCrash.init { t, e ->
 //            CrashReport.postCatchedException(e)
@@ -40,22 +38,6 @@ class App : BaseApplication() {
                 BaseUrlManager.getInstance().urlInfo = UrlInfo(Constants.BASE_URL)
             }
         }
-
     }
-
-    private fun initLogger() {
-
-        Timber.plant(object : Timber.DebugTree() {
-            override fun isLoggable(tag: String?, priority: Int): Boolean {
-                return BuildConfig.DEBUG
-            }
-
-            override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-                LogX.offset(4).log(priority, message)
-            }
-        })
-
-    }
-
 
 }

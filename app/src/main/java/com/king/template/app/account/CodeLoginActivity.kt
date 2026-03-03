@@ -7,13 +7,13 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.constant.Constants
 import com.king.template.databinding.CodeLoginActivityBinding
 import com.king.template.dict.VerifyCodeScene
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -129,7 +129,7 @@ class CodeLoginActivity : BaseActivity<LoginViewModel, CodeLoginActivityBinding>
         }
 
         // TODO 点击“登录”逻辑
-        Timber.d(getString(R.string.verify_code_login))
+        LogX.d(getString(R.string.verify_code_login))
 
         val username = binding.etUsername.text.toString()
         val verifyCode = binding.etCode.text.toString()

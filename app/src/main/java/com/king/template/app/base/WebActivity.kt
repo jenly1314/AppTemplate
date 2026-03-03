@@ -15,11 +15,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.constant.Constants
 import com.king.template.databinding.WebActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 /**
@@ -73,7 +73,7 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
 
             override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                Timber.d("url:$url")
+                LogX.d("url:$url")
                 this@WebActivity.curl = url
                 if (!url.equals(BLANK_URL, true)) {
                     this@WebActivity.url = url
@@ -85,7 +85,7 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                Timber.d("onPageFinished:$url")
+                LogX.d("onPageFinished:$url")
                 updateProgress(100, isError)
 
             }
@@ -96,11 +96,11 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
                 error: WebResourceError
             ) {
                 super.onReceivedError(view, request, error)
-                Timber.d("onReceivedError:$url")
+                LogX.d("onReceivedError:$url")
 
 //                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 //                    val code = error.errorCode
-//                    Timber.d("errorCode:${code}")
+//                    LogX.d("errorCode:${code}")
 //                    if(code <= ERROR_TIMEOUT){
 //                        isError = true
 //                        view?.loadUrl(BLANK_URL)
@@ -120,9 +120,9 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
                 errorResponse: WebResourceResponse
             ) {
                 super.onReceivedHttpError(view, request, errorResponse)
-                Timber.d("onReceivedHttpError:$url")
+                LogX.d("onReceivedHttpError:$url")
                 val code = errorResponse.statusCode
-                Timber.d("errorCode:${code}")
+                LogX.d("errorCode:${code}")
 //                if(code == 400 || code == 500){
 //                    isError = true
 //                    view?.loadUrl(BLANK_URL)
@@ -138,7 +138,7 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
                 error: SslError?
             ) {
                 super.onReceivedSslError(view, handler, error)
-                Timber.d("onReceivedSslError:$url")
+                LogX.d("onReceivedSslError:$url")
                 handler.cancel()
                 handler.proceed()
             }

@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.constant.Constants
@@ -15,7 +16,6 @@ import com.king.template.dict.VerifyCodeScene
 import com.king.template.extension.disableCopyAndPaste
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -140,7 +140,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, RegisterActivityBinding
         }
 
         // TODO 点击“注册”逻辑
-        Timber.d(getString(R.string.register))
+        LogX.d(getString(R.string.register))
 
         val username = binding.etUsername.text.toString()
         val verifyCode = binding.etCode.text.toString()

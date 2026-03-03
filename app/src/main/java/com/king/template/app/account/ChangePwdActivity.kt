@@ -2,13 +2,13 @@ package com.king.template.app.account
 
 import android.os.Bundle
 import android.view.View
+import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.databinding.ChangePwdActivityBinding
 import com.king.template.extension.disableCopyAndPaste
 import com.king.template.util.CheckUtils
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -67,7 +67,7 @@ class ChangePwdActivity : BaseActivity<PasswordViewModel, ChangePwdActivityBindi
         }
 
         // TODO 点击“修改密码”逻辑
-        Timber.d(getString(R.string.change_password))
+        LogX.d(getString(R.string.change_password))
 
         var oldPwd = binding.etOldPassword.text.toString()
 

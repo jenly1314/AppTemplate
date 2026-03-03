@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.app.base.BaseActivity
 import com.king.template.constant.Constants
@@ -12,7 +13,6 @@ import com.king.template.databinding.LoginActivityBinding
 import com.king.template.extension.disableCopyAndPaste
 import com.king.template.manager.LoginManager
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 /**
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
@@ -90,7 +90,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>() {
         }
 
         // TODO 点击“登录”逻辑
-        Timber.d(getString(R.string.login))
+        LogX.d(getString(R.string.login))
 
         val username = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
