@@ -11,6 +11,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
+ * Activity列表模版
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint

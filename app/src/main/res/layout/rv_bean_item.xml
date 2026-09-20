@@ -19,6 +19,7 @@
             android:layout_marginStart="@dimen/size_16dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_10dp"
+            android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="3:2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/tvTitle"

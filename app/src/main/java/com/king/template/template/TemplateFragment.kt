@@ -8,6 +8,7 @@ import com.king.template.databinding.TempFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
+ * Fragment模版
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint

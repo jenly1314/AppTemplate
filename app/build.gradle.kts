@@ -36,8 +36,6 @@ android {
         // 常见排除项
         resources.excludes += setOf(
             "META-INF/LICENSE*",
-            "META-INF/LICENSE-*.txt",
-            "META-INF/LICENSE-*.md",
             "META-INF/NOTICE*",
             "META-INF/COPYING*",
             "META-INF/DEPENDENCIES*",
@@ -69,7 +67,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android.txt"),
+                getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             if (signingEnabled) {
@@ -86,9 +84,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 //    flavorDimensions.add("flavor")
@@ -116,13 +111,11 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.splashscreen)
+    implementation(libs.webkit)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
-
-    //room
-    ksp(libs.room.compiler)
 
     implementation(libs.bundles.jenly1314)
 
@@ -135,8 +128,7 @@ dependencies {
 
     implementation(libs.bundles.smartrefreshlayout)
 
-    implementation(libs.glide)
-    kapt(libs.glide.compiler)
+    implementation(libs.bundles.coil)
 
     //leakCanary
     debugImplementation(libs.leakcanary)

@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
+ * ViewModel模版
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @HiltViewModel

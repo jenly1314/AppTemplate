@@ -8,6 +8,7 @@ import com.king.template.databinding.BaseTabActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
+ * TabActivity模版
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint

@@ -3,18 +3,23 @@ package com.king.template.app.base
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.net.http.SslError
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.webkit.ClientCertRequest
+import android.webkit.RenderProcessGoneDetail
 import android.webkit.SslErrorHandler
 import android.webkit.WebChromeClient
-import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.WebView.RENDERER_PRIORITY_BOUND
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import androidx.webkit.SafeBrowsingResponseCompat
+import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewClientCompat
+import androidx.webkit.WebViewFeature
 import com.king.logx.LogX
 import com.king.template.R
 import com.king.template.constant.Constants
@@ -69,7 +74,19 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
             }
 
         }
-        binding.web.webViewClient = object : WebViewClient() {
+
+        binding.web.webViewClient = object : WebViewClientCompat() {
+
+            override fun onSafeBrowsingHit(
+                view: WebView,
+                request: WebResourceRequest,
+                threatType: Int,
+                callback: SafeBrowsingResponseCompat
+            ) {
+                if (WebViewFeature.isFeatureSupported(WebViewFeature.SAFE_BROWSING_RESPONSE_BACK_TO_SAFETY)) {
+                    callback.backToSafety(true)
+                }
+            }
 
             override fun onPageStarted(view: WebView?, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
@@ -82,7 +99,6 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
                 updateProgress(0, false)
             }
 
-
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 LogX.d("onPageFinished:$url")
@@ -90,57 +106,27 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
 
             }
 
-            override fun onReceivedError(
+            override fun onRenderProcessGone(
                 view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError
-            ) {
-                super.onReceivedError(view, request, error)
-                LogX.d("onReceivedError:$url")
-
-//                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//                    val code = error.errorCode
-//                    LogX.d("errorCode:${code}")
-//                    if(code <= ERROR_TIMEOUT){
-//                        isError = true
-//                        view?.loadUrl(BLANK_URL)
-//                        updateProgress(0,isError)
-//                    }
-//                }else{
-//                    isError = true
-//                    view?.loadUrl(BLANK_URL)
-//                    updateProgress(0,isError)
-//                }
-
-            }
-
-            override fun onReceivedHttpError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                errorResponse: WebResourceResponse
-            ) {
-                super.onReceivedHttpError(view, request, errorResponse)
-                LogX.d("onReceivedHttpError:$url")
-                val code = errorResponse.statusCode
-                LogX.d("errorCode:${code}")
-//                if(code == 400 || code == 500){
-//                    isError = true
-//                    view?.loadUrl(BLANK_URL)
-//                    updateProgress(0,isError)
-//                }
-
+                detail: RenderProcessGoneDetail
+            ): Boolean {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LogX.d("onRenderProcessGone: didCrash=${detail.didCrash()}")
+                    return !detail.didCrash()
+                }
+                return false
             }
 
             @SuppressLint("WebViewClientOnReceivedSslError")
             override fun onReceivedSslError(
                 view: WebView?,
-                handler: SslErrorHandler,
+                handler: SslErrorHandler?,
                 error: SslError?
             ) {
                 super.onReceivedSslError(view, handler, error)
                 LogX.d("onReceivedSslError:$url")
-                handler.cancel()
-                handler.proceed()
+                handler?.cancel()
+                handler?.proceed()
             }
 
         }
@@ -148,7 +134,8 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
         onBackPressedDispatcher.addCallback(this) {
             if (canGoBack()) {
                 binding.web.goBack()
-                if (curl.equals(BLANK_URL, true)) {// 返回上一页时如果是空白页，表示之前加载页面出错过
+                // 返回上一页时如果是空白页，表示之前加载页面出错过
+                if (curl.equals(BLANK_URL, true)) {
                     if (canGoBack()) {
                         binding.web.goBack()
                     } else {
@@ -172,31 +159,36 @@ open class WebActivity : BaseActivity<BaseViewModel, WebActivityBinding>() {
 
     @SuppressLint("SetJavaScriptEnabled")
     open fun intWebSettings(webView: WebView) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            webView.setRendererPriorityPolicy(RENDERER_PRIORITY_BOUND, true)
+        }
+
         webView.settings.apply {
-            //如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript
+            // 如果访问的页面中要与Javascript交互，则webView必须设置支持Javascript
             this.javaScriptEnabled = true
 
-            //设置自适应屏幕，两者合用
-            this.useWideViewPort = true //将图片调整到适合webView的大小
+            // 设置自适应屏幕，两者合用
+            this.useWideViewPort = true // 将图片调整到适合webView的大小
             this.loadWithOverviewMode = true // 缩放至屏幕的大小
 
-            //缩放操作
-            this.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
+            // 缩放操作
+            this.setSupportZoom(true) // 支持缩放，默认为true。是下面那个的前提。
 
-            this.builtInZoomControls = true //设置内置的缩放控件。若为false，则该WebView不可缩放
+            this.builtInZoomControls = true // 设置内置的缩放控件。若为false，则该WebView不可缩放
 
-            this.displayZoomControls = false //隐藏原生的缩放控件
+            this.displayZoomControls = false // 隐藏原生的缩放控件
 
-            //其他细节操作
-            this.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK //关闭webView中缓存
+            // 其他细节操作
+            this.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK // 关闭webView中缓存
 
-            this.allowFileAccess = true //设置可以访问文件
+            this.allowFileAccess = true // 设置可以访问文件
 
-            this.javaScriptCanOpenWindowsAutomatically = true //支持通过JS打开新窗口
+            this.javaScriptCanOpenWindowsAutomatically = true // 支持通过JS打开新窗口
 
-            this.loadsImagesAutomatically = true //支持自动加载图片
+            this.loadsImagesAutomatically = true // 支持自动加载图片
 
-            this.defaultTextEncodingName = "utf-8" //设置编码格式
+            this.defaultTextEncodingName = "utf-8" // 设置编码格式
         }
     }
 

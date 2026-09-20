@@ -14,7 +14,6 @@ import com.chad.library.adapter4.BaseSingleItemAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.king.image.imageviewer.ImageViewer
-import com.king.image.imageviewer.loader.GlideImageLoader
 import com.king.template.R
 import com.king.template.app.adapter.BannerImageAdapter
 import com.king.template.app.adapter.BaseBindingAdapter
@@ -23,6 +22,7 @@ import com.king.template.constant.Constants
 import com.king.template.data.model.BannerBean
 import com.king.template.data.model.Bean
 import com.king.template.databinding.HomeFragmentBinding
+import com.king.template.loader.CoilImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment<HomeViewModel, HomeFragmentBinding>() {
                     it.adapter.setOnBannerListener { _, position ->
                         // TODO 点击 Banner Item 示例
                         ImageViewer.load(mImageAdapter.getList())
-                            .imageLoader(GlideImageLoader())
+                            .imageLoader(CoilImageLoader())
                             .selection(position)
                             .showIndicator(true)
                             .start(this@HomeFragment, it)

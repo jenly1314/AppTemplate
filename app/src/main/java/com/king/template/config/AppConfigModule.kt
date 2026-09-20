@@ -1,6 +1,7 @@
 package com.king.template.config
 
 import android.content.Context
+import androidx.room.RoomDatabase
 import com.king.base.baseurlmanager.BaseUrlManager
 import com.king.frame.mvvmframe.config.AppliesOptions
 import com.king.frame.mvvmframe.config.Config
@@ -31,6 +32,12 @@ class AppConfigModule : FrameConfigModule() {
                         HttpLoggingInterceptor.Level.NONE
                     }
                 )
+            }
+        })
+
+        builder.roomDatabaseOptions(object : AppliesOptions.RoomDatabaseOptions {
+            override fun applyOptions(builder: RoomDatabase.Builder<out RoomDatabase>) {
+                builder.fallbackToDestructiveMigration(true)
             }
         })
     }

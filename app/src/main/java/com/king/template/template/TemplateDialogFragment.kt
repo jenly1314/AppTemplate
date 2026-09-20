@@ -7,6 +7,7 @@ import com.king.template.app.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
+ * DialogFragment模版
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 @AndroidEntryPoint

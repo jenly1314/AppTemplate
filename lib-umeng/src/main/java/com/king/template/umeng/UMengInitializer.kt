@@ -11,6 +11,7 @@ import com.umeng.commonsdk.UMConfigure
  * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
  */
 class UMengInitializer : Initializer<Unit> {
+
     override fun create(context: Context) {
         UMConfigure.preInit(
             context,

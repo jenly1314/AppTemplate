@@ -2,37 +2,40 @@
 versionCode = "1"
 versionName = "1.0.0"
 
-minSdk = "21"
-targetSdk = "35"
-compileSdk = "35"
+minSdk = "23"
+targetSdk = "36"
+compileSdk = "36"
 
-agp = "8.8.0"
-kotlin = "2.0.21"
+agp = "9.1.0"
+kotlin = "2.2.21"
 
-coreKtx = "1.13.1"
-material = "1.12.0"
-appcompat = "1.7.0"
-fragmentKtx = "1.8.6"
-swiperefreshlayout = "1.1.0"
+coreKtx = "1.17.0"
+material = "1.14.0"
+appcompat = "1.8.0"
+fragmentKtx = "1.9.0"
+lifecycleKtx="2.10.0"
+
+swiperefreshlayout = "1.2.0"
 recyclerview = "1.4.0"
-constraintlayout = "2.2.1"
+constraintLayout = "2.2.2"
+
 startup = "1.2.0"
 splashscreen = "1.2.0"
-lifecycleKtx = "2.9.4"
 viewpager2 = "1.1.0"
-room = "2.7.2"
-daggerHilt = "2.55"
+room = "2.8.5"
+daggerHilt = "2.60.1"
+webkit = "1.15.0"
 
 junit = "4.13.2"
 androidJunit = "1.3.0"
 espresso = "3.7.0"
 
-mvvmframe = "3.2.0"
-appUpdater = "2.1.0"
+mvvmframe = "3.4.0"
+appUpdater = "2.2.0"
 nevercrash = "1.0.0"
 baseUrlManager = "1.2.0"
 superTextView = "1.0.1"
-logx = "1.2.0"
+logx = "1.3.0"
 kvcache = "1.3.0"
 guidepage = "1.0.0"
 imageviewer = "1.2.0"
@@ -40,16 +43,18 @@ imageviewer = "1.2.0"
 androidktx = "1.1.0"
 androidutil = "1.0.0"
 
-mmkv = "1.3.16"
+mmkv = "2.4.2"
 
 brvah = "4.1.4"
 smartRefreshLayout = "2.1.1"
 circleimageview = "3.1.0"
-glide = "4.16.0"
+coil = "3.3.0"
 
 leakcanary = "2.14"
 banner = "2.2.3"
 autosize = "v1.2.1"
+
+ksp = "2.3.6"
 
 [libraries]
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
@@ -58,10 +63,11 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
 androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidJunit" }
@@ -91,8 +97,8 @@ refresh-layout-kernel = { group = "io.github.scwang90", name = "refresh-layout-k
 refresh-header-material = { group = "io.github.scwang90", name = "refresh-header-material", version.ref = "smartRefreshLayout" }
 refresh-footer-classics = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref = "smartRefreshLayout" }
 
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
@@ -101,23 +107,24 @@ banner = { group = "io.github.youth5201314", name = "banner", version.ref = "ban
 autosize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autosize" }
 
 # 友盟
-umeng-common = { group = "com.umeng.umsdk", name = "common", version = "9.8.9" }
+umeng-common = { group = "com.umeng.umsdk", name = "common", version = "9.9.10" }
 umeng-asms = { group = "com.umeng.umsdk", name = "asms", version = "1.8.7.2" }
-umeng-apm = { group = "com.umeng.umsdk", name = "apm", version = "2.0.6" }
+umeng-apm = { group = "com.umeng.umsdk", name = "apm", version = "2.1.0" }
 
 [bundles]
 jenly1314 = ["mvvmframe", "appupdater", "appdialog", "nevercrash", "baseurlmanager", "supertextview", "logx", "kvcache", "imageviewer"]
 smartrefreshlayout = ["refresh-layout-kernel", "refresh-header-material", "refresh-footer-classics"]
+coil = ["coil", "coil-network-okhttp"]
 umeng = ["umeng-common", "umeng-asms", "umeng-apm"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "2.0.21-1.0.28" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 mvvmframe = { id = "com.github.jenly1314.mvvmframe", version.ref = "mvvmframe" }
-
 
